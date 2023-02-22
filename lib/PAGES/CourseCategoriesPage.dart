@@ -15,7 +15,7 @@ import 'package:blog/UTILITY/LoadingCards.dart';
 import 'EmptyPage.dart';
 
 class CourseCategoriesPage extends StatefulWidget {
-  CourseCategoriesPage({Key key}) : super(key: key);
+  CourseCategoriesPage({Key? key}) : super(key: key);
 
   @override
   _CourseCategoriesPageState createState() => _CourseCategoriesPageState();
@@ -23,7 +23,7 @@ class CourseCategoriesPage extends StatefulWidget {
 
 class _CourseCategoriesPageState extends State<CourseCategoriesPage>
     with AutomaticKeepAliveClientMixin {
-  ScrollController controller;
+  ScrollController? controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -37,7 +37,7 @@ class _CourseCategoriesPageState extends State<CourseCategoriesPage>
 
   @override
   void dispose() {
-    controller.removeListener(_scrollListener);
+    controller!.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -45,7 +45,7 @@ class _CourseCategoriesPageState extends State<CourseCategoriesPage>
     final db = context.read<TechnicalBlogBLOC>();
 
     if (!db.isLoading) {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
+      if (controller!.position.pixels == controller!.position.maxScrollExtent) {
         context.read<CourseCategoryBLOC>().setLoading(true);
         context.read<CourseCategoryBLOC>().getData(mounted);
       }
@@ -115,7 +115,7 @@ class _CourseCategoriesPageState extends State<CourseCategoriesPage>
 class _ItemList extends StatelessWidget {
   final CourseCategoriesModel d;
 
-  const _ItemList({Key key, @required this.d}) : super(key: key);
+  const _ItemList({Key? key, required this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +135,7 @@ class _ItemList extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: CustomCacheImage(
-                        imageUrl: d.categoryImage,
+                        imageUrl: d.categoryImage!,
                       )),
                 ),
                 Align(
@@ -148,7 +148,7 @@ class _ItemList extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        d.name.toUpperCase(),
+                        d.name!.toUpperCase(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22,
@@ -164,7 +164,7 @@ class _ItemList extends StatelessWidget {
       onTap: () => nextScreen(
           context,
           CategoryBasedCoursesPage(
-            stateName: d.name,
+            stateName: d.name!,
             color: (ColorList().randomColors..shuffle()).first,
           )),
     );

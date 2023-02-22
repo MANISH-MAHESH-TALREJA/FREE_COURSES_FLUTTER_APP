@@ -6,7 +6,7 @@ class EmptyPage extends StatelessWidget
   final String message;
   final String message1;
 
-  const EmptyPage({Key key, @required this.icon, @required this.message, @required this.message1}) : super(key: key);
+  const EmptyPage({Key? key, required this.icon, required this.message, required this.message1}) : super(key: key);
 
   @override
   Widget build(BuildContext context)

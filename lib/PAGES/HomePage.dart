@@ -13,7 +13,7 @@ import 'package:blog/PAGES/VideoCoursesPage.dart';
 import 'package:toast/toast.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   _HomePageState createState() => _HomePageState();
 }
@@ -30,14 +30,14 @@ class _HomePageState extends State<HomePage> {
     Feather.bookmark,
     Feather.user
   ];
-  DateTime currentBackPressTime;
+  DateTime? currentBackPressTime;
   Future<bool> onWillPop()
   {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null || now.difference(currentBackPressTime) > Duration(seconds: 2))
+    if (currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2))
     {
       currentBackPressTime = now;
-      Toast.show("PRESS BACK BUTTON AGAIN TO EXIT", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+      Toast.show("PRESS BACK BUTTON AGAIN TO EXIT", duration: Toast.lengthShort, gravity:  Toast.bottom);
       return Future.value(false);
     }
     return Future.value(true);
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
         curve: Curves.easeIn, duration: Duration(milliseconds: 400));
   }
 
-  AppUpdateInfo _updateInfo;
+  AppUpdateInfo? _updateInfo;
   Future<void> checkForUpdate() async
   {
     InAppUpdate.checkForUpdate().then((info)

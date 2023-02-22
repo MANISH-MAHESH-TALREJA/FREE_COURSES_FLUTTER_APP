@@ -12,9 +12,9 @@ class NotificationBLOC extends ChangeNotifier
 {
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-  DocumentSnapshot _lastVisible;
+  DocumentSnapshot? _lastVisible;
 
-  DocumentSnapshot get lastVisible => _lastVisible;
+  DocumentSnapshot get lastVisible => _lastVisible!;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -22,9 +22,9 @@ class NotificationBLOC extends ChangeNotifier
   List<NotificationModel> _data = [];
 
   List<NotificationModel> get data => _data;
-  bool _subscribed;
+  bool? _subscribed;
 
-  bool get subscribed => _subscribed;
+  bool get subscribed => _subscribed!;
   final String subscriptionTopic = 'ALL';
 
   Future<Null> getData(mounted) async
@@ -33,7 +33,7 @@ class NotificationBLOC extends ChangeNotifier
     if (_lastVisible == null)
       rawData = await fireStore.collection('NOTIFICATIONS').orderBy('TIMESTAMP', descending: true).limit(10).get();
     else
-      rawData = await fireStore.collection('NOTIFICATIONS').orderBy('TIMESTAMP', descending: true).startAfter([_lastVisible['TIMESTAMP']]).limit(10).get();
+      rawData = await fireStore.collection('NOTIFICATIONS').orderBy('TIMESTAMP', descending: true).startAfter([_lastVisible!['TIMESTAMP']]).limit(10).get();
 
     if (rawData != null && rawData.docs.length > 0)
     {
@@ -84,7 +84,7 @@ class NotificationBLOC extends ChangeNotifier
     handleFcmSubscription();
     FirebaseMessaging.onMessage.listen((RemoteMessage message)
     {
-      showInAppDialog(context, message.notification.title, message.notification);
+      showInAppDialog(context, message.notification!.title, message.notification);
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message)
     {

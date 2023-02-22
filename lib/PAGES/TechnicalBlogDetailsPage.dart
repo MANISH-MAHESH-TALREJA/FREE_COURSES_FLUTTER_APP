@@ -18,9 +18,9 @@ import '../Constants.dart';
 
 class TechnicalBlogDetailsPage extends StatefulWidget {
   final TechnicalBlogModel blogData;
-  final String tag;
+  final String? tag;
 
-  TechnicalBlogDetailsPage({Key key, @required this.blogData, @required this.tag})
+  TechnicalBlogDetailsPage({Key? key, required this.blogData, required this.tag})
       : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
     } else {
       context
           .read<BookmarkBLOC>()
-          .onLoveIconClick(collectionName, widget.blogData.timestamp);
+          .onLoveIconClick(collectionName, widget.blogData.timestamp!);
     }
   }
 
@@ -50,7 +50,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
     } else {
       context
           .read<BookmarkBLOC>()
-          .onBookmarkIconClick(collectionName, widget.blogData.timestamp);
+          .onBookmarkIconClick(collectionName, widget.blogData.timestamp!);
     }
   }
 
@@ -146,7 +146,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                             width: 3,
                           ),
                           Text(
-                            d.date,
+                            d.date!,
                             style: TextStyle(
                                 fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
                           ),
@@ -156,7 +156,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                         height: 15,
                       ),
                       Text(
-                        d.title,
+                        d.title!,
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w900,
@@ -182,9 +182,9 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                             onPressed: () async
                             {
                               var url = d.blogLink;
-                              if(await canLaunch(url))
+                              if(await canLaunch(url!))
                               {
-                                await launch(url);
+                                await launch(url!);
                               }
                               else
                               {
@@ -216,7 +216,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                               icon: LoveCard(
                                   collectionName: collectionName,
                                   uid: sb.uid,
-                                  timestamp: d.timestamp),
+                                  timestamp: d.timestamp!),
                               onPressed: () {
                                 handleLoveClick();
                               }),
@@ -229,14 +229,14 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                   height: 15,
                 ),
                 Hero(
-                  tag: widget.tag,
+                  tag: widget.tag!,
                   child: Container(
                       height: 200,
                       width: MediaQuery.of(context).size.width,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child:
-                              CustomCacheImage(imageUrl: d.thumbnail))),
+                              CustomCacheImage(imageUrl: d.thumbnail!))),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
@@ -245,7 +245,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                     children: <Widget>[
                       LoveCount(
                           collectionName: collectionName,
-                          timestamp: d.timestamp),
+                          timestamp: d.timestamp!),
                     ],
                   ),
                 ),
@@ -253,10 +253,10 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                   height: 15,
                 ),
                 Html(
-                    defaultTextStyle: TextStyle(
+                    /*defaultTextStyle: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
-                        color: Colors.grey[800]),
+                        color: Colors.grey[800]),*/
                     data: '''  ${d.description}   '''),
                 SizedBox(
                   height: 20,

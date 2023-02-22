@@ -15,7 +15,7 @@ class CategoryBasedCoursesPage extends StatefulWidget {
   final String stateName;
   final Color color;
 
-  CategoryBasedCoursesPage({Key key, @required this.stateName, @required this.color})
+  CategoryBasedCoursesPage({Key? key, required this.stateName, required this.color})
       : super(key: key);
 
   @override
@@ -25,12 +25,12 @@ class CategoryBasedCoursesPage extends StatefulWidget {
 class _CategoryBasedCoursesPageState extends State<CategoryBasedCoursesPage> {
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
   final String collectionName = 'UDEMY COURSES';
-  ScrollController controller;
-  DocumentSnapshot _lastVisible;
-  bool _isLoading;
+  ScrollController? controller;
+  DocumentSnapshot? _lastVisible;
+  bool? _isLoading;
   List<DocumentSnapshot> _snap = [];
   List<UdemyCoursesModel> _data = [];
-  bool _hasData;
+  bool? _hasData;
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _CategoryBasedCoursesPageState extends State<CategoryBasedCoursesPage> {
       data = await fireStore
           .collection(collectionName)
           .where('COURSE CATEGORY', isEqualTo: widget.stateName)
-          .startAfter([_lastVisible['LOVES']])
+          .startAfter([_lastVisible!['LOVES']])
           .get();
 
     if (data != null && data.docs.length > 0) {
@@ -94,13 +94,13 @@ class _CategoryBasedCoursesPageState extends State<CategoryBasedCoursesPage> {
 
   @override
   void dispose() {
-    controller.removeListener(_scrollListener);
+    controller!.removeListener(_scrollListener);
     super.dispose();
   }
 
   void _scrollListener() {
-    if (!_isLoading) {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
+    if (!_isLoading!) {
+      if (controller!.position.pixels == controller!.position.maxScrollExtent) {
         setState(() => _isLoading = true);
         _getData();
       }
@@ -172,7 +172,7 @@ class _CategoryBasedCoursesPageState extends State<CategoryBasedCoursesPage> {
                             );
                           }
                           return Opacity(
-                            opacity: _isLoading ? 1.0 : 0.0,
+                            opacity: _isLoading! ? 1.0 : 0.0,
                             child: _lastVisible == null
                                 ? Column(
                                     children: [
@@ -207,9 +207,9 @@ class _CategoryBasedCoursesPageState extends State<CategoryBasedCoursesPage> {
 
 class _ListItem extends StatelessWidget {
   final UdemyCoursesModel d;
-  final String tag;
+  final String? tag;
 
-  const _ListItem({Key key, @required this.d, @required this.tag})
+  const _ListItem({Key? key, required this.d, required this.tag})
       : super(key: key);
 
   @override
@@ -227,10 +227,10 @@ class _ListItem extends StatelessWidget {
                       height: 150,
                       width: MediaQuery.of(context).size.width,
                       child: Hero(
-                        tag: tag,
+                        tag: tag!,
                         child: ClipRRect(
                             borderRadius: BorderRadius.all(Radius.circular(5)),
-                            child: CustomCacheImage(imageUrl: d.image_01)),
+                            child: CustomCacheImage(imageUrl: d.image_01!)),
                       )),
                   Container(
                     padding: EdgeInsets.all(15),
@@ -238,7 +238,7 @@ class _ListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          d.courseName.toUpperCase(),
+                          d.courseName!.toUpperCase(),
                           maxLines: 1,
                           style: TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w600),
@@ -259,7 +259,7 @@ class _ListItem extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                "  "+d.courseCategory,
+                                "  "+d.courseCategory!,
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
@@ -282,7 +282,7 @@ class _ListItem extends StatelessWidget {
                               width: 3,
                             ),
                             Text(
-                              "  "+d.date,
+                              "  "+d.date!,
                               style: TextStyle(
                                   fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
                             ),

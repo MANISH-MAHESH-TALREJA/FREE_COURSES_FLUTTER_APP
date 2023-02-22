@@ -10,7 +10,7 @@ import 'package:blog/UTILITY/LoadingCards.dart';
 import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
 
 class VideoCoursesSearchPage extends StatefulWidget {
-  VideoCoursesSearchPage({Key key}) : super(key: key);
+  VideoCoursesSearchPage({Key? key}) : super(key: key);
 
   _VideoCoursesSearchPageState createState() => _VideoCoursesSearchPageState();
 }
@@ -119,7 +119,7 @@ class _VideoCoursesSearchPageState extends State<VideoCoursesSearchPage> {
 }
 
 class SuggestionsUI extends StatelessWidget {
-  const SuggestionsUI({Key key}) : super(key: key);
+  const SuggestionsUI({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +161,7 @@ class SuggestionsUI extends StatelessWidget {
 }
 
 class AfterSearchUI extends StatelessWidget {
-  const AfterSearchUI({Key key}) : super(key: key);
+  const AfterSearchUI({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

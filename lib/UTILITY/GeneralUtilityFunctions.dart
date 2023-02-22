@@ -4,12 +4,12 @@ import 'package:toast/toast.dart';
 
 void openToast(context, message)
 {
-  Toast.show(message, context, textColor: Colors.white, backgroundRadius: 20, duration: Toast.LENGTH_SHORT);
+  Toast.show(message, textStyle: TextStyle(color: Colors.white), backgroundRadius: 20, duration: Toast.lengthShort);
 }
 
 void openToast1(context, message)
 {
-  Toast.show(message, context, textColor: Colors.white, backgroundRadius: 20, duration: Toast.LENGTH_LONG);
+  Toast.show(message, textStyle: TextStyle(color: Colors.white), backgroundRadius: 20, duration: Toast.lengthLong);
 }
 
 void openDialog(context, title, message)

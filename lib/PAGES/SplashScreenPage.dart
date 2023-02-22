@@ -16,8 +16,8 @@ class SplashScreenPage extends StatefulWidget
 class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerProviderStateMixin
 {
   var _visible = true;
-  AnimationController animationController;
-  Animation<double> animation;
+  AnimationController? animationController;
+  Animation<double>? animation;
   startTime() async
   {
     var _duration = new Duration(seconds: 5);
@@ -53,10 +53,10 @@ class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerPro
   {
     super.initState();
     animationController = new AnimationController(vsync: this, duration: new Duration(seconds: 2));
-    animation = new CurvedAnimation(parent: animationController, curve: Curves.easeOut);
+    animation = new CurvedAnimation(parent: animationController!, curve: Curves.easeOut);
 
-    animation.addListener(() => this.setState(() {}));
-    animationController.forward();
+    animation!.addListener(() => this.setState(() {}));
+    animationController!.forward();
 
     setState(()
     {
@@ -77,8 +77,8 @@ class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerPro
           [
             new Image.asset(
               'assets/images/app_icon.png',
-              width: animation.value * 250,
-              height: animation.value * 250,
+              width: animation!.value * 250,
+              height: animation!.value * 250,
             ),
           ],
         ),

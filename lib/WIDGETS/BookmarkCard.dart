@@ -10,7 +10,7 @@ class BookmarkCard extends StatelessWidget
   final String uid;
   final String timestamp;
 
-  const BookmarkCard({Key key, @required this.collectionName, @required this.uid, @required this.timestamp}): super(key: key);
+  const BookmarkCard({Key? key, required this.collectionName, required this.uid, required this.timestamp}): super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -25,7 +25,7 @@ class BookmarkCard extends StatelessWidget
       {
         if (uid == null) return BookmarkIcon().normal;
         if (!snap.hasData) return BookmarkIcon().normal;
-        List d = snap.data[_type];
+        List d = snap.data![_type];
         if (d.contains(timestamp))
         {
           return BookmarkIcon().bold;

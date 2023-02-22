@@ -3,21 +3,20 @@ import 'package:intl/intl.dart';
 
 class NotificationModel
 {
-  String title;
-  String description;
+  String? title;
+  String? description;
   var createdAt;
-  String timestamp;
+  String? timestamp;
 
   NotificationModel({this.title, this.description, this.createdAt, this.timestamp});
 
   factory NotificationModel.fromFirestore(DocumentSnapshot snapshot)
   {
-    Map<String, dynamic> d = snapshot.data();
     return NotificationModel(
-      title: d['TITLE'],
-      description: d['DESCRIPTION'],
-      createdAt: DateFormat('d MMM, y').format(DateTime.parse(d['CREATED AT'].toDate().toString())),
-      timestamp: d['TIMESTAMP'],
+      title: snapshot.get('TITLE'),
+      description: snapshot.get('DESCRIPTION'),
+      createdAt: DateFormat('d MMM, y').format(DateTime.parse(snapshot.get('CREATED AT').toDate().toString())),
+      timestamp: snapshot.get('TIMESTAMP'),
     );
   }
 }

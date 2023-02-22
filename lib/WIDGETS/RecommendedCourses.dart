@@ -11,7 +11,7 @@ import 'package:blog/WIDGETS/CustomCacheImage.dart';
 
 class RecommendedCourses extends StatelessWidget
 {
-  RecommendedCourses({Key key}) : super(key: key);
+  RecommendedCourses({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context)
   {
@@ -40,7 +40,7 @@ class RecommendedCourses extends StatelessWidget
                     context,
                     MoreCoursesPage(
                       title: 'RECOMMENDED',
-                      color: Colors.green[300],
+                      color: Colors.green[300]!,
                     )),
               )
             ],
@@ -72,7 +72,7 @@ class RecommendedCourses extends StatelessWidget
 class _ListItem extends StatelessWidget
 {
   final UdemyCoursesModel d;
-  const _ListItem({Key key, @required this.d}) : super(key: key);
+  const _ListItem({Key? key, required this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -91,7 +91,7 @@ class _ListItem extends StatelessWidget
                 ),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: CustomCacheImage(imageUrl: d.image_01))),
+                    child: CustomCacheImage(imageUrl: d.image_01!))),
           ),
           Align(
             alignment: Alignment.topRight,
@@ -104,7 +104,7 @@ class _ListItem extends StatelessWidget
                             borderRadius: BorderRadius.all(Radius.circular(25))
                         )
                     ),
-                    backgroundColor: MaterialStateProperty.all(Colors.grey[600].withOpacity(0.5))
+                    backgroundColor: MaterialStateProperty.all(Colors.grey[600]!.withOpacity(0.5))
                 ),
                 icon: Icon(
                   LineIcons.heart,
@@ -128,7 +128,7 @@ class _ListItem extends StatelessWidget
               padding: EdgeInsets.all(15),
               height: 80,
               decoration: BoxDecoration(
-                  color: Colors.grey[900].withOpacity(0.6),
+                  color: Colors.grey[900]!.withOpacity(0.6),
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
@@ -136,7 +136,7 @@ class _ListItem extends StatelessWidget
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    d.courseName.toUpperCase(),
+                    d.courseName!.toUpperCase(),
                     maxLines: 1,
                     overflow: TextOverflow.clip,
                     style: TextStyle(
@@ -152,7 +152,7 @@ class _ListItem extends StatelessWidget
                     children: <Widget>[
                       Icon(Feather.check_circle, size: 15, color: Colors.green),
                       Text(
-                        "  "+d.courseCategory,
+                        "  "+d.courseCategory!,
                         style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey[400],

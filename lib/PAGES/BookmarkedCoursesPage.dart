@@ -10,7 +10,7 @@ import 'package:blog/UTILITY/LoadingCards.dart';
 import '../widgets/TechnicalBlogCard.dart';
 
 class BookmarkedCoursesPage extends StatefulWidget {
-  const BookmarkedCoursesPage({Key key}) : super(key: key);
+  const BookmarkedCoursesPage({Key? key}) : super(key: key);
 
   @override
   _BookmarkedCoursesPageState createState() => _BookmarkedCoursesPageState();
@@ -90,7 +90,7 @@ class _BookmarkedCoursesPageState extends State<BookmarkedCoursesPage>
 }
 
 class BookmarkedUdemyCourses extends StatefulWidget {
-  const BookmarkedUdemyCourses({Key key}) : super(key: key);
+  const BookmarkedUdemyCourses({Key? key}) : super(key: key);
 
   @override
   _BookmarkedUdemyCoursesState createState() => _BookmarkedUdemyCoursesState();
@@ -151,7 +151,7 @@ class _BookmarkedUdemyCoursesState extends State<BookmarkedUdemyCourses>
 }
 
 class BookMarkedVideoCourses extends StatefulWidget {
-  const BookMarkedVideoCourses({Key key}) : super(key: key);
+  const BookMarkedVideoCourses({Key? key}) : super(key: key);
 
   @override
   _BookMarkedVideoCoursesState createState() => _BookMarkedVideoCoursesState();

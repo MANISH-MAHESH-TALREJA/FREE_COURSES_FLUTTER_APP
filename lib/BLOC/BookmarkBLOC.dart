@@ -14,7 +14,7 @@ class BookmarkBLOC extends ChangeNotifier
     List<DocumentSnapshot> _snap = [];
 
     SharedPreferences sp = await SharedPreferences.getInstance();
-    String _uid = sp.getString('UID');
+    String? _uid = sp.getString('UID');
     final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
     DocumentSnapshot snap = await ref.get();
     List d = snap[type];
@@ -36,7 +36,7 @@ class BookmarkBLOC extends ChangeNotifier
     List<VideoCoursesModel> data = [];
     List<DocumentSnapshot> _snap = [];
     SharedPreferences sp = await SharedPreferences.getInstance();
-    String _uid = sp.getString('UID');
+    String? _uid = sp.getString('UID');
 
     final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
     DocumentSnapshot snap = await ref.get();
@@ -54,7 +54,7 @@ class BookmarkBLOC extends ChangeNotifier
   Future onBookmarkIconClick(String collectionName, String timestamp) async
   {
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    String _uid = sp.getString('UID');
+    String? _uid = sp.getString('UID');
     String _type = collectionName == 'UDEMY COURSES' ? 'BOOKMARKED UDEMY COURSES' : 'BOOKMARKED YOUTUBE COURSES';
 
     final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
@@ -77,7 +77,7 @@ class BookmarkBLOC extends ChangeNotifier
   Future onLoveIconClick(String collectionName, String timestamp) async
   {
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    String _uid = sp.getString('UID');
+    String? _uid = sp.getString('UID');
     String _type = collectionName == 'UDEMY COURSES' ? 'LOVED UDEMY COURSES' : 'LOVED YOUTUBE COURSES';
     final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
     final DocumentReference ref1 = FirebaseFirestore.instance.collection(collectionName).doc(timestamp);

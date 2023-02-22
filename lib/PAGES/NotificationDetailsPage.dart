@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class NotificationDetailsPage extends StatelessWidget {
   final NotificationModel data;
 
-  const NotificationDetailsPage({Key key, @required this.data}) : super(key: key);
+  const NotificationDetailsPage({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class NotificationDetailsPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(data.title,
+            Text(data.title!,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
             Container(
               margin: EdgeInsets.only(top: 15, bottom: 20),
@@ -57,13 +57,14 @@ class NotificationDetailsPage extends StatelessWidget {
               decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             ),
             HtmlWidget(
-              data.description,
+              data.description!,
               textStyle: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
               ),
               onTapUrl: (url) async {
                 await launch(url);
+                return true;
               },
             ),
           ],

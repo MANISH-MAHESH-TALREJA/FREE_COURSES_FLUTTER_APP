@@ -9,9 +9,9 @@ import 'IntroductionScreen.dart';
 
 class AuthenticationPage extends StatefulWidget
 {
-  final String tag;
+  final String? tag;
 
-  AuthenticationPage({Key key, this.tag}) : super(key: key);
+  AuthenticationPage({Key? key, this.tag}) : super(key: key);
 
   _AuthenticationPageState createState() => _AuthenticationPageState();
 }

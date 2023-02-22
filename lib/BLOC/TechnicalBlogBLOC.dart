@@ -5,8 +5,8 @@ import 'package:blog/MODELS/TechnicalBlogModel.dart';
 
 class TechnicalBlogBLOC extends ChangeNotifier
 {
-  DocumentSnapshot _lastVisible;
-  DocumentSnapshot get lastVisible => _lastVisible;
+  DocumentSnapshot? _lastVisible;
+  DocumentSnapshot get lastVisible => _lastVisible!;
   bool _isLoading = true;
   bool get isLoading => _isLoading;
   List<TechnicalBlogModel> _data = [];
@@ -15,8 +15,8 @@ class TechnicalBlogBLOC extends ChangeNotifier
   String get popupSelection => _popSelection;
   List<DocumentSnapshot> _snap = [];
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
-  bool _hasData;
-  bool get hasData => _hasData;
+  bool? _hasData;
+  bool get hasData => _hasData!;
 
   Future<Null> getData(mounted, String orderBy) async
   {
@@ -25,7 +25,7 @@ class TechnicalBlogBLOC extends ChangeNotifier
     if (_lastVisible == null)
       rawData = await fireStore.collection('TECHNICAL BLOGS').orderBy(orderBy, descending: true).limit(5).get();
     else
-      rawData = await fireStore.collection('TECHNICAL BLOGS').orderBy(orderBy, descending: true).startAfter([_lastVisible[orderBy]]).limit(5).get();
+      rawData = await fireStore.collection('TECHNICAL BLOGS').orderBy(orderBy, descending: true).startAfter([_lastVisible![orderBy]]).limit(5).get();
 
     if (rawData != null && rawData.docs.length > 0)
     {

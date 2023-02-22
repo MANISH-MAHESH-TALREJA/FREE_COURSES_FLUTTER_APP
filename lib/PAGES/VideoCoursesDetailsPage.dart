@@ -21,9 +21,9 @@ import '../Constants.dart';
 
 class VideoCoursesDetailsPage extends StatefulWidget {
   final VideoCoursesModel blogData;
-  final String tag;
+  final String? tag;
 
-  VideoCoursesDetailsPage({Key key, @required this.blogData, @required this.tag})
+  VideoCoursesDetailsPage({Key? key, required this.blogData, required this.tag})
       : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
     } else {
       context
           .read<BookmarkBLOC>()
-          .onLoveIconClick(collectionName, widget.blogData.timestamp);
+          .onLoveIconClick(collectionName, widget.blogData.timestamp!);
     }
   }
 
@@ -51,7 +51,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
     } else {
       context
           .read<BookmarkBLOC>()
-          .onBookmarkIconClick(collectionName, widget.blogData.timestamp);
+          .onBookmarkIconClick(collectionName, widget.blogData.timestamp!);
     }
   }
 
@@ -66,13 +66,13 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
         '${widget.blogData.title}, TO WATCH MORE VIDEOS, INSTALL ${Constants().appName} APP. https://play.google.com/store/apps/details?id=net.manish.blog');
   }
 
-  YoutubePlayerController _controller;
+  YoutubePlayerController? _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: widget.blogData.videoID,
+      initialVideoId: widget.blogData.videoID!,
 
       flags: const YoutubePlayerFlags(
         mute: false,
@@ -92,14 +92,14 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
     final AuthenticationBLOC sb = context.watch<AuthenticationBLOC>();
     final VideoCoursesModel d = widget.blogData;
     YoutubePlayer player = YoutubePlayer(
-      controller: _controller,
+      controller: _controller!,
       showVideoProgressIndicator: true,
       progressIndicatorColor: Colors.blueAccent,
       topActions: <Widget>[
         const SizedBox(width: 8.0),
         Expanded(
           child: Text(
-            _controller.metadata.title,
+            _controller!.metadata.title,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18.0,
@@ -206,7 +206,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                     width: 3,
                                   ),
                                   Text(
-                                    " "+d.channel,
+                                    " "+d.channel!,
                                     style: TextStyle(
                                         fontSize: 13, color: Colors.grey[700]),
                                   ),
@@ -224,7 +224,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                     width: 3,
                                   ),
                                   Text(
-                                    " "+d.date,
+                                    " "+d.date!,
                                     style: TextStyle(
                                         fontSize: 13, color: Colors.grey[700]),
                                   ),
@@ -237,7 +237,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                             height: 15,
                           ),
                           Text(
-                            d.title,
+                            d.title!,
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w900,
@@ -264,7 +264,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                 //padding: EdgeInsets.all(0),
                                 onPressed: () async
                                 {
-                                  var url = "https://www.youtube.com/watch?v="+d.videoID;
+                                  var url = "https://www.youtube.com/watch?v="+d.videoID!;
                                   if(await canLaunch(url))
                                   {
                                     await launch(url);
@@ -294,7 +294,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                   icon: LoveCard(
                                       collectionName: collectionName,
                                       uid: sb.uid,
-                                      timestamp: d.timestamp),
+                                      timestamp: d.timestamp!),
                                   onPressed: () {
                                     handleLoveClick();
                                   }),
@@ -302,7 +302,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                   icon: BookmarkCard(
                                       collectionName: collectionName,
                                       uid: sb.uid,
-                                      timestamp: d.timestamp),
+                                      timestamp: d.timestamp!),
                                   onPressed: () {
                                     handleBookmarkClick();
                                   }),
@@ -315,7 +315,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                       height: 15,
                     ),
                     Hero(
-                      tag: widget.tag,
+                      tag: widget.tag!,
                       child: Container(
                         height: 220,
                         width: MediaQuery.of(context).size.width,
@@ -339,7 +339,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                         children: <Widget>[
                           LoveCount(
                               collectionName: collectionName,
-                              timestamp: d.timestamp),
+                              timestamp: d.timestamp!),
                         ],
                       ),
                     ),
@@ -347,10 +347,10 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                       height: 15,
                     ),
                     Html(
-                        defaultTextStyle: TextStyle(
+                        /*defaultTextStyle: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w400,
-                            color: Colors.grey[800]),
+                            color: Colors.grey[800]),*/
                         data: '''  ${d.description}   '''),
                     SizedBox(
                       height: 20,

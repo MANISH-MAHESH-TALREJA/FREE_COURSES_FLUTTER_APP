@@ -15,7 +15,7 @@ import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
 import 'package:blog/UTILITY/LoadingCards.dart';
 
 class VideoCoursesPage extends StatefulWidget {
-  VideoCoursesPage({Key key}) : super(key: key);
+  VideoCoursesPage({Key? key}) : super(key: key);
 
   @override
   _VideoCoursesPageState createState() => _VideoCoursesPageState();
@@ -23,7 +23,7 @@ class VideoCoursesPage extends StatefulWidget {
 
 class _VideoCoursesPageState extends State<VideoCoursesPage>
     with AutomaticKeepAliveClientMixin {
-  ScrollController controller;
+  ScrollController? controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String _orderBy = 'TIMESTAMP';
 
@@ -38,7 +38,7 @@ class _VideoCoursesPageState extends State<VideoCoursesPage>
 
   @override
   void dispose() {
-    controller.removeListener(_scrollListener);
+    controller!.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -46,7 +46,7 @@ class _VideoCoursesPageState extends State<VideoCoursesPage>
     final db = context.read<VideoCoursesBLOC>();
 
     if (!db.isLoading) {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
+      if (controller!.position.pixels == controller!.position.maxScrollExtent) {
         context.read<VideoCoursesBLOC>().setLoading(true);
         context.read<VideoCoursesBLOC>().getData(mounted, _orderBy);
       }
@@ -161,7 +161,7 @@ class _VideoCoursesPageState extends State<VideoCoursesPage>
 class VideoCourseItem extends StatelessWidget {
   final VideoCoursesModel d;
 
-  const VideoCourseItem({Key key, @required this.d}) : super(key: key);
+  const VideoCourseItem({Key? key, required this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +180,7 @@ class VideoCourseItem extends StatelessWidget {
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(5.0),
                               child: Image.network(
-                                d.thumbnail,
+                                d.thumbnail!,
                                 fit: BoxFit.fill,
                               )),
                         ),
@@ -204,7 +204,7 @@ class VideoCourseItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        d.title,
+                        d.title!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style:
@@ -215,7 +215,7 @@ class VideoCourseItem extends StatelessWidget {
                       ),
                       Text(
                           HtmlUnescape()
-                              .convert(parse(d.description).documentElement.text),
+                              .convert(parse(d.description).documentElement!.text),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
@@ -237,7 +237,7 @@ class VideoCourseItem extends StatelessWidget {
                             width: 3,
                           ),
                           Text(
-                            d.date,
+                            d.date!,
                             style: TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.bold),
                           ),
                           Spacer(),

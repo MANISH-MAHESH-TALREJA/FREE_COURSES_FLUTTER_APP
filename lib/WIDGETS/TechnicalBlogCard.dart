@@ -9,11 +9,11 @@ import 'package:blog/WIDGETS/CustomCacheImage.dart';
 
 class BlogCard extends StatelessWidget {
   final VideoCoursesModel d;
-  final String tag;
+  final String? tag;
   final Color color;
 
   const BlogCard(
-      {Key key, @required this.d, @required this.tag, @required this.color})
+      {Key? key, required this.d, required this.tag, required this.color})
       : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class BlogCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            d.title,
+                            d.title!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -62,7 +62,7 @@ class BlogCard extends StatelessWidget {
                                 width: 3,
                               ),
                               Expanded(
-                                child: Text(" "+d.channel,
+                                child: Text(" "+d.channel!,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -126,14 +126,14 @@ class BlogCard extends StatelessWidget {
               bottom: 30,
               left: 5,
               child: Hero(
-                tag: tag,
+                tag: tag!,
                 child: Container(
                     height: 120,
                     width: 120,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child:
-                            CustomCacheImage(imageUrl: d.thumbnail))),
+                            CustomCacheImage(imageUrl: d.thumbnail!))),
               ))
         ],
       ),

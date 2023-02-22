@@ -8,14 +8,14 @@ import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
 import 'NotificationDetailsPage.dart';
 
 class NotificationsPage extends StatefulWidget {
-  NotificationsPage({Key key}) : super(key: key);
+  NotificationsPage({Key? key}) : super(key: key);
 
   @override
   _NotificationsPageState createState() => _NotificationsPageState();
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
-  ScrollController controller;
+  ScrollController? controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,7 +29,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   @override
   void dispose() {
-    controller.removeListener(_scrollListener);
+    controller!.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -37,7 +37,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     final db = context.read<NotificationBLOC>();
 
     if (!db.isLoading) {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
+      if (controller!.position.pixels == controller!.position.maxScrollExtent) {
         context.read<NotificationBLOC>().setLoading(true);
         context.read<NotificationBLOC>().getData(mounted);
       }
@@ -99,7 +99,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
 class _ListItem extends StatelessWidget {
   final NotificationModel d;
 
-  const _ListItem({Key key, @required this.d}) : super(key: key);
+  const _ListItem({Key? key, required this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class _ListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          d.title,
+                          d.title!,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(

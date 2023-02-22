@@ -11,7 +11,7 @@ import 'package:blog/UTILITY/LoadingCards.dart';
 
 class FeaturedCourses extends StatefulWidget
 {
-  FeaturedCourses({Key key}) : super(key: key);
+  FeaturedCourses({Key? key}) : super(key: key);
 
   _FeaturedCoursesState createState() => _FeaturedCoursesState();
 }
@@ -73,7 +73,7 @@ class _FeaturedCoursesState extends State<FeaturedCourses>
 class _FeaturedItemList extends StatelessWidget
 {
   final UdemyCoursesModel d;
-  const _FeaturedItemList({Key key, @required this.d}) : super(key: key);
+  const _FeaturedItemList({Key? key, required this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -95,7 +95,7 @@ class _FeaturedItemList extends StatelessWidget
                       borderRadius: BorderRadius.circular(10)),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: CustomCacheImage(imageUrl: d.image_01))),
+                      child: CustomCacheImage(imageUrl: d.image_01!))),
             ),
             Positioned(
               height: 120,
@@ -108,7 +108,7 @@ class _FeaturedItemList extends StatelessWidget
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: Colors.grey[200],
+                          color: Colors.grey[200]!,
                           offset: Offset(0, 2),
                           blurRadius: 2)
                     ]),
@@ -122,7 +122,7 @@ class _FeaturedItemList extends StatelessWidget
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Center(
                           child: Text(
-                            d.courseName.toUpperCase(),
+                            d.courseName!.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
@@ -164,7 +164,7 @@ class _FeaturedItemList extends StatelessWidget
                                 ),
                                 Text(
                                   //"  "+d.commentsCount.toString()+" COMMENTS",
-                                  "  " + d.date,
+                                  "  " + d.date!,
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:line_icons/line_icons.dart';
@@ -11,11 +10,11 @@ import 'package:blog/WIDGETS/CustomCacheImage.dart';
 
 class ListCard extends StatelessWidget {
   final UdemyCoursesModel d;
-  final String tag;
+  final String? tag;
   final Color color;
 
   const ListCard(
-      {Key key, @required this.d, @required this.tag, @required this.color})
+      {Key? key, required this.d, required this.tag, required this.color})
       : super(key: key);
 
   @override
@@ -42,7 +41,7 @@ class ListCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            d.courseName.toUpperCase(),
+                            d.courseName!.toUpperCase(),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -65,7 +64,7 @@ class ListCard extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Text(
-                                  " " + d.courseCategory,
+                                  " " + d.courseCategory!,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -129,13 +128,13 @@ class ListCard extends StatelessWidget {
               bottom: 30,
               left: 5,
               child: Hero(
-                tag: tag,
+                tag: tag!,
                 child: Container(
                     height: 120,
                     width: 120,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: CustomCacheImage(imageUrl: d.image_01))),
+                        child: CustomCacheImage(imageUrl: d.image_01!))),
               ))
         ],
       ),
@@ -147,11 +146,11 @@ class ListCard extends StatelessWidget {
 
 class ListCard2 extends StatelessWidget {
   final VideoCoursesModel d;
-  final String tag;
+  final String? tag;
   final Color color;
 
   const ListCard2(
-      {Key key, @required this.d, @required this.tag, @required this.color})
+      {Key? key, required this.d, required this.tag, required this.color})
       : super(key: key);
 
   @override
@@ -178,7 +177,7 @@ class ListCard2 extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            d.title,
+                            d.title!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -201,7 +200,7 @@ class ListCard2 extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Text(
-                                  " " + d.channel,
+                                  " " + d.channel!,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -265,13 +264,13 @@ class ListCard2 extends StatelessWidget {
               bottom: 30,
               left: 5,
               child: Hero(
-                tag: tag,
+                tag: tag!,
                 child: Container(
                     height: 120,
                     width: 120,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: CustomCacheImage(imageUrl: d.thumbnail))),
+                        child: CustomCacheImage(imageUrl: d.thumbnail!))),
               ))
         ],
       ),

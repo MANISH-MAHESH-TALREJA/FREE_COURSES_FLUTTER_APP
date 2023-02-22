@@ -26,36 +26,36 @@ class AuthenticationBLOC extends ChangeNotifier
   bool get isSignedIn => _isSignedIn;
   bool _hasError = false;
   bool get hasError => _hasError;
-  String _errorCode;
-  String get errorCode => _errorCode;
-  String _name;
-  String get name => _name;
-  String _uid;
-  String get uid => _uid;
-  String _email;
-  String get email => _email;
-  String _imageUrl;
-  String get imageUrl => _imageUrl;
-  String _joiningDate;
-  String get joiningDate => _joiningDate;
-  String _signInProvider;
-  String get signInProvider => _signInProvider;
-  String timestamp;
+  String? _errorCode;
+  String get errorCode => _errorCode!;
+  String? _name;
+  String get name => _name!;
+  String? _uid;
+  String get uid => _uid!;
+  String? _email;
+  String get email => _email!;
+  String? _imageUrl;
+  String get imageUrl => _imageUrl!;
+  String? _joiningDate;
+  String get joiningDate => _joiningDate!;
+  String? _signInProvider;
+  String get signInProvider => _signInProvider!;
+  String? timestamp;
 
   Future signInWithGoogle() async
   {
     // ignore: invalid_return_type_for_catch_error
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn().catchError((error) => print('ERROR OCCURRED : $error'));
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn().catchError((error) => print('ERROR OCCURRED : $error'));
     if (googleUser != null)
     {
       try
       {
         final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
         final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-        User userDetails = (await _firebaseAuth.signInWithCredential(credential)).user;
-        this._name = userDetails.displayName;
-        this._email = userDetails.email;
-        this._imageUrl = userDetails.photoURL;
+        User? userDetails = (await _firebaseAuth.signInWithCredential(credential)).user;
+        this._name = userDetails!.displayName!;
+        this._email = userDetails.email!;
+        this._imageUrl = userDetails.photoURL!;
         this._uid = userDetails.uid;
         this._signInProvider = 'GOOGLE';
         _hasError = false;
@@ -76,7 +76,7 @@ class AuthenticationBLOC extends ChangeNotifier
   }
   Future signInWithFacebook() async
   {
-    User currentUser;
+    User? currentUser;
     // ignore: invalid_return_type_for_catch_error
     final FacebookLoginResult facebookLoginResult = await _fbLogin.logIn(['email', 'public_profile']).catchError((error) => print('ERROR : $error'));
     if (facebookLoginResult.status == FacebookLoginStatus.cancelledByUser)
@@ -98,14 +98,14 @@ class AuthenticationBLOC extends ChangeNotifier
         {
           FacebookAccessToken facebookAccessToken = facebookLoginResult.accessToken;
           final AuthCredential credential = FacebookAuthProvider.credential(facebookAccessToken.token);
-          final User user = (await _firebaseAuth.signInWithCredential(credential)).user;
-          print(user.displayName);
+          final User? user = (await _firebaseAuth.signInWithCredential(credential)).user;
+          print(user!.displayName);
           assert(user.email != null);
           assert(user.displayName != null);
           assert(!user.isAnonymous);
           assert(await user.getIdToken() != null);
           currentUser = _firebaseAuth.currentUser;
-          assert(user.uid == currentUser.uid);
+          assert(user.uid == currentUser!.uid);
           this._name = user.displayName;
           this._email = user.email;
           this._imageUrl = user.photoURL;
@@ -165,12 +165,12 @@ class AuthenticationBLOC extends ChangeNotifier
   Future saveDataToSP() async
   {
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    await sp.setString('NAME', _name);
-    await sp.setString('EMAIL', _email);
-    await sp.setString('IMAGE URL', _imageUrl);
-    await sp.setString('UID', _uid);
-    await sp.setString('JOINING DATE', _joiningDate);
-    await sp.setString('SIGN IN PROVIDER', _signInProvider);
+    await sp.setString('NAME', _name!);
+    await sp.setString('EMAIL', _email!);
+    await sp.setString('IMAGE URL', _imageUrl!);
+    await sp.setString('UID', _uid!);
+    await sp.setString('JOINING DATE', _joiningDate!);
+    await sp.setString('SIGN IN PROVIDER', _signInProvider!);
   }
 
   Future getDataFromSp() async
@@ -189,12 +189,11 @@ class AuthenticationBLOC extends ChangeNotifier
   {
     await FirebaseFirestore.instance.collection('USERS').doc(uid).get().then((DocumentSnapshot snap)
     {
-      Map<String, dynamic> d = snap.data();
-      this._uid = d['UID'];
-      this._name = d['NAME'];
-      this._email = d['EMAIL'];
-      this._imageUrl = d['IMAGE URL'];
-      this._joiningDate = d['JOINING DATE'];
+      this._uid = snap.get('UID');
+      this._name = snap.get('NAME');
+      this._email = snap.get('EMAIL');
+      this._imageUrl = snap.get('IMAGE URL');
+      this._joiningDate = snap.get('JOINING DATE');
       print(_name);
     });
     notifyListeners();

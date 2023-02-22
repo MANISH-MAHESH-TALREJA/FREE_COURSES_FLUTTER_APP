@@ -15,7 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../Constants.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -248,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage>
 }
 
 class GuestUserUI extends StatelessWidget {
-  const GuestUserUI({Key key}) : super(key: key);
+  const GuestUserUI({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -316,7 +316,7 @@ class GuestUserUI extends StatelessWidget {
 }
 
 class UserUI extends StatelessWidget {
-  const UserUI({Key key}) : super(key: key);
+  const UserUI({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

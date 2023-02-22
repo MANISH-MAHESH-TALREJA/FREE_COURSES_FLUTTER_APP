@@ -17,9 +17,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class UdemyCoursesDetailPage extends StatefulWidget {
   final UdemyCoursesModel data;
-  final String tag;
+  final String? tag;
 
-  const UdemyCoursesDetailPage({Key key, @required this.data, @required this.tag})
+  const UdemyCoursesDetailPage({Key? key, required this.data, required this.tag})
       : super(key: key);
 
   @override
@@ -43,7 +43,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
     } else {
       context
           .read<BookmarkBLOC>()
-          .onLoveIconClick(collectionName, widget.data.timestamp);
+          .onLoveIconClick(collectionName, widget.data.timestamp!);
     }
   }
 
@@ -55,7 +55,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
     } else {
       context
           .read<BookmarkBLOC>()
-          .onBookmarkIconClick(collectionName, widget.data.timestamp);
+          .onBookmarkIconClick(collectionName, widget.data.timestamp!);
     }
   }
 
@@ -71,7 +71,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
             Stack(
               children: <Widget>[
                 Hero(
-                  tag: widget.tag,
+                  tag: widget.tag!,
                   child: Container(
                     color: Colors.white,
                     child: Container(
@@ -87,9 +87,9 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                           dotSpacing: 15,
                           boxFit: BoxFit.fill,
                           images: [
-                            CustomCacheImage(imageUrl: widget.data.image_01),
-                            CustomCacheImage(imageUrl: widget.data.image_02),
-                            CustomCacheImage(imageUrl: widget.data.image_03),
+                            CustomCacheImage(imageUrl: widget.data.image_01!),
+                            CustomCacheImage(imageUrl: widget.data.image_02!),
+                            CustomCacheImage(imageUrl: widget.data.image_03!),
                           ]),
                     ),
                   ),
@@ -130,7 +130,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                       ),
                       Expanded(
                           child: Text(
-                        "  " + widget.data.courseCategory,
+                        "  " + widget.data.courseCategory!,
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey[600],
@@ -142,7 +142,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                           icon: LoveCard(
                               collectionName: collectionName,
                               uid: sb.uid,
-                              timestamp: widget.data.timestamp),
+                              timestamp: widget.data.timestamp!),
                           onPressed: () {
                             handleLoveClick();
                           }),
@@ -150,13 +150,13 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                           icon: BookmarkCard(
                               collectionName: collectionName,
                               uid: sb.uid,
-                              timestamp: widget.data.timestamp),
+                              timestamp: widget.data.timestamp!),
                           onPressed: () {
                             handleBookmarkClick();
                           }),
                     ],
                   ),
-                  Text(widget.data.courseName.toUpperCase(),
+                  Text(widget.data.courseName!.toUpperCase(),
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w900,
@@ -174,7 +174,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                     children: <Widget>[
                       LoveCount(
                           collectionName: collectionName,
-                          timestamp: widget.data.timestamp),
+                          timestamp: widget.data.timestamp!),
                     ],
                   ),
                   SizedBox(
@@ -182,10 +182,10 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                   ),
                   Html(
                     data: '''${widget.data.courseDescription}''',
-                    defaultTextStyle: TextStyle(
+                    /*defaultTextStyle: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
-                        color: Colors.grey[800]),
+                        color: Colors.grey[800]),*/
                   ),
                   SizedBox(
                     height: 20,
@@ -198,9 +198,9 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                           borderRadius: new BorderRadius.circular(12)),
                       onPressed: () async
                       {
-                        if (await canLaunch(widget.data.courseDriveLink))
+                        if (await canLaunch(widget.data.courseDriveLink!))
                         {
-                          await launch(widget.data.courseDriveLink);
+                          await launch(widget.data.courseDriveLink!);
                         }
                         else
                         {

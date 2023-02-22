@@ -10,7 +10,7 @@ class LoveCard extends StatelessWidget
   final String uid;
   final String timestamp;
 
-  const LoveCard({Key key, @required this.collectionName, @required this.uid, @required this.timestamp}): super(key: key);
+  const LoveCard({Key? key, required this.collectionName, required this.uid, required this.timestamp}): super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -24,7 +24,7 @@ class LoveCard extends StatelessWidget
       {
         if (uid == null) return LoveIcon().normal;
         if (!snap.hasData) return LoveIcon().normal;
-        List d = snap.data[_type];
+        List d = snap.data![_type];
 
         if (d.contains(timestamp))
         {

@@ -10,7 +10,7 @@ class EditProfile extends StatefulWidget
   final String name;
   final String imageUrl;
 
-  EditProfile({Key key, @required this.name, @required this.imageUrl}) : super(key: key);
+  EditProfile({Key? key, required this.name, required this.imageUrl}) : super(key: key);
 
   @override
   _EditProfileState createState() => _EditProfileState(this.name, this.imageUrl);
@@ -22,7 +22,7 @@ class _EditProfileState extends State<EditProfile>
 
   String name;
   String imageUrl;
-  String fileName;
+  String? fileName;
   bool loading = false;
 
   var formKey = GlobalKey<FormState>();
@@ -41,9 +41,9 @@ class _EditProfileState extends State<EditProfile>
     }
     else
     {
-      if (formKey.currentState.validate())
+      if (formKey.currentState!.validate())
       {
-        formKey.currentState.save();
+        formKey.currentState!.save();
         setState(() => loading = true);
         await sb.updateUserProfile(nameCtrl.text, imageUrl).then((value)
         {
@@ -80,7 +80,7 @@ class _EditProfileState extends State<EditProfile>
                 height: 120,
                 width: 120,
                 decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: Colors.grey[800]),
+                    border: Border.all(width: 1, color: Colors.grey[800]!),
                     color: Colors.grey[500],
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -99,7 +99,7 @@ class _EditProfileState extends State<EditProfile>
                   ),
                   controller: nameCtrl,
                   validator: (value) {
-                    if (value.length == 0) return "NAME CAN'T BE EMPTY";
+                    if (value!.length == 0) return "NAME CAN'T BE EMPTY";
                     return null;
                   },
                 )),

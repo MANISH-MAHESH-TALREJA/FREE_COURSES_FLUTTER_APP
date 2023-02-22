@@ -19,7 +19,7 @@ import 'package:blog/WIDGETS/RecommendedCourses.dart';
 import '../Constants.dart';
 
 class ExploreCourses extends StatefulWidget {
-  ExploreCourses({Key key}) : super(key: key);
+  ExploreCourses({Key? key}) : super(key: key);
 
   _ExploreCoursesState createState() => _ExploreCoursesState();
 }
@@ -70,7 +70,7 @@ class _ExploreCoursesState extends State<ExploreCourses> with AutomaticKeepAlive
 }
 
 class Header extends StatelessWidget {
-  const Header({Key key}) : super(key: key);
+  const Header({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +141,7 @@ class Header extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.grey[100],
-                border: Border.all(color: Colors.grey[300], width: 0.5),
+                border: Border.all(color: Colors.grey[300]!, width: 0.5),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Padding(
@@ -176,7 +176,7 @@ class Header extends StatelessWidget {
 }
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({Key key}) : super(key: key);
+  const CustomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

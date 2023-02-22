@@ -11,7 +11,7 @@ import 'package:blog/UTILITY/LoadingCards.dart';
 
 class RecentCourses extends StatelessWidget
 {
-  RecentCourses({Key key}) : super(key: key);
+  RecentCourses({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -40,7 +40,7 @@ class RecentCourses extends StatelessWidget
                     context,
                     MoreCoursesPage(
                       title: 'RECENTLY ADDED',
-                      color: Colors.blueGrey[600],
+                      color: Colors.blueGrey[600]!,
                     )),
               )
             ],
@@ -71,7 +71,7 @@ class RecentCourses extends StatelessWidget
 class ItemList extends StatelessWidget
 {
   final UdemyCoursesModel d;
-  const ItemList({Key key, @required this.d}) : super(key: key);
+  const ItemList({Key? key, required this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -88,14 +88,14 @@ class ItemList extends StatelessWidget
               tag: 'RECENT ${d.timestamp}',
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: CustomCacheImage(imageUrl: d.image_01)),
+                  child: CustomCacheImage(imageUrl: d.image_01!)),
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
                 child: Text(
-                  d.courseName.toUpperCase(),
+                  d.courseName!.toUpperCase(),
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -117,7 +117,7 @@ class ItemList extends StatelessWidget
                         EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[600].withOpacity(0.5),
+                      color: Colors.grey[600]!.withOpacity(0.5),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,

@@ -15,7 +15,7 @@ import 'package:blog/WIDGETS/CustomCacheImage.dart';
 import 'package:blog/UTILITY/LoadingCards.dart';
 
 class TechnicalBlogPage extends StatefulWidget {
-  TechnicalBlogPage({Key key}) : super(key: key);
+  TechnicalBlogPage({Key? key}) : super(key: key);
 
   @override
   _TechnicalBlogPageState createState() => _TechnicalBlogPageState();
@@ -23,7 +23,7 @@ class TechnicalBlogPage extends StatefulWidget {
 
 class _TechnicalBlogPageState extends State<TechnicalBlogPage>
     with AutomaticKeepAliveClientMixin {
-  ScrollController controller;
+  ScrollController? controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String _orderBy = 'TIMESTAMP';
 
@@ -38,7 +38,7 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
 
   @override
   void dispose() {
-    controller.removeListener(_scrollListener);
+    controller!.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -46,7 +46,7 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
     final db = context.read<TechnicalBlogBLOC>();
 
     if (!db.isLoading) {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
+      if (controller!.position.pixels == controller!.position.maxScrollExtent) {
         context.read<TechnicalBlogBLOC>().setLoading(true);
         context.read<TechnicalBlogBLOC>().getData(mounted, _orderBy);
       }
@@ -161,7 +161,7 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
 class _ItemList extends StatelessWidget {
   final TechnicalBlogModel d;
 
-  const _ItemList({Key key, @required this.d}) : super(key: key);
+  const _ItemList({Key? key, required this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +177,7 @@ class _ItemList extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: CustomCacheImage(imageUrl: d.thumbnail)),
+                        child: CustomCacheImage(imageUrl: d.thumbnail!)),
                   ),
                 ),
                 Container(
@@ -186,7 +186,7 @@ class _ItemList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        d.title,
+                        d.title!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style:
@@ -197,7 +197,7 @@ class _ItemList extends StatelessWidget {
                       ),
                       Text(
                           HtmlUnescape()
-                              .convert(parse(d.description).documentElement.text),
+                              .convert(parse(d.description).documentElement!.text),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
@@ -219,7 +219,7 @@ class _ItemList extends StatelessWidget {
                             width: 3,
                           ),
                           Text(
-                            " "+d.date,
+                            " "+d.date!,
                             style: TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.bold),
                           ),
                           Spacer(),

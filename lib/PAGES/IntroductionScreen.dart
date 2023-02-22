@@ -28,7 +28,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
   }
   Future<Null> checkIsLogin() async
   {
-    String logged = "";
+    String? logged = "";
     SharedPreferences prefs = await SharedPreferences.getInstance();
     logged = prefs.getString("LOGGED");
     if (logged != "" && logged != null)
@@ -54,7 +54,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
     const pageDecoration = const PageDecoration(
       titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
-      descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+      bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: Colors.white,
       imagePadding: EdgeInsets.zero,
     );
@@ -84,7 +84,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
       onDone: () => _onIntroEnd(context),
       onSkip: () => _onIntroEnd(context),
       showSkipButton: true,
-      skipFlex: 0,
+      skipOrBackFlex: 0,
       nextFlex: 0,
       skip: const Text('SKIP'),
       next: const Icon(Icons.arrow_forward),
