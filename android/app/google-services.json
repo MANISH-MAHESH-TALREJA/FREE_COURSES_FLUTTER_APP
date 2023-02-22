@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "358735777314",
+    "firebase_url": "https://manish-travel-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "manish-travel",
+    "storage_bucket": "manish-travel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358735777314:android:e6668535d53eeaea2d847b",
+        "android_client_info": {
+          "package_name": "net.manish.blog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358735777314-kklfp7banv60emuo0gl3tgj110710pcb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.manish.blog",
+            "certificate_hash": "c1ebe2152c520e0e077a7f9d2ebea7178bc759d5"
+          }
+        },
+        {
+          "client_id": "358735777314-ufhr9lceb4tc7qnro40ll22n1ng2ohcc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtBS7i-tQk5cNYjTOukjhitzzC3XAJpsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358735777314-ufhr9lceb4tc7qnro40ll22n1ng2ohcc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358735777314:android:9c35fecea4145b142d847b",
+        "android_client_info": {
+          "package_name": "net.manish.travel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358735777314-30u78t8o08p00lvsv0nvmfuoqj9ktjo5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.manish.travel",
+            "certificate_hash": "c1ebe2152c520e0e077a7f9d2ebea7178bc759d5"
+          }
+        },
+        {
+          "client_id": "358735777314-mdo6muceikfjh0fhsupcun3cd028ooft.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.manish.travel",
+            "certificate_hash": "79fb340c86316e64651f0fc442cf52437df6a436"
+          }
+        },
+        {
+          "client_id": "358735777314-ufhr9lceb4tc7qnro40ll22n1ng2ohcc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtBS7i-tQk5cNYjTOukjhitzzC3XAJpsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358735777314-ufhr9lceb4tc7qnro40ll22n1ng2ohcc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,65 @@
+name: blog
+description: FREE ONLINE COURSES
+
+publish_to: 'none'
+
+version: 1.0.0+0
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+
+  avatar_glow: ^2.0.1
+  in_app_update: ^2.0.0
+  animated_bottom_navigation_bar: ^0.1.3
+  cached_network_image: ^3.0.0
+  carousel_pro: ^1.0.0
+  cloud_firestore: ^2.0.0
+  connectivity: ^3.0.3
+  dots_indicator: ^2.0.0
+  firebase_auth: ^1.1.3
+  firebase_core: ^1.1.0
+  firebase_messaging: ^9.1.3
+  flutter_html: ^0.11.1
+  flutter_icons: ^1.1.0
+  google_fonts: ^2.0.0
+  google_sign_in: ^5.0.2
+  line_icons: ^2.0.1
+  provider: ^5.0.0
+  share: ^2.0.1
+  md2_tab_indicator: ^1.0.2
+  html_unescape: ^1.0.2
+  flutter_widget_from_html: ^0.6.0
+  shared_preferences: ^2.0.5
+  skeleton_text: ^3.0.0
+  flutter_facebook_login: ^3.0.0
+  toast: ^0.1.5
+  url_launcher: ^6.0.3
+  introduction_screen: ^2.1.0
+  youtube_player_flutter: ^8.0.0
+  focused_menu: ^1.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+
+    - family: Muli
+      fonts:
+        - asset: fonts/Muli-Regular.ttf
+          weight: 500
+        - asset: fonts/Muli-Medium.ttf
+          weight: 600
+        - asset: fonts/Muli-SemiBold.ttf
+          weight: 700
+        - asset: fonts/Muli-Bold.ttf
+          weight: 800
