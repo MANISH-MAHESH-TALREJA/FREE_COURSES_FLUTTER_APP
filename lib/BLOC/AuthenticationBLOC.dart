@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,8 +78,11 @@ class AuthenticationBLOC extends ChangeNotifier
   {
     User? currentUser;
     // ignore: invalid_return_type_for_catch_error
-    final FacebookLoginResult facebookLoginResult = await _fbLogin.logIn(['email', 'public_profile']).catchError((error) => print('ERROR : $error'));
-    if (facebookLoginResult.status == FacebookLoginStatus.cancelledByUser)
+    final FacebookLoginResult facebookLoginResult = await _fbLogin.logIn(permissions: [
+      FacebookPermission.publicProfile,
+      FacebookPermission.email,
+    ]).catchError((error) => print('ERROR : $error'));
+    if (facebookLoginResult.status == FacebookLoginStatus.cancel)
     {
       _hasError = true;
       _errorCode = 'CANCEL';
@@ -94,9 +97,9 @@ class AuthenticationBLOC extends ChangeNotifier
     {
       try
       {
-        if (facebookLoginResult.status == FacebookLoginStatus.loggedIn)
+        if (facebookLoginResult.status == FacebookLoginStatus.success)
         {
-          FacebookAccessToken facebookAccessToken = facebookLoginResult.accessToken;
+          FacebookAccessToken facebookAccessToken = facebookLoginResult.accessToken!;
           final AuthCredential credential = FacebookAuthProvider.credential(facebookAccessToken.token);
           final User? user = (await _firebaseAuth.signInWithCredential(credential)).user;
           print(user!.displayName);

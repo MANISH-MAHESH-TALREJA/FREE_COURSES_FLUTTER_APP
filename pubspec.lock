@@ -81,14 +81,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  carousel_pro:
-    dependency: "direct main"
-    description:
-      name: carousel_pro
-      sha256: "714689d60d2edb263673783c264c8e5207640d52dcbdcb60d8bd1a17fe7514a9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   characters:
     dependency: transitive
     description:
@@ -334,14 +326,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
-  flutter_facebook_login:
-    dependency: "direct main"
-    description:
-      name: flutter_facebook_login
-      sha256: "922bb882f38a9dfaded86708dd41f4e859434991de7474fc464e2af24edd6795"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   flutter_html:
     dependency: "direct main"
     description:
@@ -353,10 +337,9 @@ packages:
   flutter_icons:
     dependency: "direct main"
     description:
-      name: flutter_icons
-      sha256: ad1c830f729c71216372d1a8d62c08c6dd792227d9492d5130aea5e391210a9f
-      url: "https://pub.dev"
-    source: hosted
+      path: flutter_icons
+      relative: true
+    source: path
     version: "1.1.0"
   flutter_inappwebview:
     dependency: transitive
@@ -366,6 +349,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.7.2+3"
+  flutter_login_facebook:
+    dependency: "direct main"
+    description:
+      name: flutter_login_facebook
+      sha256: "340595d5a386dde1695f31944993eff200ffc6c3d17ff76fa6c1283b6374c250"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.7.0"
   flutter_svg:
     dependency: transitive
     description:
@@ -616,6 +607,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  list_ext:
+    dependency: transitive
+    description:
+      name: list_ext
+      sha256: a38869a6911830f39ace7534972d01e573e17917955b26215e54d5797eb8d5cd
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   matcher:
     dependency: transitive
     description:
@@ -632,14 +631,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  md2_tab_indicator:
-    dependency: "direct main"
-    description:
-      name: md2_tab_indicator
-      sha256: "69dea9ee4027ab102581d49d89d9fce8f56747bf9a2aece4485423d51152a52f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.2"
   meta:
     dependency: transitive
     description:

@@ -17,13 +17,11 @@ dependencies:
   animated_bottom_navigation_bar: ^1.1.0+1
   cached_network_image: ^3.2.3
 
-  carousel_pro: ^1.0.0
+  flutter_icons:
+    path: ./flutter_icons
   connectivity: ^3.0.6
-  flutter_icons: ^1.1.0
   share: ^2.0.4
-  md2_tab_indicator: ^1.0.2
-  flutter_facebook_login: ^3.0.0
-
+  flutter_login_facebook: ^1.7.0
   cloud_firestore: ^4.4.3
 
   dots_indicator: ^2.1.0

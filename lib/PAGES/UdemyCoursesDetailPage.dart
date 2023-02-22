@@ -1,5 +1,4 @@
 import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -14,6 +13,8 @@ import 'package:blog/WIDGETS/LoveCard.dart';
 import 'package:blog/WIDGETS/OtherUdemyCourses.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../carousel_pro/src/carousel_pro.dart';
 
 class UdemyCoursesDetailPage extends StatefulWidget {
   final UdemyCoursesModel data;
