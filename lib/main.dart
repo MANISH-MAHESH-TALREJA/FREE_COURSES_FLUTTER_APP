@@ -7,29 +7,20 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'package:in_app_update/in_app_update.dart';
 import 'package:provider/provider.dart';
-import 'package:blog/BLOC/TechnicalBlogBLOC.dart';
-import 'package:blog/BLOC/bookmark_bloc.dart';
-import 'package:blog/BLOC/FeaturedCoursesBLOC.dart';
-import 'package:blog/BLOC/InternetBLOC.dart';
-import 'package:blog/BLOC/NotificationBLOC.dart';
-import 'package:blog/BLOC/PopularCoursesBLOC.dart';
-import 'package:blog/BLOC/RecentCoursesBLOC.dart';
-import 'package:blog/BLOC/RecommendedCoursesBLOC.dart';
-import 'package:blog/BLOC/UdemyCoursesSearchBLOC.dart';
-import 'package:blog/BLOC/authentication_bloc.dart';
-import 'package:blog/BLOC/CourseCategoryBLOC.dart';
-import 'BLOC/VideoCoursesBLOC.dart';
-import 'BLOC/VideoCoursesSearchBLOC.dart';
-import 'PAGES/SplashScreenPage.dart';
-
-
-/*class MyHttpOverrides extends HttpOverrides{
-  @override
-  HttpClient createHttpClient(SecurityContext? context){
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
-  }
-}*/
+import 'package:blog/bloc/technical_blog_bloc.dart';
+import 'package:blog/bloc/bookmark_bloc.dart';
+import 'package:blog/bloc/featured_courses_bloc.dart';
+import 'package:blog/bloc/internet_bloc.dart';
+import 'package:blog/bloc/notification_bloc.dart';
+import 'package:blog/bloc/popular_courses_bloc.dart';
+import 'package:blog/bloc/recent_courses_bloc.dart';
+import 'package:blog/bloc/recommended_courses_bloc.dart';
+import 'package:blog/bloc/udemy_courses_search_bloc.dart';
+import 'package:blog/bloc/authentication_bloc.dart';
+import 'package:blog/bloc/course_category_bloc.dart';
+import 'bloc/video_courses_bloc.dart';
+import 'bloc/video_courses_search_bloc.dart';
+import 'pages/splash_screen_page.dart';
 
 void main()async
 {
@@ -39,8 +30,6 @@ void main()async
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark
   ));
-  //HttpOverrides.global = new MyHttpOverrides();
-  //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness:Brightness.dark));
   runApp(MyApp());
 }
 
@@ -54,27 +43,10 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp>
 {
-  /*AppUpdateInfo _updateInfo;
-  Future<void> checkForUpdate() async
-  {
-    InAppUpdate.checkForUpdate().then((info)
-    {
-      setState(()
-      {
-        _updateInfo = info;
-      });
-      print(_updateInfo);
-    }).catchError((e)
-    {
-      print(e.toString());
-    });
-  }*/
-
 
   @override
   void initState() {
     super.initState();
-    //checkForUpdate();
   }
 
   @override
@@ -102,7 +74,7 @@ class _MyAppState extends State<MyApp>
               primarySwatch: Colors.blue,
               primaryColor: Colors.blueAccent,
               iconTheme: IconThemeData(color: Colors.grey[900]),
-              fontFamily: 'Muli',
+              fontFamily: 'Poppins',
               appBarTheme: AppBarTheme(
                 color: Colors.transparent,
                 elevation: 0,

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:blog/MODELS/UdemyCoursesModel.dart';
-import 'package:blog/MODELS/VideoCoursesModel.dart';
+import 'package:blog/models/udemy_courses_model.dart';
+import 'package:blog/models/video_courses_model.dart';
 
 class BookmarkBLOC extends ChangeNotifier
 {
