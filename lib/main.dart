@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 //import 'package:in_app_update/in_app_update.dart';
 import 'package:provider/provider.dart';
 import 'package:blog/BLOC/TechnicalBlogBLOC.dart';
-import 'package:blog/BLOC/BookmarkBLOC.dart';
+import 'package:blog/BLOC/bookmark_bloc.dart';
 import 'package:blog/BLOC/FeaturedCoursesBLOC.dart';
 import 'package:blog/BLOC/InternetBLOC.dart';
 import 'package:blog/BLOC/NotificationBLOC.dart';
@@ -14,18 +16,31 @@ import 'package:blog/BLOC/PopularCoursesBLOC.dart';
 import 'package:blog/BLOC/RecentCoursesBLOC.dart';
 import 'package:blog/BLOC/RecommendedCoursesBLOC.dart';
 import 'package:blog/BLOC/UdemyCoursesSearchBLOC.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:blog/BLOC/CourseCategoryBLOC.dart';
 import 'BLOC/VideoCoursesBLOC.dart';
 import 'BLOC/VideoCoursesSearchBLOC.dart';
 import 'PAGES/SplashScreenPage.dart';
 
 
+/*class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}*/
+
 void main()async
 {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness:Brightness.dark));
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark
+  ));
+  //HttpOverrides.global = new MyHttpOverrides();
+  //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness:Brightness.dark));
   runApp(MyApp());
 }
 

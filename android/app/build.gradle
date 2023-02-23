@@ -22,32 +22,32 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "net.manish.blog"
         minSdkVersion 21
-        ndkVersion "22.1.7171670"
-		multiDexEnabled true
-        targetSdkVersion 30
+        multiDexEnabled true
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        ndk {
-            debugSymbolLevel 'SYMBOL_TABLE'
-        }
     }
 
     buildTypes {
         release {
-            ndk {
-                debugSymbolLevel 'SYMBOL_TABLE'
-            }
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -55,7 +55,8 @@ android {
 flutter {
     source '../..'
 }
+
 dependencies {
-  implementation 'com.android.support:multidex:2.0.1'
-    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+    implementation 'com.android.support:multidex:2.0.1'
+    implementation 'com.google.firebase:firebase-analytics:21.2.0'
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:blog/BLOC/InternetBLOC.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
 import 'IntroductionScreen.dart';
 

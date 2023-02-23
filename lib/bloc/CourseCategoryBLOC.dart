@@ -6,7 +6,7 @@ import 'package:blog/MODELS/CourseCategoriesModel.dart';
 class CourseCategoryBLOC extends ChangeNotifier
 {
   DocumentSnapshot? _lastVisible;
-  DocumentSnapshot get lastVisible => _lastVisible!;
+  DocumentSnapshot? get lastVisible => _lastVisible;
   bool _isLoading = true;
   bool get isLoading => _isLoading;
   List<CourseCategoriesModel> _data = [];
@@ -14,7 +14,7 @@ class CourseCategoryBLOC extends ChangeNotifier
   List<DocumentSnapshot> _snap = [];
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
   bool? _hasData;
-  bool get hasData => _hasData!;
+  bool? get hasData => _hasData;
 
   Future<Null> getData(mounted) async
   {
@@ -64,7 +64,7 @@ class CourseCategoryBLOC extends ChangeNotifier
     _isLoading = true;
     _snap.clear();
     _data.clear();
-    _lastVisible = null;
+    //_lastVisible = null;
     getData(mounted);
     notifyListeners();
   }
@@ -74,7 +74,7 @@ class CourseCategoryBLOC extends ChangeNotifier
     _isLoading = true;
     _snap.clear();
     _data.clear();
-    _lastVisible = null;
+    //_lastVisible = null;
     getData(mounted);
     notifyListeners();
   }

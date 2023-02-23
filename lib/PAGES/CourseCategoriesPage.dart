@@ -60,7 +60,7 @@ class _CourseCategoriesPageState extends State<CourseCategoriesPage>
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Text('COURSES CATEGORIES'),
+        title: Text('COURSES CATEGORIES', style: TextStyle(color: Colors.black),),
         elevation: 0,
       ),
       body: RefreshIndicator(

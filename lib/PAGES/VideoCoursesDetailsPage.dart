@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share/share.dart';
-import 'package:blog/BLOC/BookmarkBLOC.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/bookmark_bloc.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:blog/MODELS/VideoCoursesModel.dart';
 import 'package:blog/WIDGETS/BookmarkCard.dart';
 import 'package:blog/WIDGETS/LoveCount.dart';
@@ -293,7 +293,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                               IconButton(
                                   icon: LoveCard(
                                       collectionName: collectionName,
-                                      uid: sb.uid,
+                                      uid: sb.uid!,
                                       timestamp: d.timestamp!),
                                   onPressed: () {
                                     handleLoveClick();
@@ -301,7 +301,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                               IconButton(
                                   icon: BookmarkCard(
                                       collectionName: collectionName,
-                                      uid: sb.uid,
+                                      uid: sb.uid!,
                                       timestamp: d.timestamp!),
                                   onPressed: () {
                                     handleBookmarkClick();

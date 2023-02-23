@@ -1,7 +1,7 @@
 import 'package:blog/UTILITY/GeneralUtilityClasses.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:provider/provider.dart';
 
 class BookmarkCard extends StatelessWidget

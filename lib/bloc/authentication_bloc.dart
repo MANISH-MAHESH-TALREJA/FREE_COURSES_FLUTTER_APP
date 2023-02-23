@@ -27,19 +27,19 @@ class AuthenticationBLOC extends ChangeNotifier
   bool _hasError = false;
   bool get hasError => _hasError;
   String? _errorCode;
-  String get errorCode => _errorCode!;
+  String? get errorCode => _errorCode;
   String? _name;
-  String get name => _name!;
+  String? get name => _name;
   String? _uid;
-  String get uid => _uid!;
+  String? get uid => _uid;
   String? _email;
-  String get email => _email!;
+  String? get email => _email;
   String? _imageUrl;
-  String get imageUrl => _imageUrl!;
+  String? get imageUrl => _imageUrl;
   String? _joiningDate;
-  String get joiningDate => _joiningDate!;
+  String? get joiningDate => _joiningDate;
   String? _signInProvider;
-  String get signInProvider => _signInProvider!;
+  String? get signInProvider => _signInProvider;
   String? timestamp;
 
   Future signInWithGoogle() async
@@ -109,9 +109,9 @@ class AuthenticationBLOC extends ChangeNotifier
           assert(await user.getIdToken() != null);
           currentUser = _firebaseAuth.currentUser;
           assert(user.uid == currentUser!.uid);
-          this._name = user.displayName;
-          this._email = user.email;
-          this._imageUrl = user.photoURL;
+          this._name = user.displayName!;
+          this._email = user.email!;
+          this._imageUrl = user.photoURL!;
           this._uid = user.uid;
           this._signInProvider = 'FACEBOOK';
           _hasError = false;

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:blog/BLOC/InternetBLOC.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
 
 class EditProfile extends StatefulWidget

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:blog/PAGES/AuthenticationPage.dart';
 import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
 import 'package:flutter/material.dart';

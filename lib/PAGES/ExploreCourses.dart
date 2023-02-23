@@ -7,7 +7,7 @@ import 'package:blog/BLOC/FeaturedCoursesBLOC.dart';
 import 'package:blog/BLOC/PopularCoursesBLOC.dart';
 import 'package:blog/BLOC/RecentCoursesBLOC.dart';
 import 'package:blog/BLOC/RecommendedCoursesBLOC.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:blog/PAGES/ProfilePage.dart';
 import 'package:blog/PAGES/UdemyCoursesSearchPage.dart';
@@ -120,7 +120,7 @@ class Header extends StatelessWidget {
                             color: Colors.grey[300],
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                image: CachedNetworkImageProvider(sb.imageUrl),
+                                image: CachedNetworkImageProvider(sb.imageUrl!),
                                 fit: BoxFit.cover)),
                       ),
                 onTap: () {

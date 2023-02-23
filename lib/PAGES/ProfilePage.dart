@@ -6,7 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:blog/BLOC/NotificationBLOC.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:blog/PAGES/EditProfile.dart';
 import 'package:blog/PAGES/NotificationsPage.dart';
 import 'package:blog/UTILITY/GeneralUtilityFunctions.dart';
@@ -85,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage>
                   ),
                   trailing: Switch(
                       activeColor: Theme.of(context).primaryColor,
-                      value: context.watch<NotificationBLOC>().subscribed,
+                      value: context.watch<NotificationBLOC>().subscribed!,
                       onChanged: (bool) {
                         context.read<NotificationBLOC>().fcmSubscribe(bool);
                       }),
@@ -335,10 +335,10 @@ class UserUI extends StatelessWidget {
                 child: CircleAvatar(
                     radius: 60,
                     backgroundColor: Colors.transparent,
-                    backgroundImage: CachedNetworkImageProvider(sb.imageUrl)),
+                    backgroundImage: CachedNetworkImageProvider(sb.imageUrl!)),
               ),
               Text(
-                sb.name,
+                sb.name!,
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(
@@ -355,7 +355,7 @@ class UserUI extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              title: Text(sb.email.toUpperCase(), maxLines: 1,),
+              title: Text(sb.email!.toUpperCase(), maxLines: 1,),
               leading: Container(
                 height: 30,
                 width: 30,
@@ -375,7 +375,7 @@ class UserUI extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              title: Text("JOINED ON : "+sb.joiningDate),
+              title: Text("JOINED ON : "+sb.joiningDate!),
               leading: Container(
                 height: 30,
                 width: 30,
@@ -408,7 +408,7 @@ class UserUI extends StatelessWidget {
                   size: 20,
                 ),
                 onTap: () => nextScreen(
-                    context, EditProfile(name: sb.name, imageUrl: sb.imageUrl))),
+                    context, EditProfile(name: sb.name!, imageUrl: sb.imageUrl!))),
           ),
         ),
         Padding(
@@ -433,7 +433,7 @@ class UserUI extends StatelessWidget {
                 size: 20,
               ),
               onTap: () async => await launch(
-                  'mailto:${"aayushmanojha4231@gmail.com"}?subject=REQUEST FOR AN COURSE ON ${Constants().appName} APP&body= HELLO AAYUSHMAN SIR,\n          MYSELF, '+sb.name+" , I JOINED FREE COURSES APP ON : "+sb.joiningDate+". I WOULD LIKE TO REQUEST FOR A COURSE ON YOU APP NAMED AS ............\n\n\n\n\nTHANKING YOU SIR,\nWITH REGARDS,\n"+sb.name+"\n"+sb.email.toUpperCase()),
+                  'mailto:${"aayushmanojha4231@gmail.com"}?subject=REQUEST FOR AN COURSE ON ${Constants().appName} APP&body= HELLO AAYUSHMAN SIR,\n          MYSELF, '+sb.name!+", I JOINED FREE COURSES APP ON : "+sb.joiningDate!+". I WOULD LIKE TO REQUEST FOR A COURSE ON YOU APP NAMED AS ............\n\n\n\n\nTHANKING YOU SIR,\nWITH REGARDS,\n"+sb.name!+"\n"+sb.email!.toUpperCase()),
             ),
           ),
         ),

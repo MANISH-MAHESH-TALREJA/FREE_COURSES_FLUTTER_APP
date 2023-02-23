@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage> {
         activeIndex: _currentIndex,
         inactiveColor: Colors.grey[800],
         onTap: (index) => onTabTapped(index),
+        gapLocation: GapLocation.none,
       ),
       body: WillPopScope(
         onWillPop: onWillPop,

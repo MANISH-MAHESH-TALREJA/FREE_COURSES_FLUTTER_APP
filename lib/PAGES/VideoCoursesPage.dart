@@ -30,9 +30,9 @@ class _VideoCoursesPageState extends State<VideoCoursesPage>
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 0)).then((value) {
+    Future.delayed(Duration(milliseconds: 0)).then((value) async {
       controller = new ScrollController()..addListener(_scrollListener);
-      context.read<VideoCoursesBLOC>().getData(mounted, _orderBy);
+      await context.read<VideoCoursesBLOC>().getData(mounted, _orderBy);
     });
   }
 
@@ -71,7 +71,7 @@ class _VideoCoursesPageState extends State<VideoCoursesPage>
             Navigator.push(context, MaterialPageRoute(builder: (context) => VideoCoursesSearchPage()));
           },
         ),
-        title: Text('YOUTUBE COURSES'),
+        title: Text('YOUTUBE COURSES', style: TextStyle(color: Colors.black),),
         elevation: 0,
         actions: <Widget>
         [

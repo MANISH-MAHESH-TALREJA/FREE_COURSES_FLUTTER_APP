@@ -14,7 +14,7 @@ class NotificationBLOC extends ChangeNotifier
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   DocumentSnapshot? _lastVisible;
 
-  DocumentSnapshot get lastVisible => _lastVisible!;
+  DocumentSnapshot? get lastVisible => _lastVisible;
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
@@ -24,7 +24,7 @@ class NotificationBLOC extends ChangeNotifier
   List<NotificationModel> get data => _data;
   bool? _subscribed;
 
-  bool get subscribed => _subscribed!;
+  bool? get subscribed => _subscribed;
   final String subscriptionTopic = 'ALL';
 
   Future<Null> getData(mounted) async

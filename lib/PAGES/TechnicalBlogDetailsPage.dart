@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:share/share.dart';
-import 'package:blog/BLOC/BookmarkBLOC.dart';
-import 'package:blog/BLOC/AuthenticationBLOC.dart';
+import 'package:blog/BLOC/bookmark_bloc.dart';
+import 'package:blog/BLOC/authentication_bloc.dart';
 import 'package:blog/MODELS/TechnicalBlogModel.dart';
 import 'package:blog/WIDGETS/CustomCacheImage.dart';
 import 'package:blog/WIDGETS/LoveCount.dart';
@@ -215,7 +215,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                           IconButton(
                               icon: LoveCard(
                                   collectionName: collectionName,
-                                  uid: sb.uid,
+                                  uid: sb.uid!,
                                   timestamp: d.timestamp!),
                               onPressed: () {
                                 handleLoveClick();
