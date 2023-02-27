@@ -11,7 +11,7 @@ import 'package:blog/utility/loading_cards.dart';
 
 class PopularCourses extends StatelessWidget
 {
-  PopularCourses({Key? key}) : super(key: key);
+  const PopularCourses({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -21,22 +21,21 @@ class PopularCourses extends StatelessWidget
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             left: 15,
             top: 10,
           ),
           child: Row(
             children: <Widget>[
-              Text(
+              const Text(
                 'POPULAR COURSES',
                 style: TextStyle(
                     fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey[800]),
+                    fontWeight: FontWeight.w700),
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
-                icon: Icon(Icons.arrow_forward),
+                icon: const Icon(Icons.arrow_forward),
                 onPressed: () => nextScreen(
                     context,
                     MoreCoursesPage(
@@ -47,17 +46,17 @@ class PopularCourses extends StatelessWidget
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: 220,
           //color: Colors.green,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
-            padding: EdgeInsets.only(left: 15, right: 15),
+            padding: const EdgeInsets.only(left: 15, right: 15),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: pb.data.isEmpty ? 3 : pb.data.length,
             itemBuilder: (BuildContext context, int index) {
-              if (pb.data.isEmpty) return LoadingPopularCoursesCard();
+              if (pb.data.isEmpty) return const LoadingPopularCoursesCard();
               return ItemList(
                 d: pb.data[index],
               );
@@ -80,7 +79,7 @@ class ItemList extends StatelessWidget
   {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.only(left: 0, right: 10, top: 5, bottom: 5),
+        margin: const EdgeInsets.only(left: 0, right: 10, top: 5, bottom: 5),
         width: MediaQuery.of(context).size.width * 0.36,
         decoration: BoxDecoration(
             color: Colors.grey[300], borderRadius: BorderRadius.circular(10)),
@@ -100,7 +99,7 @@ class ItemList extends StatelessWidget
                   d.courseName!.toUpperCase(),
                   textAlign: TextAlign.center,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
@@ -116,7 +115,7 @@ class ItemList extends StatelessWidget
                   ),
                   child: Container(
                     padding:
-                        EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                        const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.grey[600]!.withOpacity(0.5),
@@ -124,13 +123,13 @@ class ItemList extends StatelessWidget
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(LineIcons.heart, size: 16, color: Colors.white),
-                        SizedBox(
+                        const Icon(LineIcons.heart, size: 16, color: Colors.white),
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
                           d.loves.toString(),
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                          style: const TextStyle(fontSize: 12, color: Colors.white),
                         )
                       ],
                     ),

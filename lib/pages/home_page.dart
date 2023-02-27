@@ -14,15 +14,18 @@ import 'package:blog/pages/course_categories_page.dart';
 import 'package:blog/pages/video_courses_page.dart';
 import 'package:toast/toast.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+import '../bloc/theme_bloc.dart';
 
-  _HomePageState createState() => _HomePageState();
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage>  with TickerProviderStateMixin {
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   List<IconData> iconList = [
     Feather.home,
@@ -36,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   Future<bool> onWillPop()
   {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2))
+    if (currentBackPressTime == null || now.difference(currentBackPressTime!) > const Duration(seconds: 2))
     {
       currentBackPressTime = now;
       Toast.show("PRESS BACK BUTTON AGAIN TO EXIT", duration: Toast.lengthShort, gravity:  Toast.bottom);
@@ -49,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       _currentIndex = index;
     });
     _pageController.animateToPage(index,
-        curve: Curves.easeIn, duration: Duration(milliseconds: 400));
+        curve: Curves.easeIn, duration: const Duration(milliseconds: 400));
   }
 
   AppUpdateInfo? _updateInfo;
@@ -61,10 +64,10 @@ class _HomePageState extends State<HomePage> {
       {
         _updateInfo = info;
       });
-      print(_updateInfo);
+      debugPrint(_updateInfo.toString());
     }).catchError((e)
     {
-      print(e.toString());
+      debugPrint(e.toString());
     });
   }
 
@@ -73,7 +76,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     askPermission();
     checkForUpdate();
-    Future.delayed(Duration(milliseconds: 0)).then((value) async {
+    Future.delayed(const Duration(milliseconds: 0)).then((value) async {
       await context
           .read<NotificationBLOC>()
           .initFirebasePushNotification(context);
@@ -108,9 +111,23 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       bottomNavigationBar: AnimatedBottomNavigationBar(
+        backgroundColor: context.watch<ThemeBloc>().darkTheme! == true ? Colors.grey[900] : Colors.white,
         icons: iconList,
+        shadow: null,
+        notchAndCornersAnimation: CurvedAnimation(
+          parent: AnimationController(
+            duration: const Duration(milliseconds: 500),
+            vsync: this,
+          ),
+          curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+        ),
+        splashColor: Colors.red,
+        splashRadius: 10,
+        splashSpeedInMilliseconds: 300,
+        notchSmoothness: NotchSmoothness.defaultEdge,
         activeIndex: _currentIndex,
-        inactiveColor: Colors.grey[800],
+        inactiveColor: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.grey[800],
+        activeColor: context.watch<ThemeBloc>().darkTheme! == true ? Colors.cyanAccent : Theme.of(context).accentColor,
         onTap: (index) => onTabTapped(index),
         gapLocation: GapLocation.none,
       ),
@@ -118,8 +135,8 @@ class _HomePageState extends State<HomePage> {
         onWillPop: onWillPop,
         child: PageView(
           controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
+          physics: const NeverScrollableScrollPhysics(),
+          children: const <Widget>[
             ExploreCourses(),
             VideoCoursesPage(),
             CourseCategoriesPage(),

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:blog/utility/general_utility_functions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -23,19 +22,19 @@ class VideoCoursesDetailsPage extends StatefulWidget {
   final VideoCoursesModel blogData;
   final String? tag;
 
-  VideoCoursesDetailsPage({Key? key, required this.blogData, required this.tag})
+  const VideoCoursesDetailsPage({Key? key, required this.blogData, required this.tag})
       : super(key: key);
 
   @override
-  _BlogDetailsState createState() => _BlogDetailsState();
+  BlogDetailsState createState() => BlogDetailsState();
 }
 
-class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
+class BlogDetailsState extends State<VideoCoursesDetailsPage> {
   final String collectionName = 'YOUTUBE VIDEO COURSES';
   handleLoveClick() {
-    bool _guestUser = context.read<AuthenticationBLOC>().guestUser;
+    bool guestUser = context.read<AuthenticationBLOC>().guestUser;
 
-    if (_guestUser == true) {
+    if (guestUser == true) {
       openSignInDialog(context);
     } else {
       context
@@ -45,8 +44,8 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
   }
 
   handleBookmarkClick() {
-    bool _guestUser = context.read<AuthenticationBLOC>().guestUser;
-    if (_guestUser == true) {
+    bool guestUser = context.read<AuthenticationBLOC>().guestUser;
+    if (guestUser == true) {
       openSignInDialog(context);
     } else {
       context
@@ -133,14 +132,14 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
       builder: (context, player)
       {
         return Scaffold(
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,32 +148,32 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                             height: 35,
                             width: 35,
                             decoration: BoxDecoration(
-                                color: Colors.grey[200],
+                                /*color: Colors.grey[200],*/
                                 borderRadius: BorderRadius.circular(5)),
                             child: IconButton(
-                              padding: EdgeInsets.all(0),
-                              icon: Icon(Icons.arrow_back),
+                              padding: const EdgeInsets.all(0),
+                              icon: const Icon(Icons.arrow_back),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
                             ),
                           ),
-                          Text(
+                          const Text(
                             "YOUTUBE COURSES",
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w900,
-                                color: Colors.indigo),
+                                /*color: Colors.indigo*/),
                           ),
                           Container(
                               height: 35,
                               width: 35,
                               decoration: BoxDecoration(
-                                  color: Colors.grey[200],
+                                 /* color: Colors.grey[200],*/
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
-                                padding: EdgeInsets.all(0),
-                                icon: Icon(
+                                padding: const EdgeInsets.all(0),
+                                icon: const Icon(
                                   Icons.share,
                                   size: 22,
                                 ),
@@ -197,61 +196,61 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  Icon(
+                                  const Icon(
                                     Feather.check_circle,
                                     size: 18,
                                     color: Colors.green,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 3,
                                   ),
                                   Text(
-                                    " "+d.channel!,
-                                    style: TextStyle(
-                                        fontSize: 13, color: Colors.grey[700]),
+                                    " ${d.channel!}",
+                                    style: const TextStyle(
+                                        fontSize: 13/*, color: Colors.grey[700]*/),
                                   ),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  Icon(
+                                  const Icon(
                                     Feather.clock,
                                     size: 18,
                                     color: Colors.green,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 3,
                                   ),
                                   Text(
-                                    " "+d.date!,
-                                    style: TextStyle(
-                                        fontSize: 13, color: Colors.grey[700]),
+                                    " ${d.date!}",
+                                    style: const TextStyle(
+                                        fontSize: 13/*, color: Colors.grey[700]*/),
                                   ),
                                 ],
                               ),
                             ],
                           ),
 
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Text(
                             d.title!,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w900,
-                                color: Colors.grey[800]),
+                                /*color: Colors.grey[800]*/),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 8, bottom: 8),
+                            margin: const EdgeInsets.only(top: 8, bottom: 8),
                             height: 3,
                             width: 150,
                             decoration: BoxDecoration(
                                 color: Theme.of(context).primaryColor,
                                 borderRadius: BorderRadius.circular(40)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Row(
@@ -264,7 +263,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                 //padding: EdgeInsets.all(0),
                                 onPressed: () async
                                 {
-                                  var url = "https://www.youtube.com/watch?v="+d.videoID!;
+                                  var url = "https://www.youtube.com/watch?v=${d.videoID!}";
                                   if(await canLaunch(url))
                                   {
                                     await launch(url);
@@ -277,9 +276,9 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(Colors.red)
                                 ),
-                                icon: Icon(Feather.youtube,
+                                icon: const Icon(Feather.youtube,
                                     size: 20, color: Colors.white),
-                                label: Text(
+                                label: const Text(
                                   " OPEN YOUTUBE   ",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -289,11 +288,11 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               IconButton(
                                   icon: LoveCard(
                                       collectionName: collectionName,
-                                      uid: sb.uid!,
+                                      uid: sb.uid,
                                       timestamp: d.timestamp!),
                                   onPressed: () {
                                     handleLoveClick();
@@ -301,7 +300,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                               IconButton(
                                   icon: BookmarkCard(
                                       collectionName: collectionName,
-                                      uid: sb.uid!,
+                                      uid: sb.uid,
                                       timestamp: d.timestamp!),
                                   onPressed: () {
                                     handleBookmarkClick();
@@ -311,19 +310,19 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Hero(
                       tag: widget.tag!,
-                      child: Container(
+                      child: SizedBox(
                         height: 220,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14)),
-                            child: Container(
+                            child: SizedBox(
                               height: MediaQuery.of(context).size.height * 0.5,
                               width: MediaQuery.of(context).size.width * 0.9,
                               child:player,
@@ -343,7 +342,7 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Html(
@@ -352,11 +351,11 @@ class _BlogDetailsState extends State<VideoCoursesDetailsPage> {
                             fontWeight: FontWeight.w400,
                             color: Colors.grey[800]),*/
                         data: '''  ${d.description}   '''),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    OtherVideoCourses(),
-                    SizedBox(
+                    const OtherVideoCourses(),
+                    const SizedBox(
                       height: 10,
                     ),
                   ]),

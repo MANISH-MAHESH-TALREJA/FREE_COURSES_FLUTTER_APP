@@ -14,27 +14,27 @@ class MoreCoursesPage extends StatefulWidget {
   final String title;
   final Color color;
 
-  MoreCoursesPage({Key? key, required this.title, required this.color})
+  const MoreCoursesPage({Key? key, required this.title, required this.color})
       : super(key: key);
 
   @override
-  _MoreCoursesPageState createState() => _MoreCoursesPageState();
+  MoreCoursesPageState createState() => MoreCoursesPageState();
 }
 
-class _MoreCoursesPageState extends State<MoreCoursesPage> {
+class MoreCoursesPageState extends State<MoreCoursesPage> {
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
   final String collectionName = 'UDEMY COURSES';
   ScrollController? controller;
   DocumentSnapshot? _lastVisible;
   bool? _isLoading;
-  List<DocumentSnapshot> _snap = [];
+  final List<DocumentSnapshot> _snap = [];
   List<UdemyCoursesModel> _data = [];
   bool? _descending;
   String? _orderBy;
 
   @override
   void initState() {
-    controller = new ScrollController()..addListener(_scrollListener);
+    controller = ScrollController()..addListener(_scrollListener);
     super.initState();
     _isLoading = true;
     if (widget.title == 'POPULAR') {
@@ -60,23 +60,24 @@ class _MoreCoursesPageState extends State<MoreCoursesPage> {
     _getData();
   }
 
-  Future<Null> _getData() async {
+  Future<void> _getData() async {
     QuerySnapshot data;
-    if (_lastVisible == null)
+    if (_lastVisible == null) {
       data = await fireStore
           .collection(collectionName)
           .orderBy(_orderBy!, descending: _descending!)
           .limit(5)
           .get();
-    else
+    } else {
       data = await fireStore
           .collection(collectionName)
           .orderBy(_orderBy!, descending: _descending!)
           .startAfter([_lastVisible![_orderBy!]])
           .limit(5)
           .get();
+    }
 
-    if (data != null && data.docs.length > 0) {
+    if (data != null && data.docs.isNotEmpty) {
       _lastVisible = data.docs[data.docs.length - 1];
       if (mounted) {
         setState(() {
@@ -88,7 +89,7 @@ class _MoreCoursesPageState extends State<MoreCoursesPage> {
     } else {
       setState(() => _isLoading = false);
     }
-    return null;
+    return;
   }
 
   @override
@@ -119,7 +120,7 @@ class _MoreCoursesPageState extends State<MoreCoursesPage> {
               pinned: true,
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.keyboard_arrow_left,
                     color: Colors.white,
                   ),
@@ -138,15 +139,15 @@ class _MoreCoursesPageState extends State<MoreCoursesPage> {
                   width: double.infinity,
                 ),
                 title: Text(
-                  '${widget.title}',
-                  style: GoogleFonts.montserrat(
+                  widget.title,
+                  style: GoogleFonts.poppins(
                       color: Colors.white, fontWeight: FontWeight.w500),
                 ),
-                titlePadding: EdgeInsets.only(left: 20, bottom: 15),
+                titlePadding: const EdgeInsets.only(left: 20, bottom: 15),
               ),
             ),
             SliverPadding(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
@@ -160,7 +161,7 @@ class _MoreCoursesPageState extends State<MoreCoursesPage> {
                       opacity: _isLoading! ? 1.0 : 0.0,
                       child: _lastVisible == null
                           ? Column(
-                              children: [
+                              children: const [
                                 LoadingCard(
                                   height: 180,
                                 ),
@@ -169,15 +170,15 @@ class _MoreCoursesPageState extends State<MoreCoursesPage> {
                                 )
                               ],
                             )
-                          : Center(
+                          : const Center(
                               child: SizedBox(
                                   width: 32.0,
                                   height: 32.0,
-                                  child: new CupertinoActivityIndicator()),
+                                  child: CupertinoActivityIndicator()),
                             ),
                     );
                   },
-                  childCount: _data.length == 0 ? 5 : _data.length + 1,
+                  childCount: _data.isEmpty ? 5 : _data.length + 1,
                 ),
               ),
             )
@@ -203,97 +204,95 @@ class _ListItem extends StatelessWidget {
       child: InkWell(
         child: Card(
           child: Container(
-            child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(5)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        child: Hero(
-                          tag: tag,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              child: CustomCacheImage(imageUrl: d.image_01!)),
-                        )),
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            d.courseName!.toUpperCase(),
-                            maxLines: 1,
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Feather.check_circle,
-                                size: 16,
-                                color: Colors.indigo,
+              decoration: BoxDecoration(
+                  /*color: Colors.white,*/ borderRadius: BorderRadius.circular(5)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      height: 150,
+                      width: MediaQuery.of(context).size.width,
+                      child: Hero(
+                        tag: tag,
+                        child: ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(5)),
+                            child: CustomCacheImage(imageUrl: d.image_01!)),
+                      )),
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          d.courseName!.toUpperCase(),
+                          maxLines: 1,
+                          style: const TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Feather.check_circle,
+                              size: 16,
+                              color: Colors.indigo,
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Expanded(
+                              child: Text(
+                                "  ${d.courseCategory!}",
+                                maxLines: 1,
+                                style: const TextStyle(
+                                    fontSize: 13, /*color: Colors.grey[700],*/ fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  "  "+d.courseCategory!,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                CupertinoIcons.time,
-                                size: 16,
-                                color: Colors.green,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                "  "+d.date!,
-                                style: TextStyle(
-                                    fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
-                              ),
-                              Spacer(),
-                              Icon(
-                                LineIcons.heart,
-                                size: 16,
-                                color: Colors.orange,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                "  "+d.loves.toString(),
-                                style: TextStyle(
-                                    fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              CupertinoIcons.time,
+                              size: 16,
+                              color: Colors.green,
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              "  ${d.date!}",
+                              style: const TextStyle(
+                                  fontSize: 13, /*color: Colors.grey[700],*/ fontWeight: FontWeight.bold),
+                            ),
+                            const Spacer(),
+                            const Icon(
+                              LineIcons.heart,
+                              size: 16,
+                              color: Colors.orange,
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              "  ${d.loves}",
+                              style: const TextStyle(
+                                  fontSize: 13, /*color: Colors.grey[700],*/ fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
-                  ],
-                )),
-          ),
+                  ),
+                ],
+              )),
         ),
         onTap: () => nextScreen(context, UdemyCoursesDetailPage(data: d, tag: tag)),
       ),

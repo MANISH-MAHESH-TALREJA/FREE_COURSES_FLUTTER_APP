@@ -4,11 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'home_page.dart';
 
 class IntroductionScreenPage extends StatefulWidget {
+  const IntroductionScreenPage({super.key});
+
   @override
-  _IntroductionScreenPageState createState() => _IntroductionScreenPageState();
+  IntroductionScreenPageState createState() => IntroductionScreenPageState();
 }
 
-class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
+class IntroductionScreenPageState extends State<IntroductionScreenPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   @override
@@ -22,18 +24,18 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => HomePage(),
+        builder: (context) => const HomePage(),
       ), //MaterialPageRoute
     );
   }
-  Future<Null> checkIsLogin() async
+  Future<void> checkIsLogin() async
   {
     String? logged = "";
     SharedPreferences prefs = await SharedPreferences.getInstance();
     logged = prefs.getString("LOGGED");
     if (logged != "" && logged != null)
     {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
     else
     {
@@ -43,15 +45,15 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
   }
   Widget _buildImage(String assetName) {
     return Align(
-      child: Image.asset('assets/images/$assetName.gif', width: 300.0, height: MediaQuery.of(context).size.height*0.5,),
       alignment: Alignment.bottomCenter,
+      child: Image.asset('assets/images/$assetName.gif', width: 300.0, height: MediaQuery.of(context).size.height*0.5,),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 19.0);
-    const pageDecoration = const PageDecoration(
+    const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
@@ -63,20 +65,20 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
       key: introKey,
       pages: [
         PageViewModel(
-          titleWidget: Text('FREE COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-          bodyWidget: Text('DAILY NEW FREE ONLINE UDEMY COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
+          titleWidget: const Text('FREE COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+          bodyWidget: const Text('DAILY NEW FREE ONLINE UDEMY COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
           image: _buildImage('courses_01'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          titleWidget: Text('VIDEO COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-          bodyWidget: Text('WIDE VARIETY OF VIDEO COURSES AVAILABLE', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
+          titleWidget: const Text('VIDEO COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+          bodyWidget: const Text('WIDE VARIETY OF VIDEO COURSES AVAILABLE', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
           image: _buildImage('courses_02'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          titleWidget: Text('IT COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-          bodyWidget: Text('POPULAR PROGRAMMING COURSES TO LEARN AND PRACTICE', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
+          titleWidget: const Text('IT COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+          bodyWidget: const Text('POPULAR PROGRAMMING COURSES TO LEARN AND PRACTICE', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
           image: _buildImage('courses_03'),
           decoration: pageDecoration,
         ),

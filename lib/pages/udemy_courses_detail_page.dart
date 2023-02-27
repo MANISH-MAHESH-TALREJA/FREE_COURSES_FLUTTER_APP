@@ -1,5 +1,4 @@
 import 'package:blog/utility/general_utility_functions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:line_icons/line_icons.dart';
@@ -24,22 +23,22 @@ class UdemyCoursesDetailPage extends StatefulWidget {
       : super(key: key);
 
   @override
-  _UdemyCoursesDetailPageState createState() => _UdemyCoursesDetailPageState();
+  UdemyCoursesDetailPageState createState() => UdemyCoursesDetailPageState();
 }
 
-class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
+class UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 0)).then((value) async {});
+    Future.delayed(const Duration(milliseconds: 0)).then((value) async {});
   }
 
   String collectionName = 'UDEMY COURSES';
 
   handleLoveClick() {
-    bool _guestUser = context.read<AuthenticationBLOC>().guestUser;
+    bool guestUser = context.read<AuthenticationBLOC>().guestUser;
 
-    if (_guestUser == true) {
+    if (guestUser == true) {
       openSignInDialog(context);
     } else {
       context
@@ -49,9 +48,9 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
   }
 
   handleBookmarkClick() {
-    bool _guestUser = context.read<AuthenticationBLOC>().guestUser;
+    bool guestUser = context.read<AuthenticationBLOC>().guestUser;
 
-    if (_guestUser == true) {
+    if (guestUser == true) {
       openSignInDialog(context);
     } else {
       context
@@ -64,7 +63,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
   Widget build(BuildContext context) {
     final AuthenticationBLOC sb = context.watch<AuthenticationBLOC>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +77,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height*0.5,
                       width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                       ),
                       child: Carousel(
@@ -102,7 +101,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                     child: CircleAvatar(
                       backgroundColor: Colors.blue.withOpacity(0.9),
                       child: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           LineIcons.arrowLeft,
                           color: Colors.white,
                         ),
@@ -117,24 +116,24 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
             ),
             Padding(
               padding:
-                  EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+                  const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Icon(
+                      const Icon(
                         LineIcons.checkCircle,
                         size: 20,
                         color: Colors.green,
                       ),
                       Expanded(
                           child: Text(
-                        "  " + widget.data.courseCategory!,
-                        style: TextStyle(
+                        "  ${widget.data.courseCategory!}",
+                        style: const TextStyle(
                           fontSize: 13,
-                          color: Colors.grey[600],
+                          /*color: Colors.grey[600],*/
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -142,7 +141,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                       IconButton(
                           icon: LoveCard(
                               collectionName: collectionName,
-                              uid: sb.uid!,
+                              uid: sb.uid,
                               timestamp: widget.data.timestamp!),
                           onPressed: () {
                             handleLoveClick();
@@ -150,7 +149,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                       IconButton(
                           icon: BookmarkCard(
                               collectionName: collectionName,
-                              uid: sb.uid!,
+                              uid: sb.uid,
                               timestamp: widget.data.timestamp!),
                           onPressed: () {
                             handleBookmarkClick();
@@ -158,12 +157,12 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                     ],
                   ),
                   Text(widget.data.courseName!.toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w900,
-                          color: Colors.grey[800])),
+                          /*color: Colors.grey[800]*/)),
                   Container(
-                    margin: EdgeInsets.only(top: 8, bottom: 8),
+                    margin: const EdgeInsets.only(top: 8, bottom: 8),
                     height: 3,
                     width: 150,
                     decoration: BoxDecoration(
@@ -178,7 +177,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                           timestamp: widget.data.timestamp!),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Html(
@@ -188,7 +187,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                         fontWeight: FontWeight.w400,
                         color: Colors.grey[800]),*/
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Center(
@@ -196,7 +195,7 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                       height: 50,
                       minWidth: MediaQuery.of(context).size.width/2,
                       shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12)),
                       onPressed: () async
                       {
                         if (await canLaunch(widget.data.courseDriveLink!))
@@ -208,25 +207,25 @@ class _UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                           throw 'COULD NOT LAUNCH URL';
                         }
                       },
+                      color: const Color(0xFFF7CA18),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "DOWNLOAD COURSE",
                           style: TextStyle(
                             fontSize: 20,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w800,
                               color: Colors.grey[800]
                           ),
                         ),
                       ),
-                      color: Color(0xFFF7CA18),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  OtherUdemyCourses(),
-                  SizedBox(
+                  const OtherUdemyCourses(),
+                  const SizedBox(
                     height: 15,
                   ),
                 ],

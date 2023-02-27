@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:blog/bloc/featured_courses_bloc.dart';
@@ -19,16 +17,17 @@ import 'package:blog/widgets/recommended_courses.dart';
 import '../constants.dart';
 
 class ExploreCourses extends StatefulWidget {
-  ExploreCourses({Key? key}) : super(key: key);
+  const ExploreCourses({Key? key}) : super(key: key);
 
-  _ExploreCoursesState createState() => _ExploreCoursesState();
+  @override
+  ExploreCoursesState createState() => ExploreCoursesState();
 }
 
-class _ExploreCoursesState extends State<ExploreCourses> with AutomaticKeepAliveClientMixin {
+class ExploreCoursesState extends State<ExploreCourses> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 0)).then((_) {
+    Future.delayed(const Duration(milliseconds: 0)).then((_) {
       context.read<FeaturedCoursesBLOC>().getData();
       context.read<PopularCoursesBLOC>().getData();
       context.read<RecentCoursesBLOC>().getData();
@@ -52,7 +51,7 @@ class _ExploreCoursesState extends State<ExploreCourses> with AutomaticKeepAlive
             },
             child: SingleChildScrollView(
               child: Column(
-                children: <Widget>[
+                children: const <Widget>[
                   Header(),
                   FeaturedCourses(),
                   PopularCourses(),
@@ -87,21 +86,19 @@ class Header extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     Constants().appName,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 22,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.grey[800]),
+                        fontWeight: FontWeight.w900,),
                   ),
-                  Text(
+                  const Text(
                     'EXPLORE COURSES',
                     style: TextStyle(
                         fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600]),
+                        fontWeight: FontWeight.w500,),
                   )
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               InkWell(
                 child: sb.imageUrl == null || sb.isSignedIn == false
                     ? Container(
@@ -111,7 +108,7 @@ class Header extends StatelessWidget {
                           color: Colors.grey[300],
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(Icons.person, size: 28),
+                        child: const Icon(Icons.person, size: 28),
                       )
                     : Container(
                         height: 50,
@@ -124,19 +121,19 @@ class Header extends StatelessWidget {
                                 fit: BoxFit.cover)),
                       ),
                 onTap: () {
-                  nextScreen(context, ProfilePage());
+                  nextScreen(context, const ProfilePage());
                 },
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           InkWell(
             child: Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(left: 5, right: 5),
-              padding: EdgeInsets.only(left: 15, right: 15),
+              margin: const EdgeInsets.only(left: 5, right: 5),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               height: 40,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -153,7 +150,7 @@ class Header extends StatelessWidget {
                       color: Colors.grey[600],
                       size: 20,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
@@ -166,7 +163,7 @@ class Header extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UdemyCoursesSearchPage()));
+                  MaterialPageRoute(builder: (context) => const UdemyCoursesSearchPage()));
             },
           )
         ],
@@ -181,7 +178,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10, bottom: 5, left: 15, right: 15),
+      padding: const EdgeInsets.only(top: 10, bottom: 5, left: 15, right: 15),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -205,15 +202,15 @@ class CustomAppBar extends StatelessWidget {
               )
             ],
           ),
-          Spacer(),
+          const Spacer(),
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Feather.bell,
                 size: 20,
               ),
               onPressed: () {}),
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Feather.search,
                 size: 20,
               ),

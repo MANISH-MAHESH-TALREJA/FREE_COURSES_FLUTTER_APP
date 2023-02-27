@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-//import 'package:in_app_update/in_app_update.dart';
 import 'package:provider/provider.dart';
 import 'package:blog/bloc/technical_blog_bloc.dart';
 import 'package:blog/bloc/bookmark_bloc.dart';
@@ -18,19 +14,21 @@ import 'package:blog/bloc/recommended_courses_bloc.dart';
 import 'package:blog/bloc/udemy_courses_search_bloc.dart';
 import 'package:blog/bloc/authentication_bloc.dart';
 import 'package:blog/bloc/course_category_bloc.dart';
+import 'bloc/theme_bloc.dart';
 import 'bloc/video_courses_bloc.dart';
 import 'bloc/video_courses_search_bloc.dart';
+import 'models/theme_model.dart';
 import 'pages/splash_screen_page.dart';
 
 void main()async
 {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark
   ));
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget
@@ -38,10 +36,10 @@ class MyApp extends StatefulWidget
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp>
+class MyAppState extends State<MyApp>
 {
 
   @override
@@ -52,7 +50,11 @@ class _MyAppState extends State<MyApp>
   @override
   Widget build(BuildContext context)
   {
-    return MultiProvider(
+    return ChangeNotifierProvider<ThemeBloc>(
+        create: (_) => ThemeBloc(),
+        child: Consumer<ThemeBloc>(
+        builder: (_, mode, child){
+      return MultiProvider(
       providers:
       [
         ChangeNotifierProvider<TechnicalBlogBLOC>( create: (context) => TechnicalBlogBLOC()),
@@ -70,11 +72,14 @@ class _MyAppState extends State<MyApp>
         ChangeNotifierProvider<CourseCategoryBLOC>(create: (context) => CourseCategoryBLOC()),
       ],
       child: MaterialApp(
+          darkTheme: ThemeModel().darkMode,
+          themeMode: mode.darkTheme == true ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData(
               primarySwatch: Colors.blue,
               primaryColor: Colors.blueAccent,
               iconTheme: IconThemeData(color: Colors.grey[900]),
               fontFamily: 'Poppins',
+
               appBarTheme: AppBarTheme(
                 color: Colors.transparent,
                 elevation: 0,
@@ -83,14 +88,17 @@ class _MyAppState extends State<MyApp>
                   color: Colors.grey[800],
                 ),
                 textTheme: TextTheme(
-                    headline6: GoogleFonts.montserrat(
+                    headline6: GoogleFonts.poppins(
                         fontSize: 16,
                         color: Colors.grey[900],
                         fontWeight: FontWeight.w500
                     )),
               )),
           debugShowCheckedModeBanner: false,
-          home: SplashScreenPage()),
+          home: const SplashScreenPage()),
+      );
+        },
+        ),
     );
   }
 }

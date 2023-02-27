@@ -5,24 +5,25 @@ import 'package:provider/provider.dart';
 import 'package:blog/bloc/notification_bloc.dart';
 import 'package:blog/models/notification_model.dart';
 import 'package:blog/utility/general_utility_functions.dart';
+import '../bloc/theme_bloc.dart';
 import 'notification_details_page.dart';
 
 class NotificationsPage extends StatefulWidget {
-  NotificationsPage({Key? key}) : super(key: key);
+  const NotificationsPage({Key? key}) : super(key: key);
 
   @override
-  _NotificationsPageState createState() => _NotificationsPageState();
+  NotificationsPageState createState() => NotificationsPageState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class NotificationsPageState extends State<NotificationsPage> {
   ScrollController? controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    controller = new ScrollController()..addListener(_scrollListener);
+    controller = ScrollController()..addListener(_scrollListener);
     super.initState();
-    Future.delayed(Duration(milliseconds: 0)).then((value) {
+    Future.delayed(const Duration(milliseconds: 0)).then((value) {
       context.read<NotificationBLOC>().onRefresh(mounted);
     });
   }
@@ -52,10 +53,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
       key: scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('NOTIFICATIONS'),
+        title: Text('NOTIFICATIONS', style: TextStyle(color: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.black,)),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Feather.rotate_cw,
               size: 22,
             ),
@@ -65,12 +66,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
       ),
       body: RefreshIndicator(
         child: ListView.separated(
-          padding: EdgeInsets.only(top: 15, bottom: 15),
+          padding: const EdgeInsets.only(top: 15, bottom: 15),
           controller: controller,
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: nb.data.length + 1,
-          separatorBuilder: (context, index) => SizedBox(
+          separatorBuilder: (context, index) => const SizedBox(
             height: 10,
           ),
           itemBuilder: (_, int index) {
@@ -78,12 +79,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
               return _ListItem(d: nb.data[index]);
             }
             return Center(
-              child: new Opacity(
+              child: Opacity(
                 opacity: nb.isLoading ? 1.0 : 0.0,
-                child: new SizedBox(
+                child: const SizedBox(
                     width: 32.0,
                     height: 32.0,
-                    child: new CircularProgressIndicator()),
+                    child: CircularProgressIndicator()),
               ),
             );
           },
@@ -108,18 +109,18 @@ class _ListItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Card(
           child: Container(
-            margin: EdgeInsets.only(left: 15, right: 15),
+            margin: const EdgeInsets.only(left: 15, right: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                    child: Image.asset("assets/images/notify.gif"),
-                  radius: 30,
+                    radius: 30,
                   backgroundColor: Colors.transparent,
+                    child: Image.asset("assets/images/notify.gif"),
                 ),
                 Flexible(
                   child: Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -127,24 +128,24 @@ class _ListItem extends StatelessWidget {
                           d.title!,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(CupertinoIcons.time_solid,
+                            const Icon(CupertinoIcons.time_solid,
                                 size: 16, color: Colors.green),
-                            SizedBox(
+                            const SizedBox(
                               width: 3,
                             ),
                             Text(
                               d.createdAt.toString().toUpperCase(),
                               style:
-                                  TextStyle(color: Colors.grey, fontSize: 13, fontWeight: FontWeight.bold),
+                                  const TextStyle(color: Colors.grey, fontSize: 13, fontWeight: FontWeight.bold),
                             )
                           ],
                         )

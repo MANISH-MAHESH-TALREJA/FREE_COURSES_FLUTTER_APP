@@ -20,29 +20,29 @@ class EmptyPage extends StatelessWidget
           Icon(
             icon,
             size: 80,
-            color: Colors.grey,
+            /*color: Colors.grey,*/
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey[700]),
+                /*color: Colors.grey[700]*/),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
             message1,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w400,
-                color: Colors.grey[700]),
+                /*color: Colors.grey[700]*/),
           )
         ],
       ),

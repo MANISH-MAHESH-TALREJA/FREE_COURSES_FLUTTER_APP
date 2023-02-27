@@ -11,19 +11,19 @@ class BookmarkBLOC extends ChangeNotifier
     String collectionName = 'UDEMY COURSES';
     String type = 'BOOKMARKED UDEMY COURSES';
     List<UdemyCoursesModel> data = [];
-    List<DocumentSnapshot> _snap = [];
+    List<DocumentSnapshot> snap0 = [];
 
     SharedPreferences sp = await SharedPreferences.getInstance();
-    String? _uid = sp.getString('UID');
-    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
+    String? uid = sp.getString('UID');
+    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(uid);
     DocumentSnapshot snap = await ref.get();
     List d = snap[type];
 
     if (d.isNotEmpty)
     {
       QuerySnapshot rawData = await FirebaseFirestore.instance.collection(collectionName).where('TIMESTAMP', whereIn: d).get();
-      _snap.addAll(rawData.docs);
-      data = _snap.map((e) => UdemyCoursesModel.fromFirestore(e)).toList();
+      snap0.addAll(rawData.docs);
+      data = snap0.map((e) => UdemyCoursesModel.fromFirestore(e)).toList();
     }
 
     return data;
@@ -34,19 +34,19 @@ class BookmarkBLOC extends ChangeNotifier
     String collectionName = 'YOUTUBE VIDEO COURSES';
     String type = 'BOOKMARKED YOUTUBE COURSES';
     List<VideoCoursesModel> data = [];
-    List<DocumentSnapshot> _snap = [];
+    List<DocumentSnapshot> snap0 = [];
     SharedPreferences sp = await SharedPreferences.getInstance();
-    String? _uid = sp.getString('UID');
+    String? uid = sp.getString('UID');
 
-    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
+    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(uid);
     DocumentSnapshot snap = await ref.get();
     List d = snap[type];
 
     if (d.isNotEmpty)
     {
       QuerySnapshot rawData = await FirebaseFirestore.instance.collection(collectionName).where('TIMESTAMP', whereIn: d).get();
-      _snap.addAll(rawData.docs);
-      data = _snap.map((e) => VideoCoursesModel.fromFirestore(e)).toList();
+      snap0.addAll(rawData.docs);
+      data = snap0.map((e) => VideoCoursesModel.fromFirestore(e)).toList();
     }
     return data;
   }
@@ -54,22 +54,22 @@ class BookmarkBLOC extends ChangeNotifier
   Future onBookmarkIconClick(String collectionName, String timestamp) async
   {
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    String? _uid = sp.getString('UID');
-    String _type = collectionName == 'UDEMY COURSES' ? 'BOOKMARKED UDEMY COURSES' : 'BOOKMARKED YOUTUBE COURSES';
+    String? uid = sp.getString('UID');
+    String type = collectionName == 'UDEMY COURSES' ? 'BOOKMARKED UDEMY COURSES' : 'BOOKMARKED YOUTUBE COURSES';
 
-    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
+    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(uid);
     DocumentSnapshot snap = await ref.get();
-    List d = snap[_type];
+    List d = snap[type];
 
     if (d.contains(timestamp))
     {
       List a = [timestamp];
-      await ref.update({_type: FieldValue.arrayRemove(a)});
+      await ref.update({type: FieldValue.arrayRemove(a)});
     }
     else
     {
       d.add(timestamp);
-      await ref.update({_type: FieldValue.arrayUnion(d)});
+      await ref.update({type: FieldValue.arrayUnion(d)});
     }
     notifyListeners();
   }
@@ -77,27 +77,27 @@ class BookmarkBLOC extends ChangeNotifier
   Future onLoveIconClick(String collectionName, String timestamp) async
   {
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    String? _uid = sp.getString('UID');
-    String _type = collectionName == 'UDEMY COURSES' ? 'LOVED UDEMY COURSES' : 'LOVED YOUTUBE COURSES';
-    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(_uid);
+    String? uid = sp.getString('UID');
+    String type = collectionName == 'UDEMY COURSES' ? 'LOVED UDEMY COURSES' : 'LOVED YOUTUBE COURSES';
+    final DocumentReference ref = FirebaseFirestore.instance.collection('USERS').doc(uid);
     final DocumentReference ref1 = FirebaseFirestore.instance.collection(collectionName).doc(timestamp);
 
     DocumentSnapshot snap = await ref.get();
     DocumentSnapshot snap1 = await ref1.get();
-    List d = snap[_type];
-    int _loves = snap1['LOVES'];
+    List d = snap[type];
+    int loves = snap1['LOVES'];
 
     if (d.contains(timestamp))
     {
       List a = [timestamp];
-      await ref.update({_type: FieldValue.arrayRemove(a)});
-      ref1.update({'LOVES': _loves - 1});
+      await ref.update({type: FieldValue.arrayRemove(a)});
+      ref1.update({'LOVES': loves - 1});
     }
     else
     {
       d.add(timestamp);
-      await ref.update({_type: FieldValue.arrayUnion(d)});
-      ref1.update({'LOVES': _loves + 1});
+      await ref.update({type: FieldValue.arrayUnion(d)});
+      ref1.update({'LOVES': loves + 1});
     }
   }
 }

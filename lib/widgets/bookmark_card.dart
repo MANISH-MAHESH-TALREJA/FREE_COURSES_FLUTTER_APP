@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class BookmarkCard extends StatelessWidget
 {
   final String collectionName;
-  final String uid;
+  final String? uid;
   final String timestamp;
 
   const BookmarkCard({Key? key, required this.collectionName, required this.uid, required this.timestamp}): super(key: key);
@@ -16,7 +16,7 @@ class BookmarkCard extends StatelessWidget
   Widget build(BuildContext context)
   {
     final sb = context.watch<AuthenticationBLOC>();
-    String _type = collectionName == 'UDEMY COURSES' ? 'BOOKMARKED UDEMY COURSES' : 'BOOKMARKED YOUTUBE COURSES';
+    String type = collectionName == 'UDEMY COURSES' ? 'BOOKMARKED UDEMY COURSES' : 'BOOKMARKED YOUTUBE COURSES';
     if (sb.isSignedIn == false) return BookmarkIcon().normal;
     return StreamBuilder(
       stream:
@@ -25,7 +25,7 @@ class BookmarkCard extends StatelessWidget
       {
         if (uid == null) return BookmarkIcon().normal;
         if (!snap.hasData) return BookmarkIcon().normal;
-        List d = snap.data![_type];
+        List d = snap.data![type];
         if (d.contains(timestamp))
         {
           return BookmarkIcon().bold;

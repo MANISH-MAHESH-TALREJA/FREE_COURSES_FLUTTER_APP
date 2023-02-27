@@ -11,12 +11,13 @@ class AuthenticationPage extends StatefulWidget
 {
   final String? tag;
 
-  AuthenticationPage({Key? key, this.tag}) : super(key: key);
+  const AuthenticationPage({Key? key, this.tag}) : super(key: key);
 
-  _AuthenticationPageState createState() => _AuthenticationPageState();
+  @override
+  AuthenticationPageState createState() => AuthenticationPageState();
 }
 
-class _AuthenticationPageState extends State<AuthenticationPage>
+class AuthenticationPageState extends State<AuthenticationPage>
 {
   bool googleSignInStarted = false;
   bool facebookSignInStarted = false;
@@ -28,7 +29,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
     final sb = context.read<AuthenticationBLOC>();
     sb.setGuestUser();
     sb.removeSignIn();
-    nextScreenReplace(context, IntroductionScreenPage());
+    nextScreenReplace(context, const IntroductionScreenPage());
   }
   handleFacebookSignIn() async
   {
@@ -133,7 +134,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
 
   afterSignIn() {
     if (widget.tag == null) {
-      nextScreenReplace(context, IntroductionScreenPage());
+      nextScreenReplace(context, const IntroductionScreenPage());
     } else {
       Navigator.pop(context);
     }
@@ -145,15 +146,16 @@ class _AuthenticationPageState extends State<AuthenticationPage>
     Size size = MediaQuery.of(context).size;
     return OrientationBuilder(builder: (context, orientation){
       return Scaffold(
-        backgroundColor: Colors.white,
+        //backgroundColor: Theme.of(context).backgroundColor,
         key: scaffoldKey,
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           actions: [
             widget.tag != null
                 ? Container()
                 : TextButton(
                 onPressed: () => handleSkip(),
-                child: Text('SKIP',
+                child: const Text('SKIP',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -167,13 +169,12 @@ class _AuthenticationPageState extends State<AuthenticationPage>
               children: <Widget>[
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       'WELCOME TO',
                       style: TextStyle(
                           fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey[700]),
+                          fontWeight: FontWeight.w400),
                     ),
                     SizedBox(
                       height: 10,
@@ -182,29 +183,27 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                       'FREE ONLINE COURSES',
                       style: TextStyle(
                           fontSize: 25,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.grey[700]),
+                          fontWeight: FontWeight.w900,),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40, right: 40),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 40, right: 40),
                       child: Text(
                         'BEST APP TO GET FREE ONLINE COURSES',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey[700]),
+                            fontWeight: FontWeight.w400),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Container(
                       height: 3,
                       width: MediaQuery.of(context).size.width * 0.50,
@@ -216,21 +215,21 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                 ),
                 SizedBox(height: size.height * 0.05),
                 AvatarGlow(
-                  glowColor: Colors.purpleAccent,
+                  glowColor: Theme.of(context).accentColor,
                   endRadius: 90.0,
-                  duration: Duration(milliseconds: 2000),
+                  duration: const Duration(milliseconds: 2000),
                   repeat: true,
-                  repeatPauseDuration: Duration(milliseconds: 100),
-                  child: CircleAvatar(
+                  repeatPauseDuration: const Duration(milliseconds: 100),
+                  child: const CircleAvatar(
                       radius: 60,
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.transparent,
                       backgroundImage: AssetImage("assets/images/app_icon.png")),
                 ),
                 SizedBox(height: size.height * 0.05),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       height: 45,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: TextButton(
@@ -244,7 +243,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               ? Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 FontAwesome.google,
                                 color: Colors.white,
@@ -261,15 +260,15 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               )
                             ],
                           )
-                              : Center(
+                              : const Center(
                             child: CircularProgressIndicator(
                                 backgroundColor: Colors.white),
                           )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Container(
+                    SizedBox(
                       height: 45,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: TextButton(
@@ -285,7 +284,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               ? Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 FontAwesome.facebook_official,
                                 color: Colors.white,
@@ -302,7 +301,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               )
                             ],
                           )
-                              : Center(
+                              : const Center(
                             child: CircularProgressIndicator(
                                 backgroundColor: Colors.white),
                           )),
@@ -326,9 +325,9 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
-                          color: Colors.grey[700]),
+                          color: Theme.of(context).secondaryHeaderColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
@@ -336,7 +335,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.w900,
-                          color: Colors.grey[700]),
+                          color: Theme.of(context).accentColor),
                     ),
                   ],
                 ),
@@ -352,7 +351,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    AvatarGlow(
+                    const AvatarGlow(
                       glowColor: Colors.purpleAccent,
                       endRadius: 90.0,
                       duration: Duration(milliseconds: 2000),
@@ -360,14 +359,14 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                       repeatPauseDuration: Duration(milliseconds: 100),
                       child: CircleAvatar(
                           radius: 60,
-                          backgroundColor: Colors.white,
+                          backgroundColor: Colors.transparent,
                           backgroundImage: AssetImage("assets/images/app_icon.png")),
                     ),
                     SizedBox(height: size.height * 0.05),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 45,
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: TextButton(
@@ -381,7 +380,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                                   ? Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   Icon(
                                     FontAwesome.google,
                                     color: Colors.white,
@@ -398,15 +397,15 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                                   )
                                 ],
                               )
-                                  : Center(
+                                  : const Center(
                                 child: CircularProgressIndicator(
                                     backgroundColor: Colors.white),
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Container(
+                        SizedBox(
                           height: 45,
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: TextButton(
@@ -422,7 +421,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                                   ? Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   Icon(
                                     FontAwesome.facebook_official,
                                     color: Colors.white,
@@ -439,7 +438,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                                   )
                                 ],
                               )
-                                  : Center(
+                                  : const Center(
                                 child: CircularProgressIndicator(
                                     backgroundColor: Colors.white),
                               )),

@@ -7,12 +7,12 @@ class DelayedAnimation extends StatefulWidget {
   final Widget child;
   final int? delay;
 
-  DelayedAnimation({required this.child, this.delay});
+  const DelayedAnimation({super.key, required this.child, this.delay});
   @override
-  _DelayedAnimationState createState() => _DelayedAnimationState();
+  DelayedAnimationState createState() => DelayedAnimationState();
 }
 
-class _DelayedAnimationState extends State<DelayedAnimation>
+class DelayedAnimationState extends State<DelayedAnimation>
     with TickerProviderStateMixin {
   AnimationController? _controller;
   Animation<Offset>? _animOffset;
@@ -21,7 +21,7 @@ class _DelayedAnimationState extends State<DelayedAnimation>
   void initState() {
     super.initState();
     _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 800));
     final curve =
         CurvedAnimation(curve: Curves.decelerate, parent: _controller!);
     _animOffset =
@@ -46,11 +46,11 @@ class _DelayedAnimationState extends State<DelayedAnimation>
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
+      opacity: _controller!,
       child: SlideTransition(
         position: _animOffset!,
         child: widget.child,
       ),
-      opacity: _controller!,
     );
   }
 }

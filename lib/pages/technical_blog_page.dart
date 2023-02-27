@@ -9,19 +9,20 @@ import 'package:html_unescape/html_unescape.dart';
 import 'package:provider/provider.dart';
 import 'package:blog/bloc/technical_blog_bloc.dart';
 import 'package:blog/models/technical_blog_model.dart';
+import '../bloc/theme_bloc.dart';
 import 'empty_page.dart';
 import 'package:blog/utility/general_utility_functions.dart';
 import 'package:blog/widgets/custom_cache_image.dart';
 import 'package:blog/utility/loading_cards.dart';
 
 class TechnicalBlogPage extends StatefulWidget {
-  TechnicalBlogPage({Key? key}) : super(key: key);
+  const TechnicalBlogPage({Key? key}) : super(key: key);
 
   @override
-  _TechnicalBlogPageState createState() => _TechnicalBlogPageState();
+  TechnicalBlogPageState createState() => TechnicalBlogPageState();
 }
 
-class _TechnicalBlogPageState extends State<TechnicalBlogPage>
+class TechnicalBlogPageState extends State<TechnicalBlogPage>
     with AutomaticKeepAliveClientMixin {
   ScrollController? controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -30,8 +31,8 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 0)).then((value) {
-      controller = new ScrollController()..addListener(_scrollListener);
+    Future.delayed(const Duration(milliseconds: 0)).then((value) {
+      controller = ScrollController()..addListener(_scrollListener);
       context.read<TechnicalBlogBLOC>().getData(mounted, _orderBy);
     });
   }
@@ -62,7 +63,7 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Text('DAILY FREE COURSES'),
+        title: Text('DAILY FREE COURSES', style: TextStyle(color: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.black,)),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -70,20 +71,20 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
             menuWidth: MediaQuery.of(context).size.width*0.50,
             blurSize: 0.0,
             menuItemExtent: 50,
-            menuBoxDecoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.all(Radius.circular(15.0))),
-            duration: Duration(milliseconds: 100),
+            menuBoxDecoration: const BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.all(Radius.circular(15.0))),
+            duration: const Duration(milliseconds: 100),
             animateMenuItems: true,
             blurBackgroundColor: Colors.transparent,
             bottomOffsetHeight: 100,
             openWithTap: true,
             menuItems: <FocusedMenuItem>
             [
-              FocusedMenuItem(title: Text("MOST RECENTLY", style: TextStyle(fontWeight: FontWeight.bold)),trailingIcon: Icon(Icons.access_time, color: Colors.green,) ,onPressed: ()
+              FocusedMenuItem(title: const Text("MOST RECENTLY", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,)),trailingIcon: const Icon(Icons.access_time, color: Colors.green,) ,onPressed: ()
               {
                 _orderBy = 'TIMESTAMP';
                 bb.afterPopSelection('RECENT', mounted, _orderBy);
               }),
-              FocusedMenuItem(title: Text("MOST POPULAR", style: TextStyle(fontWeight: FontWeight.bold),),trailingIcon: Icon(Icons.favorite_border, color: Colors.pink,) ,onPressed: ()
+              FocusedMenuItem(title: const Text("MOST POPULAR", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,),),trailingIcon: const Icon(Icons.favorite_border, color: Colors.pink,) ,onPressed: ()
               {
                 _orderBy = 'LOVES';
                 bb.afterPopSelection('POPULAR', mounted, _orderBy);
@@ -93,13 +94,13 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
             {
 
             },
-            child: IconButton(onPressed: null, icon: Icon(CupertinoIcons.sort_down, color: Colors.black,)),
+            child: IconButton(onPressed: null, icon: Icon(CupertinoIcons.sort_down, color: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.black,)),
           ),
         ),
         actions: <Widget>
         [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Feather.rotate_cw,
               size: 22,
             ),
@@ -116,18 +117,18 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.35,
                   ),
-                  EmptyPage(
+                  const EmptyPage(
                       icon: Feather.clipboard,
                       message: 'NO COURSES FOUND',
                       message1: 'TRY AGAIN'),
                 ],
               )
             : ListView.separated(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 controller: controller,
-                physics: AlwaysScrollableScrollPhysics(),
-                itemCount: bb.data.length != 0 ? bb.data.length + 1 : 5,
-                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: bb.data.isNotEmpty ? bb.data.length + 1 : 5,
+                separatorBuilder: (BuildContext context, int index) => const SizedBox(
                   height: 15,
                 ),
                 itemBuilder: (_, int index) {
@@ -137,12 +138,12 @@ class _TechnicalBlogPageState extends State<TechnicalBlogPage>
                   return Opacity(
                     opacity: bb.isLoading ? 1.0 : 0.0,
                     child: bb.lastVisible == null
-                        ? LoadingCard(height: 250)
-                        : Center(
+                        ? const LoadingCard(height: 250)
+                        : const Center(
                             child: SizedBox(
                                 width: 32.0,
                                 height: 32.0,
-                                child: new CupertinoActivityIndicator()),
+                                child: CupertinoActivityIndicator()),
                           ),
                   );
                 },
@@ -167,81 +168,79 @@ class _ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         child: Card(
-          child: Container(
-            child: Wrap(
-              children: [
-                Hero(
-                  tag: 'BLOG ${d.timestamp}',
-                  child: Container(
-                    height: 175,
-                    width: MediaQuery.of(context).size.width,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CustomCacheImage(imageUrl: d.thumbnail!)),
-                  ),
+          child: Wrap(
+            children: [
+              Hero(
+                tag: 'BLOG ${d.timestamp}',
+                child: SizedBox(
+                  height: 175,
+                  width: MediaQuery.of(context).size.width,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: CustomCacheImage(imageUrl: d.thumbnail!)),
                 ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        d.title!,
-                        maxLines: 2,
+              ),
+              Container(
+                margin: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      d.title!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                        HtmlUnescape()
+                            .convert(parse(d.description).documentElement!.text),
                         overflow: TextOverflow.ellipsis,
-                        style:
-                            TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                          HtmlUnescape()
-                              .convert(parse(d.description).documentElement!.text),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[700])),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            CupertinoIcons.time,
-                            size: 16,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            " "+d.date!,
-                            style: TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.bold),
-                          ),
-                          Spacer(),
-                          Icon(
-                            Icons.favorite,
-                            size: 16,
-                            color: Colors.orange,
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            " "+d.loves.toString(),
-                            style: TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                        maxLines: 2,
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            /*color: Colors.grey[700]*/)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          CupertinoIcons.time,
+                          size: 16,
+                          color: Colors.green,
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          " ${d.date!}",
+                          style: const TextStyle(fontSize: 13/*, color: Colors.grey*/, fontWeight: FontWeight.bold),
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Icons.favorite,
+                          size: 16,
+                          color: Colors.orange,
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          " ${d.loves}",
+                          style: const TextStyle(fontSize: 12, /*color: Colors.grey,*/ fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         onTap: () => nextScreen(

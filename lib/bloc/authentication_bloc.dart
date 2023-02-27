@@ -15,9 +15,9 @@ class AuthenticationBLOC extends ChangeNotifier
     checkGuestUser();
   }
 
-  final FacebookLogin _fbLogin = new FacebookLogin();
+  final FacebookLogin _fbLogin = FacebookLogin();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = new GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final String defaultUserImageUrl = 'https://manish-mahesh-talreja.000webhostapp.com/IMAGES/EMOJI.png';
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
   bool _guestUser = false;
@@ -45,7 +45,7 @@ class AuthenticationBLOC extends ChangeNotifier
   Future signInWithGoogle() async
   {
     // ignore: invalid_return_type_for_catch_error
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn().catchError((error) => print('ERROR OCCURRED : $error'));
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn().catchError((error) => debugPrint('ERROR OCCURRED : $error'));
     if (googleUser != null)
     {
       try
@@ -53,11 +53,11 @@ class AuthenticationBLOC extends ChangeNotifier
         final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
         final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
         User? userDetails = (await _firebaseAuth.signInWithCredential(credential)).user;
-        this._name = userDetails!.displayName!;
-        this._email = userDetails.email!;
-        this._imageUrl = userDetails.photoURL!;
-        this._uid = userDetails.uid;
-        this._signInProvider = 'GOOGLE';
+        _name = userDetails!.displayName!;
+        _email = userDetails.email!;
+        _imageUrl = userDetails.photoURL!;
+        _uid = userDetails.uid;
+        _signInProvider = 'GOOGLE';
         _hasError = false;
         notifyListeners();
       }
@@ -74,6 +74,7 @@ class AuthenticationBLOC extends ChangeNotifier
       notifyListeners();
     }
   }
+
   Future signInWithFacebook() async
   {
     User? currentUser;
@@ -81,7 +82,7 @@ class AuthenticationBLOC extends ChangeNotifier
     final FacebookLoginResult facebookLoginResult = await _fbLogin.logIn(permissions: [
       FacebookPermission.publicProfile,
       FacebookPermission.email,
-    ]).catchError((error) => print('ERROR : $error'));
+    ]).catchError((error) => debugPrint('ERROR : $error'));
     if (facebookLoginResult.status == FacebookLoginStatus.cancel)
     {
       _hasError = true;
@@ -102,18 +103,18 @@ class AuthenticationBLOC extends ChangeNotifier
           FacebookAccessToken facebookAccessToken = facebookLoginResult.accessToken!;
           final AuthCredential credential = FacebookAuthProvider.credential(facebookAccessToken.token);
           final User? user = (await _firebaseAuth.signInWithCredential(credential)).user;
-          print(user!.displayName);
+          debugPrint(user!.displayName);
           assert(user.email != null);
           assert(user.displayName != null);
           assert(!user.isAnonymous);
           assert(await user.getIdToken() != null);
           currentUser = _firebaseAuth.currentUser;
           assert(user.uid == currentUser!.uid);
-          this._name = user.displayName!;
-          this._email = user.email!;
-          this._imageUrl = user.photoURL!;
-          this._uid = user.uid;
-          this._signInProvider = 'FACEBOOK';
+          _name = user.displayName!;
+          _email = user.email!;
+          _imageUrl = user.photoURL!;
+          _uid = user.uid;
+          _signInProvider = 'FACEBOOK';
           _hasError = false;
           notifyListeners();
         }
@@ -160,8 +161,8 @@ class AuthenticationBLOC extends ChangeNotifier
   Future getJoiningDate() async
   {
     DateTime now = DateTime.now();
-    String _date = DateFormat('dd-MM-yyyy').format(now);
-    _joiningDate = _date;
+    String date = DateFormat('dd-MM-yyyy').format(now);
+    _joiningDate = date;
     notifyListeners();
   }
 
@@ -192,12 +193,12 @@ class AuthenticationBLOC extends ChangeNotifier
   {
     await FirebaseFirestore.instance.collection('USERS').doc(uid).get().then((DocumentSnapshot snap)
     {
-      this._uid = snap.get('UID');
-      this._name = snap.get('NAME');
-      this._email = snap.get('EMAIL');
-      this._imageUrl = snap.get('IMAGE URL');
-      this._joiningDate = snap.get('JOINING DATE');
-      print(_name);
+      _uid = snap.get('UID');
+      _name = snap.get('NAME');
+      _email = snap.get('EMAIL');
+      _imageUrl = snap.get('IMAGE URL');
+      _joiningDate = snap.get('JOINING DATE');
+      debugPrint(_name);
     });
     notifyListeners();
   }
@@ -286,7 +287,7 @@ class AuthenticationBLOC extends ChangeNotifier
 
   Future<int> getTotalUsersCount() async
   {
-    final String fieldName = 'TOTAL';
+    const String fieldName = 'TOTAL';
     final DocumentReference ref = fireStore.collection('COUNT').doc('USERS COUNT');
     DocumentSnapshot snap = await ref.get();
     if (snap.exists == true)
@@ -301,11 +302,26 @@ class AuthenticationBLOC extends ChangeNotifier
     }
   }
 
+  Future  afterUserSignOut ()async
+  {
+    await clearAllData();
+    _isSignedIn = false;
+    _guestUser = false;
+    notifyListeners();
+  }
+
+
   Future increaseUserCount() async
   {
     await getTotalUsersCount().then((int documentCount) async
     {
       await fireStore.collection('COUNT').doc('USERS COUNT').update({'TOTAL': documentCount + 1});
     });
+  }
+
+  Future deleteUserDataFromCloudDatabase() async
+  {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    await db.collection('USERS').doc(uid).delete();
   }
 }

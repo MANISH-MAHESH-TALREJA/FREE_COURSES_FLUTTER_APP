@@ -16,7 +16,7 @@ class CustomCacheImage extends StatelessWidget
       placeholder: (context, url) => Container(color: Colors.grey[300]),
       errorWidget: (context, url, error) => Container(
         color: Colors.grey[300],
-        child: Icon(Icons.error),
+        child: const Icon(Icons.error),
       ),
     );
   }

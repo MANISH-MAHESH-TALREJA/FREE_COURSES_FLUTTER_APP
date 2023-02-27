@@ -11,22 +11,23 @@ class CourseCategoryBLOC extends ChangeNotifier
   bool get isLoading => _isLoading;
   List<CourseCategoriesModel> _data = [];
   List<CourseCategoriesModel> get data => _data;
-  List<DocumentSnapshot> _snap = [];
+  final List<DocumentSnapshot> _snap = [];
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
   bool? _hasData;
   bool? get hasData => _hasData;
 
-  Future<Null> getData(mounted) async
+  Future<void> getData(mounted) async
   {
     _hasData = true;
     QuerySnapshot rawData;
 
-    if (_lastVisible == null)
+    if (_lastVisible == null) {
       rawData = await fireStore.collection('COURSE CATEGORIES').orderBy('TIMESTAMP', descending: true).limit(10).get();
-    else
+    } else {
       rawData = await fireStore.collection('COURSE CATEGORIES').orderBy('TIMESTAMP', descending: true).startAfter([_lastVisible!['TIMESTAMP']]).limit(10).get();
+    }
 
-    if (rawData != null && rawData.docs.length > 0)
+    if (rawData != null && rawData.docs.isNotEmpty)
     {
       _lastVisible = rawData.docs[rawData.docs.length - 1];
       if (mounted)
@@ -50,7 +51,7 @@ class CourseCategoryBLOC extends ChangeNotifier
       }
     }
     notifyListeners();
-    return null;
+    return;
   }
 
   setLoading(bool isLoading)
@@ -64,7 +65,7 @@ class CourseCategoryBLOC extends ChangeNotifier
     _isLoading = true;
     _snap.clear();
     _data.clear();
-    //_lastVisible = null;
+    _lastVisible = null;
     getData(mounted);
     notifyListeners();
   }
@@ -74,7 +75,7 @@ class CourseCategoryBLOC extends ChangeNotifier
     _isLoading = true;
     _snap.clear();
     _data.clear();
-    //_lastVisible = null;
+    _lastVisible = null;
     getData(mounted);
     notifyListeners();
   }

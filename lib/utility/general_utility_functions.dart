@@ -4,12 +4,12 @@ import 'package:toast/toast.dart';
 
 void openToast(context, message)
 {
-  Toast.show(message, textStyle: TextStyle(color: Colors.white), backgroundRadius: 20, duration: Toast.lengthShort);
+  Toast.show(message, textStyle: const TextStyle(color: Colors.white), backgroundRadius: 20, duration: Toast.lengthShort);
 }
 
-void openToast1(context, message)
+void openToastLong(message)
 {
-  Toast.show(message, textStyle: TextStyle(color: Colors.white), backgroundRadius: 20, duration: Toast.lengthLong);
+  Toast.show(message, textStyle: const TextStyle(color: Colors.white), backgroundRadius: 20, duration: Toast.lengthLong);
 }
 
 void openDialog(context, title, message)
@@ -27,7 +27,7 @@ void openDialog(context, title, message)
                 {
                   Navigator.pop(context);
                 },
-                child: Text('OK'))
+                child: const Text('OK'))
           ],
         );
       });
@@ -41,8 +41,8 @@ openSignInDialog(context)
       builder: (ctx)
       {
         return AlertDialog(
-          title: Text('SIGN IN'),
-          content: Text('SIGN IN TO EXPLORE COURSES'),
+          title: const Text('SIGN IN'),
+          content: const Text('SIGN IN TO EXPLORE COURSES'),
           actions: [
             TextButton(
                 onPressed: ()
@@ -50,32 +50,32 @@ openSignInDialog(context)
                   Navigator.pop(context);
                   nextScreenPopup(
                       context,
-                      AuthenticationPage(
+                      const AuthenticationPage(
                         tag: 'POPUP',
                       ));
                 },
-                child: Text('SIGN IN')),
+                child: const Text('SIGN IN')),
             TextButton(
                 onPressed: ()
                 {
                   Navigator.pop(context);
                 },
-                child: Text('CANCEL'))
+                child: const Text('CANCEL'))
           ],
         );
       });
 }
 
 
-void openSnackBar(_scaffoldKey, snackMessage)
+void openSnackBar(scaffoldKey, snackMessage)
 {
-  _scaffoldKey.currentState.showSnackBar(SnackBar(
+  scaffoldKey.currentState.showSnackBar(SnackBar(
     content: Container(
       alignment: Alignment.centerLeft,
       height: 30,
       child: Text(
         snackMessage,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 12,
         ),
       ),

@@ -12,25 +12,26 @@ import 'package:blog/utility/general_utility_functions.dart';
 import 'package:blog/widgets/custom_cache_image.dart';
 import 'package:blog/utility/loading_cards.dart';
 
+import '../bloc/theme_bloc.dart';
 import 'empty_page.dart';
 
 class CourseCategoriesPage extends StatefulWidget {
-  CourseCategoriesPage({Key? key}) : super(key: key);
+  const CourseCategoriesPage({Key? key}) : super(key: key);
 
   @override
-  _CourseCategoriesPageState createState() => _CourseCategoriesPageState();
+  CourseCategoriesPageState createState() => CourseCategoriesPageState();
 }
 
-class _CourseCategoriesPageState extends State<CourseCategoriesPage>
+class CourseCategoriesPageState extends State<CourseCategoriesPage>
     with AutomaticKeepAliveClientMixin {
   ScrollController? controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    controller = new ScrollController()..addListener(_scrollListener);
+    controller = ScrollController()..addListener(_scrollListener);
     super.initState();
-    Future.delayed(Duration(milliseconds: 0)).then((value) {
+    Future.delayed(const Duration(milliseconds: 0)).then((value) {
       context.read<CourseCategoryBLOC>().getData(mounted);
     });
   }
@@ -60,7 +61,7 @@ class _CourseCategoriesPageState extends State<CourseCategoriesPage>
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Text('COURSES CATEGORIES', style: TextStyle(color: Colors.black),),
+        title: Text('COURSES CATEGORIES', style: TextStyle(color: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.black,)),
         elevation: 0,
       ),
       body: RefreshIndicator(
@@ -70,18 +71,18 @@ class _CourseCategoriesPageState extends State<CourseCategoriesPage>
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.35,
                   ),
-                  EmptyPage(
+                  const EmptyPage(
                       icon: Feather.clipboard,
                       message: 'NO CATEGORIES FOUND',
                       message1: 'TRY AGAIN'),
                 ],
               )
             : ListView.separated(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 controller: controller,
-                physics: AlwaysScrollableScrollPhysics(),
-                itemCount: sb.data.length != 0 ? sb.data.length + 1 : 8,
-                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: sb.data.isNotEmpty ? sb.data.length + 1 : 8,
+                separatorBuilder: (BuildContext context, int index) => const SizedBox(
                   height: 10,
                 ),
                 itemBuilder: (_, int index) {
@@ -91,12 +92,12 @@ class _CourseCategoriesPageState extends State<CourseCategoriesPage>
                   return Opacity(
                     opacity: sb.isLoading ? 1.0 : 0.0,
                     child: sb.lastVisible == null
-                        ? LoadingCard(height: 140)
-                        : Center(
+                        ? const LoadingCard(height: 140)
+                        : const Center(
                             child: SizedBox(
                                 width: 32.0,
                                 height: 32.0,
-                                child: new CupertinoActivityIndicator()),
+                                child: CupertinoActivityIndicator()),
                           ),
                   );
                 },
@@ -130,7 +131,7 @@ class _ItemList extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
@@ -150,7 +151,7 @@ class _ItemList extends StatelessWidget {
                       child: Text(
                         d.name!.toUpperCase(),
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 22,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),

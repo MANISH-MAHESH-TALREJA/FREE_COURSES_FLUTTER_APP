@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class LoveCard extends StatelessWidget
 {
   final String collectionName;
-  final String uid;
+  final String? uid;
   final String timestamp;
 
   const LoveCard({Key? key, required this.collectionName, required this.uid, required this.timestamp}): super(key: key);
@@ -16,7 +16,7 @@ class LoveCard extends StatelessWidget
   Widget build(BuildContext context)
   {
     final sb = context.watch<AuthenticationBLOC>();
-    String _type = collectionName == 'UDEMY COURSES' ? 'LOVED UDEMY COURSES' : 'LOVED YOUTUBE COURSES';
+    String type = collectionName == 'UDEMY COURSES' ? 'LOVED UDEMY COURSES' : 'LOVED YOUTUBE COURSES';
     if (sb.isSignedIn == false) return LoveIcon().normal;
     return StreamBuilder(
       stream: FirebaseFirestore.instance.collection('USERS').doc(uid).snapshots(),
@@ -24,7 +24,7 @@ class LoveCard extends StatelessWidget
       {
         if (uid == null) return LoveIcon().normal;
         if (!snap.hasData) return LoveIcon().normal;
-        List d = snap.data![_type];
+        List d = snap.data![type];
 
         if (d.contains(timestamp))
         {

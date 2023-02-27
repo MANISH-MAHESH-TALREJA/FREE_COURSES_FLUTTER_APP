@@ -13,20 +13,21 @@ class VideoCoursesBLOC extends ChangeNotifier
   List<VideoCoursesModel> get data => _data;
   String _popSelection = 'POPULAR';
   String get popupSelection => _popSelection;
-  List<DocumentSnapshot> _snap = [];
+  final List<DocumentSnapshot> _snap = [];
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
   bool? _hasData;
   bool? get hasData => _hasData;
 
-  Future<Null> getData(mounted, String orderBy) async
+  Future<void> getData(mounted, String orderBy) async
   {
     _hasData = true;
     QuerySnapshot rawData;
-    if (_lastVisible == null)
+    if (_lastVisible == null) {
       rawData = await fireStore.collection('YOUTUBE VIDEO COURSES').orderBy(orderBy, descending: true).limit(5).get();
-    else
+    } else {
       rawData = await fireStore.collection('YOUTUBE VIDEO COURSES').orderBy(orderBy, descending: true).startAfter([_lastVisible![orderBy]]).limit(5).get();
-    if (rawData != null && rawData.docs.length > 0)
+    }
+    if (rawData != null && rawData.docs.isNotEmpty)
     {
       _lastVisible = rawData.docs[rawData.docs.length - 1];
       if (mounted)
@@ -50,7 +51,7 @@ class VideoCoursesBLOC extends ChangeNotifier
       }
     }
     notifyListeners();
-    return null;
+    return;
   }
 
   afterPopSelection (value, mounted, orderBy)
@@ -71,7 +72,7 @@ class VideoCoursesBLOC extends ChangeNotifier
     _isLoading = true;
     _snap.clear();
     _data.clear();
-    //_lastVisible = null;
+    _lastVisible = null;
     getData(mounted, orderBy);
     notifyListeners();
   }

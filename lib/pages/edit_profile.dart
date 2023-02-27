@@ -10,15 +10,15 @@ class EditProfile extends StatefulWidget
   final String name;
   final String imageUrl;
 
-  EditProfile({Key? key, required this.name, required this.imageUrl}) : super(key: key);
+  const EditProfile({Key? key, required this.name, required this.imageUrl}) : super(key: key);
 
   @override
-  _EditProfileState createState() => _EditProfileState(this.name, this.imageUrl);
+  EditProfileState createState() => EditProfileState(name, imageUrl);
 }
 
-class _EditProfileState extends State<EditProfile>
+class EditProfileState extends State<EditProfile>
 {
-  _EditProfileState(this.name, this.imageUrl);
+  EditProfileState(this.name, this.imageUrl);
 
   String name;
   String imageUrl;
@@ -68,7 +68,7 @@ class _EditProfileState extends State<EditProfile>
     return Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          title: Text('EDIT PROFILE'),
+          title: const Text('EDIT PROFILE'),
         ),
         body: ListView(
           padding: const EdgeInsets.all(25),
@@ -88,25 +88,25 @@ class _EditProfileState extends State<EditProfile>
                         fit: BoxFit.fill)),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Form(
                 key: formKey,
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'ENTER NEW NAME',
                   ),
                   controller: nameCtrl,
                   validator: (value) {
-                    if (value!.length == 0) return "NAME CAN'T BE EMPTY";
+                    if (value!.isEmpty) return "NAME CAN'T BE EMPTY";
                     return null;
                   },
                 )),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Container(
+            SizedBox(
               height: 45,
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
@@ -114,15 +114,15 @@ class _EditProfileState extends State<EditProfile>
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),),
                     backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
-                  textStyle: MaterialStateProperty.all(TextStyle(color: Colors.white))
+                  textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white))
                 ),
                 child: loading == true
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(
                           backgroundColor: Colors.white,
                         ),
                       )
-                    : Text(
+                    : const Text(
                         'UPDATE PROFILE',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),

@@ -13,9 +13,9 @@ class PopularCoursesBLOC extends ChangeNotifier
   {
     QuerySnapshot rawData;
     rawData = await fireStore.collection('UDEMY COURSES').orderBy('TIMESTAMP', descending: false).limit(10).get();
-    List<DocumentSnapshot> _snap = [];
-    _snap.addAll(rawData.docs);
-    _data = _snap.map((e) => UdemyCoursesModel.fromFirestore(e)).toList();
+    List<DocumentSnapshot> snap = [];
+    snap.addAll(rawData.docs);
+    _data = snap.map((e) => UdemyCoursesModel.fromFirestore(e)).toList();
     notifyListeners();
   }
 

@@ -1,8 +1,7 @@
 library md2_tab_indicator;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-//*THIS Initial but working null safety update
+
 enum MD2IndicatorSize {
   tiny,
   normal,
@@ -20,21 +19,21 @@ class MD2Indicator extends Decoration {
         required this.indicatorSize});
 
   @override
-  _MD2Painter createBoxPainter([VoidCallback? onChanged]) {
-    return _MD2Painter(this, onChanged!);
+  MD2Painter createBoxPainter([VoidCallback? onChanged]) {
+    return MD2Painter(this, onChanged!);
   }
 }
 
-class _MD2Painter extends BoxPainter {
+class MD2Painter extends BoxPainter {
   final MD2Indicator? decoration;
 
-  _MD2Painter(this.decoration, VoidCallback onChanged) : super(onChanged);
+  MD2Painter(this.decoration, VoidCallback onChanged) : super(onChanged);
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     assert(configuration.size != null);
 
-    Rect rect = Offset(1.0, 2.0) & const Size(3.0, 4.0);
+    Rect rect = const Offset(1.0, 2.0) & const Size(3.0, 4.0);
     if (decoration!.indicatorSize == MD2IndicatorSize.full) {
       rect = Offset(
           offset.dx,
@@ -56,7 +55,7 @@ class _MD2Painter extends BoxPainter {
     paint.style = PaintingStyle.fill;
     canvas.drawRRect(
         RRect.fromRectAndCorners(rect,
-            topRight: Radius.circular(8), topLeft: Radius.circular(8)),
+            topRight: const Radius.circular(8), topLeft: const Radius.circular(8)),
         paint);
   }
 }

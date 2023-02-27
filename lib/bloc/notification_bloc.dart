@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +17,7 @@ class NotificationBLOC extends ChangeNotifier
   bool _isLoading = true;
 
   bool get isLoading => _isLoading;
-  List<DocumentSnapshot> _snap = [];
+  final List<DocumentSnapshot> _snap = [];
   List<NotificationModel> _data = [];
 
   List<NotificationModel> get data => _data;
@@ -27,15 +26,16 @@ class NotificationBLOC extends ChangeNotifier
   bool? get subscribed => _subscribed;
   final String subscriptionTopic = 'ALL';
 
-  Future<Null> getData(mounted) async
+  Future<void> getData(mounted) async
   {
     QuerySnapshot rawData;
-    if (_lastVisible == null)
+    if (_lastVisible == null) {
       rawData = await fireStore.collection('NOTIFICATIONS').orderBy('TIMESTAMP', descending: true).limit(10).get();
-    else
+    } else {
       rawData = await fireStore.collection('NOTIFICATIONS').orderBy('TIMESTAMP', descending: true).startAfter([_lastVisible!['TIMESTAMP']]).limit(10).get();
+    }
 
-    if (rawData != null && rawData.docs.length > 0)
+    if (rawData != null && rawData.docs.isNotEmpty)
     {
       _lastVisible = rawData.docs[rawData.docs.length - 1];
       if (mounted)
@@ -50,7 +50,7 @@ class NotificationBLOC extends ChangeNotifier
       _isLoading = false;
     }
     notifyListeners();
-    return null;
+    return;
   }
 
   setLoading(bool isLoading)
@@ -88,7 +88,7 @@ class NotificationBLOC extends ChangeNotifier
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message)
     {
-      nextScreen(context, NotificationsPage());
+      nextScreen(context, const NotificationsPage());
     });
     notifyListeners();
   }
@@ -96,8 +96,8 @@ class NotificationBLOC extends ChangeNotifier
   Future handleFcmSubscription() async
   {
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    bool _getSubscription = sp.getBool('SUBSCRIBE') ?? true;
-    if (_getSubscription == true)
+    bool getSubscription = sp.getBool('SUBSCRIBE') ?? true;
+    if (getSubscription == true)
     {
       await sp.setBool('SUBSCRIBE', true);
       _fcm.subscribeToTopic(subscriptionTopic);
@@ -130,10 +130,10 @@ class NotificationBLOC extends ChangeNotifier
         ),
         actions: <Widget>[
           TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
-                nextScreen(context, NotificationsPage());
+                nextScreen(context, const NotificationsPage());
               }),
         ],
       ),

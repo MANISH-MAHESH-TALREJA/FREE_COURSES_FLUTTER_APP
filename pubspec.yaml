@@ -71,4 +71,4 @@ flutter:
         - asset: fonts/Poppins-SemiBold.ttf
           weight: 700
         - asset: fonts/Poppins-Bold.ttf
-          weight: 800
+          weight: 600

@@ -12,16 +12,17 @@ import 'package:blog/pages/notifications_page.dart';
 import 'package:blog/utility/general_utility_functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../bloc/theme_bloc.dart';
 import '../constants.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ProfilePageState createState() => ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>
+class ProfilePageState extends State<ProfilePage>
     with AutomaticKeepAliveClientMixin {
   openAboutDialog() {
     showDialog(
@@ -45,25 +46,25 @@ class _ProfilePageState extends State<ProfilePage>
     final sb = context.watch<AuthenticationBLOC>();
     return Scaffold(
         appBar: AppBar(
-          title: Text('YOUR PROFILE'),
+          title: Text('YOUR PROFILE', style: TextStyle(color: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.black,)),
           centerTitle: true,
           actions: [
             IconButton(
-                icon: Icon(Feather.bell, size: 20),
-                onPressed: () => nextScreen(context, NotificationsPage()))
+                icon: const Icon(Feather.bell, size: 20),
+                onPressed: () => nextScreen(context, const NotificationsPage()))
           ],
         ),
         body: ListView(
-          padding: EdgeInsets.fromLTRB(10, 20, 10, 30),
+          padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
           children: [
-            sb.isSignedIn == false ? GuestUserUI() : UserUI(),
-            Center(
+            sb.isSignedIn == false ? const GuestUserUI() : const UserUI(),
+            const Center(
               child: Text(
                 "GENERAL SETTINGS",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Padding(
@@ -74,20 +75,20 @@ class _ProfilePageState extends State<ProfilePage>
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
-                  title: Text('NOTIFICATIONS'),
+                  title: const Text('NOTIFICATIONS'),
                   leading: Container(
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
                         color: Colors.deepPurpleAccent,
                         borderRadius: BorderRadius.circular(5)),
-                    child: Icon(Feather.bell, size: 20, color: Colors.white),
+                    child: const Icon(Feather.bell, size: 20, color: Colors.white),
                   ),
                   trailing: Switch(
                       activeColor: Theme.of(context).primaryColor,
                       value: context.watch<NotificationBLOC>().subscribed!,
-                      onChanged: (bool) {
-                        context.read<NotificationBLOC>().fcmSubscribe(bool);
+                      onChanged: (boolean) {
+                        context.read<NotificationBLOC>().fcmSubscribe(boolean);
                       }),
                 ),
               ),
@@ -100,16 +101,16 @@ class _ProfilePageState extends State<ProfilePage>
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
-                  title: Text('CONTACT US'),
+                  title: const Text('CONTACT US'),
                   leading: Container(
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
                         color: Colors.blueAccent,
                         borderRadius: BorderRadius.circular(5)),
-                    child: Icon(Feather.mail, size: 20, color: Colors.white),
+                    child: const Icon(Feather.mail, size: 20, color: Colors.white),
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Feather.chevron_right,
                     size: 20,
                   ),
@@ -126,16 +127,16 @@ class _ProfilePageState extends State<ProfilePage>
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
-                  title: Text('RATE THIS APP'),
+                  title: const Text('RATE THIS APP'),
                   leading: Container(
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
                         color: Colors.orangeAccent,
                         borderRadius: BorderRadius.circular(5)),
-                    child: Icon(Feather.star, size: 20, color: Colors.white),
+                    child: const Icon(Feather.star, size: 20, color: Colors.white),
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Feather.chevron_right,
                     size: 20,
                   ),
@@ -162,16 +163,45 @@ class _ProfilePageState extends State<ProfilePage>
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
-                  title: Text('PRIVACY POLICY'),
+                  title: const Text('DARK MODE'),
                   leading: Container(
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
                         color: Colors.redAccent,
                         borderRadius: BorderRadius.circular(5)),
-                    child: Icon(Feather.lock, size: 20, color: Colors.white),
+                    child: const Icon(LineIcons.sun, size: 20, color: Colors.white),
                   ),
-                  trailing: Icon(
+                  trailing:  Switch(
+                      activeColor: Theme.of(context).primaryColor,
+                      value: context.watch<ThemeBloc>().darkTheme!,
+                      onChanged: (boolean) {
+                        context.read<ThemeBloc>().toggleTheme();
+                      }),
+                  onTap: () async {
+                    openToastLong("TOGGLE DARK THEME / LIGHT THEME");
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom:5.0),
+              child: Card(
+                elevation: 1,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: ListTile(
+                  title: const Text('PRIVACY POLICY'),
+                  leading: Container(
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const Icon(Feather.lock, size: 20, color: Colors.white),
+                  ),
+                  trailing: const Icon(
                     Feather.chevron_right,
                     size: 20,
                   ),
@@ -196,16 +226,16 @@ class _ProfilePageState extends State<ProfilePage>
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
-                  title: Text('ABOUT US'),
+                  title: const Text('ABOUT US'),
                   leading: Container(
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(5)),
-                    child: Icon(Feather.info, size: 20, color: Colors.white),
+                    child: const Icon(Feather.info, size: 20, color: Colors.white),
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Feather.chevron_right,
                     size: 20,
                   ),
@@ -220,17 +250,17 @@ class _ProfilePageState extends State<ProfilePage>
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-                          title: Center(
+                          title: const Center(
                             child:Text("ABOUT DEVELOPERS", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.00, color: Colors.green)),
                           ),
                           actions: [MaterialButton
                             (
-                            child: Text("CLOSE",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.00)),
+                            child: const Text("CLOSE",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.00)),
                             onPressed: ()
                             {Navigator.of(context).pop();},
                           )],
-                          content: SingleChildScrollView(
-                              child: Text("DEVELOPED BY : \n\n   1. AAYUSHMAN OJHA\n   2. MANISH TALREJA\n\n     FREE ONLINE COURSES IS AN APP THAT WILL PROVIDE FREE UDEMY COURSES, VIDEO COURSES TO STUDENTS.", style:TextStyle(fontFamily: 'Syndor', fontWeight: FontWeight.bold, color: Colors.pink, letterSpacing: 1))
+                          content: const SingleChildScrollView(
+                              child: Text("Developed By : \n\n   1. Abhishek Ojha\n   2. Manish Talreja\n\n     Free Online Courses is an app that will provide Free Udemy Courses, Video Courses to students.", style:TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.normal))
                           ),
                         );
                       },
@@ -254,29 +284,27 @@ class GuestUserUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          child: Column(
-            children: [
-              AvatarGlow(
-                glowColor: Colors.orange,
-                endRadius: 90.0,
-                duration: Duration(milliseconds: 2000),
-                repeat: true,
-                repeatPauseDuration: Duration(milliseconds: 100),
-                child: CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: AssetImage("assets/images/emoji.png")),
-              ),
-              Text(
-                "FREE ONLINE COURSES",
-                style: TextStyle(fontSize: 18),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-            ],
-          ),
+        Column(
+          children: const [
+            AvatarGlow(
+              glowColor: Colors.orange,
+              endRadius: 90.0,
+              duration: Duration(milliseconds: 2000),
+              repeat: true,
+              repeatPauseDuration: Duration(milliseconds: 100),
+              child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: AssetImage("assets/images/emoji.png")),
+            ),
+            Text(
+              "FREE ONLINE COURSES",
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+          ],
         ),
         Padding(
           padding: const EdgeInsets.only(bottom:5.0),
@@ -286,28 +314,28 @@ class GuestUserUI extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              title: Text('LOGIN'),
+              title: const Text('LOGIN'),
               leading: Container(
                 height: 30,
                 width: 30,
                 decoration: BoxDecoration(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.circular(5)),
-                child: Icon(Feather.user, size: 20, color: Colors.white),
+                child: const Icon(Feather.user, size: 20, color: Colors.white),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Feather.chevron_right,
                 size: 20,
               ),
               onTap: () => nextScreenPopup(
                   context,
-                  AuthenticationPage(
+                  const AuthenticationPage(
                     tag: 'POPUP',
                   )),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
       ],
@@ -315,37 +343,79 @@ class GuestUserUI extends StatelessWidget {
   }
 }
 
-class UserUI extends StatelessWidget {
+class UserUI extends StatefulWidget {
   const UserUI({Key? key}) : super(key: key);
+
+  @override
+  State<UserUI> createState() => _UserUIState();
+}
+
+class _UserUIState extends State<UserUI> {
+  _openDeleteDialog() {
+    return showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Do you really want to delete your data?'),
+            content: const Text('Your account information like profile data, bookmarks, etc will be erased from the app database and You will have to sign up again in the app to continue.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _handleDeleteAccount();
+                },
+                child: const Text('Yes, Delete My Account'),
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel'))
+            ],
+          );
+        });
+  }
+
+  _handleDeleteAccount () async
+  {
+    await context.read<AuthenticationBLOC>().deleteUserDataFromCloudDatabase()
+        .then((_) async => await context.read<AuthenticationBLOC>().userSignOut())
+        .then((_) => context.read<AuthenticationBLOC>().afterUserSignOut()).then((_){
+      Future.delayed(const Duration(seconds: 1))
+          .then((value) => nextScreenCloseOthers(context, const AuthenticationPage(
+        tag: 'POPUP',
+      )));
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
     final sb = context.watch<AuthenticationBLOC>();
     return Column(
       children: [
-        Container(
-          child: Column(
-            children: [
-              AvatarGlow(
-                glowColor: Colors.orange,
-                endRadius: 90.0,
-                duration: Duration(milliseconds: 2000),
-                repeat: true,
-                repeatPauseDuration: Duration(milliseconds: 100),
-                child: CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: CachedNetworkImageProvider(sb.imageUrl!)),
-              ),
-              Text(
-                sb.name!,
-                style: TextStyle(fontSize: 18),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-            ],
-          ),
+        Column(
+          children: [
+            AvatarGlow(
+              glowColor: Colors.orange,
+              endRadius: 90.0,
+              duration: const Duration(milliseconds: 2000),
+              repeat: true,
+              repeatPauseDuration: const Duration(milliseconds: 100),
+              child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: CachedNetworkImageProvider(sb.imageUrl!)),
+            ),
+            Text(
+              sb.name!,
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+          ],
         ),
         Padding(
           padding: const EdgeInsets.only(bottom:5.0),
@@ -362,7 +432,7 @@ class UserUI extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.circular(5)),
-                child: Icon(Feather.mail, size: 20, color: Colors.white),
+                child: const Icon(Feather.mail, size: 20, color: Colors.white),
               ),
             ),
           ),
@@ -375,13 +445,13 @@ class UserUI extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              title: Text("JOINED ON : "+sb.joiningDate!),
+              title: Text("JOINED ON : ${sb.joiningDate!}"),
               leading: Container(
                 height: 30,
                 width: 30,
                 decoration: BoxDecoration(
                     color: Colors.green, borderRadius: BorderRadius.circular(5)),
-                child: Icon(LineIcons.dashcube, size: 20, color: Colors.white),
+                child: const Icon(LineIcons.dashcube, size: 20, color: Colors.white),
               ),
             ),
           ),
@@ -394,16 +464,16 @@ class UserUI extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-                title: Text('EDIT PROFILE'),
+                title: const Text('EDIT PROFILE'),
                 leading: Container(
                   height: 30,
                   width: 30,
                   decoration: BoxDecoration(
                       color: Colors.purpleAccent,
                       borderRadius: BorderRadius.circular(5)),
-                  child: Icon(Feather.edit_3, size: 20, color: Colors.white),
+                  child: const Icon(Feather.edit_3, size: 20, color: Colors.white),
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Feather.chevron_right,
                   size: 20,
                 ),
@@ -419,16 +489,43 @@ class UserUI extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              title: Text('REQUEST A COURSE'),
+                title: const Text('DELETE MY PROFILE & DATA'),
+                leading: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                      color: Colors.purpleAccent,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: const Icon(Feather.trash, size: 20, color: Colors.white),
+                ),
+                trailing: const Icon(
+                  Feather.chevron_right,
+                  size: 20,
+                ),
+                onTap: _openDeleteDialog,
+                /*onTap: () => nextScreen(
+                    context, EditProfile(name: sb.name!, imageUrl: sb.imageUrl!))*/
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom:5.0),
+          child: Card(
+            elevation: 1,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: ListTile(
+              title: const Text('REQUEST A COURSE'),
               leading: Container(
                 height: 30,
                 width: 30,
                 decoration: BoxDecoration(
                     color: Colors.teal,
                     borderRadius: BorderRadius.circular(5)),
-                child: Icon(Feather.book, size: 20, color: Colors.white),
+                child: const Icon(Feather.book, size: 20, color: Colors.white),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Feather.chevron_right,
                 size: 20,
               ),
@@ -445,16 +542,16 @@ class UserUI extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: ListTile(
-              title: Text('LOGOUT'),
+              title: const Text('LOGOUT'),
               leading: Container(
                 height: 30,
                 width: 30,
                 decoration: BoxDecoration(
                     color: Colors.redAccent,
                     borderRadius: BorderRadius.circular(5)),
-                child: Icon(Feather.log_out, size: 20, color: Colors.white),
+                child: const Icon(Feather.log_out, size: 20, color: Colors.white),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Feather.chevron_right,
                 size: 20,
               ),
@@ -462,7 +559,7 @@ class UserUI extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
       ],
@@ -474,19 +571,19 @@ class UserUI extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('LOGOUT'),
+            title: const Text('LOGOUT'),
             actions: [
               TextButton(
-                child: Text('NO'),
+                child: const Text('NO'),
                 onPressed: () => Navigator.pop(context),
               ),
               TextButton(
-                child: Text('YES'),
+                child: const Text('YES'),
                 onPressed: () async {
                   Navigator.pop(context);
                   await context.read<AuthenticationBLOC>().removeSignIn();
                   await context.read<AuthenticationBLOC>().userSignOut().then(
-                      (value) => nextScreenCloseOthers(context, AuthenticationPage()));
+                      (value) => nextScreenCloseOthers(context, const AuthenticationPage()));
                 },
               )
             ],

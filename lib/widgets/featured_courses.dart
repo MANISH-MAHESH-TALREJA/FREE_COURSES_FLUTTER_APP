@@ -11,12 +11,13 @@ import 'package:blog/utility/loading_cards.dart';
 
 class FeaturedCourses extends StatefulWidget
 {
-  FeaturedCourses({Key? key}) : super(key: key);
+  const FeaturedCourses({Key? key}) : super(key: key);
 
-  _FeaturedCoursesState createState() => _FeaturedCoursesState();
+  @override
+  FeaturedCoursesState createState() => FeaturedCoursesState();
 }
 
-class _FeaturedCoursesState extends State<FeaturedCourses>
+class FeaturedCoursesState extends State<FeaturedCourses>
 {
   int listIndex = 2;
 
@@ -29,7 +30,7 @@ class _FeaturedCoursesState extends State<FeaturedCourses>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Container(
+        SizedBox(
           height: 260,
           width: w,
           child: PageView.builder(
@@ -42,12 +43,12 @@ class _FeaturedCoursesState extends State<FeaturedCourses>
               });
             },
             itemBuilder: (BuildContext context, int index) {
-              if (fb.data.isEmpty) return LoadingFeaturedCoursesCard();
+              if (fb.data.isEmpty) return const LoadingFeaturedCoursesCard();
               return _FeaturedItemList(d: fb.data[index]);
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Center(
@@ -57,7 +58,7 @@ class _FeaturedCoursesState extends State<FeaturedCourses>
             decorator: DotsDecorator(
               color: Colors.black26,
               activeColor: Colors.black,
-              spacing: EdgeInsets.only(left: 6),
+              spacing: const EdgeInsets.only(left: 6),
               size: const Size.square(5.0),
               activeSize: const Size(20.0, 4.0),
               activeShape: RoundedRectangleBorder(
@@ -109,7 +110,7 @@ class _FeaturedItemList extends StatelessWidget
                     boxShadow: <BoxShadow>[
                       BoxShadow(
                           color: Colors.grey[200]!,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                           blurRadius: 2)
                     ]),
                 child: Padding(
@@ -125,7 +126,7 @@ class _FeaturedItemList extends StatelessWidget
                             d.courseName!.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
+                                fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey[700]),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -141,13 +142,13 @@ class _FeaturedItemList extends StatelessWidget
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Icon(
+                                const Icon(
                                   LineIcons.heart,
                                   size: 18,
                                   color: Colors.orange,
                                 ),
                                 Text(
-                                  "  " + d.loves.toString() + " LIKES",
+                                  "  ${d.loves} LIKES",
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
@@ -157,14 +158,13 @@ class _FeaturedItemList extends StatelessWidget
                             ),
                             Row(
                               children: <Widget>[
-                                Icon(
+                                const Icon(
                                   LineIcons.calendar,
                                   size: 18,
                                   color: Colors.orange,
                                 ),
                                 Text(
-                                  //"  "+d.commentsCount.toString()+" COMMENTS",
-                                  "  " + d.date!,
+                                  "  ${d.date!}",
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,

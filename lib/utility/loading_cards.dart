@@ -8,7 +8,7 @@ class LoadingPopularCoursesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SkeletonAnimation(
         child: Container(
-            margin: EdgeInsets.only(left: 0, right: 10, top: 5, bottom: 5),
+            margin: const EdgeInsets.only(left: 0, right: 10, top: 5, bottom: 5),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width * 0.35,
             decoration: BoxDecoration(
@@ -24,7 +24,7 @@ class LoadingFeaturedCoursesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SkeletonAnimation(
         child: Container(
-            margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class LoadingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: SkeletonAnimation(
         child: Container(

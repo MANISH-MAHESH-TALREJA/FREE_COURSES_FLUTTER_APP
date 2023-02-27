@@ -11,7 +11,7 @@ import 'package:blog/widgets/custom_cache_image.dart';
 
 class RecommendedCourses extends StatelessWidget
 {
-  RecommendedCourses({Key? key}) : super(key: key);
+  const RecommendedCourses({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context)
   {
@@ -19,23 +19,22 @@ class RecommendedCourses extends StatelessWidget
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             left: 15,
             top: 10,
             right: 15,
           ),
           child: Row(
             children: <Widget>[
-              Text(
+              const Text(
                 'RECOMMENDED COURSES',
                 style: TextStyle(
                     fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey[800]),
+                    fontWeight: FontWeight.w700,),
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
-                icon: Icon(Icons.arrow_forward),
+                icon: const Icon(Icons.arrow_forward),
                 onPressed: () => nextScreen(
                     context,
                     MoreCoursesPage(
@@ -46,15 +45,15 @@ class RecommendedCourses extends StatelessWidget
             ],
           ),
         ),
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width,
           child: ListView.separated(
-            padding: EdgeInsets.only(top: 10, bottom: 30, left: 15, right: 15),
+            padding: const EdgeInsets.only(top: 10, bottom: 30, left: 15, right: 15),
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: rpb.data.length,
-            separatorBuilder: (context, index) => SizedBox(
+            separatorBuilder: (context, index) => const SizedBox(
               height: 10,
             ),
             itemBuilder: (BuildContext context, int index)
@@ -96,24 +95,24 @@ class _ListItem extends StatelessWidget
           Align(
             alignment: Alignment.topRight,
             child: Container(
-              margin: EdgeInsets.only(top: 10, right: 15),
+              margin: const EdgeInsets.only(top: 10, right: 15),
               child: TextButton.icon(
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
+                        const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(25))
                         )
                     ),
                     backgroundColor: MaterialStateProperty.all(Colors.grey[600]!.withOpacity(0.5))
                 ),
-                icon: Icon(
+                icon: const Icon(
                   LineIcons.heart,
                   color: Colors.white,
                   size: 20,
                 ),
                 label: Text(
                   d.loves.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 13),
+                  style: const TextStyle(color: Colors.white, fontSize: 13),
                 ),
                 onPressed: () {},
               ),
@@ -125,11 +124,11 @@ class _ListItem extends StatelessWidget
             left: 0,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               height: 80,
               decoration: BoxDecoration(
                   color: Colors.grey[900]!.withOpacity(0.6),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: Column(
@@ -139,20 +138,20 @@ class _ListItem extends StatelessWidget
                     d.courseName!.toUpperCase(),
                     maxLines: 1,
                     overflow: TextOverflow.clip,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                         fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Icon(Feather.check_circle, size: 15, color: Colors.green),
+                      const Icon(Feather.check_circle, size: 15, color: Colors.green),
                       Text(
-                        "  "+d.courseCategory!,
+                        "  ${d.courseCategory!}",
                         style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey[400],

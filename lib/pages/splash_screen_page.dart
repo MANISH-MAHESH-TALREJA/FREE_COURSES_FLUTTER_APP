@@ -9,8 +9,10 @@ import 'home_page.dart';
 
 class SplashScreenPage extends StatefulWidget
 {
+  const SplashScreenPage({super.key});
+
   @override
-  SplashScreenPageState createState() => new SplashScreenPageState();
+  SplashScreenPageState createState() => SplashScreenPageState();
 }
 
 class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerProviderStateMixin
@@ -20,8 +22,8 @@ class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerPro
   Animation<double>? animation;
   startTime() async
   {
-    var _duration = new Duration(seconds: 5);
-    return new Timer(_duration, afterSplash);
+    var duration = const Duration(seconds: 5);
+    return Timer(duration, afterSplash);
   }
   gotoHomePage()
   {
@@ -30,17 +32,17 @@ class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerPro
     {
       sb.getDataFromSp();
     }
-    nextScreenReplace(context, HomePage());
+    nextScreenReplace(context, const HomePage());
   }
 
   gotoSignInPage()
   {
-    nextScreenReplace(context, AuthenticationPage());
+    nextScreenReplace(context, const AuthenticationPage());
   }
   afterSplash()
   {
     final AuthenticationBLOC sb = context.read<AuthenticationBLOC>();
-    Future.delayed(Duration(milliseconds: 500)).then((value)
+    Future.delayed(const Duration(milliseconds: 500)).then((value)
     {
       sb.isSignedIn == true || sb.guestUser == true
           ? gotoHomePage()
@@ -52,10 +54,10 @@ class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerPro
   void initState()
   {
     super.initState();
-    animationController = new AnimationController(vsync: this, duration: new Duration(seconds: 2));
-    animation = new CurvedAnimation(parent: animationController!, curve: Curves.easeOut);
+    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animation = CurvedAnimation(parent: animationController!, curve: Curves.easeOut);
 
-    animation!.addListener(() => this.setState(() {}));
+    animation!.addListener(() => setState(() {}));
     animationController!.forward();
 
     setState(()
@@ -71,11 +73,11 @@ class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerPro
 
     return Scaffold(
       body: Center(
-        child: new Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>
           [
-            new Image.asset(
+            Image.asset(
               'assets/images/app_icon.png',
               width: animation!.value * 250,
               height: animation!.value * 250,

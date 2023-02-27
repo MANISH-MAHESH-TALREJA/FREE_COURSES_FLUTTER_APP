@@ -20,20 +20,20 @@ class TechnicalBlogDetailsPage extends StatefulWidget {
   final TechnicalBlogModel blogData;
   final String? tag;
 
-  TechnicalBlogDetailsPage({Key? key, required this.blogData, required this.tag})
+  const TechnicalBlogDetailsPage({Key? key, required this.blogData, required this.tag})
       : super(key: key);
 
   @override
-  _TechnicalBlogDetailsPageState createState() => _TechnicalBlogDetailsPageState();
+  TechnicalBlogDetailsPageState createState() => TechnicalBlogDetailsPageState();
 }
 
-class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
+class TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
   final String collectionName = 'TECHNICAL BLOGS';
 
   handleLoveClick() {
-    bool _guestUser = context.read<AuthenticationBLOC>().guestUser;
+    bool guestUser = context.read<AuthenticationBLOC>().guestUser;
 
-    if (_guestUser == true) {
+    if (guestUser == true) {
       openSignInDialog(context);
     } else {
       context
@@ -43,9 +43,9 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
   }
 
   handleBookmarkClick() {
-    bool _guestUser = context.read<AuthenticationBLOC>().guestUser;
+    bool guestUser = context.read<AuthenticationBLOC>().guestUser;
 
-    if (_guestUser == true) {
+    if (guestUser == true) {
       openSignInDialog(context);
     } else {
       context
@@ -75,14 +75,14 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
     final AuthenticationBLOC sb = context.watch<AuthenticationBLOC>();
     final TechnicalBlogModel d = widget.blogData;
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,17 +91,17 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                         height: 35,
                         width: 35,
                         decoration: BoxDecoration(
-                            color: Colors.grey[200],
+                            /*color: Colors.grey[200],*/
                             borderRadius: BorderRadius.circular(5)),
                         child: IconButton(
-                          padding: EdgeInsets.all(0),
-                          icon: Icon(Icons.arrow_back),
+                          padding: const EdgeInsets.all(0),
+                          icon: const Icon(Icons.arrow_back),
                           onPressed: () {
                             Navigator.pop(context);
                           },
                         ),
                       ),
-                      Text(
+                      const Text(
                         "DAILY FREE COURSES",
                         style: TextStyle(
                             fontSize: 18,
@@ -112,11 +112,11 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                           height: 35,
                           width: 35,
                           decoration: BoxDecoration(
-                              color: Colors.grey[200],
+                              /*color: Colors.grey[200],*/
                               borderRadius: BorderRadius.circular(5)),
                           child: IconButton(
-                            padding: EdgeInsets.all(0),
-                            icon: Icon(
+                            padding: const EdgeInsets.all(0),
+                            icon: const Icon(
                               Icons.share,
                               size: 22,
 
@@ -137,40 +137,40 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Icon(
+                          const Icon(
                             CupertinoIcons.time,
                             size: 18,
                             color: Colors.green,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 3,
                           ),
                           Text(
                             d.date!,
-                            style: TextStyle(
-                                fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 13, /*color: Colors.grey[700],*/ fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         d.title!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w900,
-                            color: Colors.grey[800]),
+                            /*color: Colors.grey[800]*/),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 8, bottom: 8),
+                        margin: const EdgeInsets.only(top: 8, bottom: 8),
                         height: 3,
                         width: 150,
                         decoration: BoxDecoration(
                             color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(40)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
@@ -194,13 +194,13 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                             style:  ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(Colors.purpleAccent)
                             ),
-                            icon: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal:5.0),
+                            icon: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal:5.0),
                               child: Icon(Feather.book_open,
                                   size: 20, color: Colors.white),
                             ),
-                            label: Padding(
-                              padding: const EdgeInsets.only(right:8.0),
+                            label: const Padding(
+                              padding: EdgeInsets.only(right:8.0),
                               child: Text(
                                 "SUBSCRIBE COURSE",
                                 maxLines: 1,
@@ -215,7 +215,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                           IconButton(
                               icon: LoveCard(
                                   collectionName: collectionName,
-                                  uid: sb.uid!,
+                                  uid: sb.uid,
                                   timestamp: d.timestamp!),
                               onPressed: () {
                                 handleLoveClick();
@@ -225,12 +225,12 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Hero(
                   tag: widget.tag!,
-                  child: Container(
+                  child: SizedBox(
                       height: 200,
                       width: MediaQuery.of(context).size.width,
                       child: ClipRRect(
@@ -249,7 +249,7 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Html(
@@ -258,11 +258,11 @@ class _TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                         fontWeight: FontWeight.w400,
                         color: Colors.grey[800]),*/
                     data: '''  ${d.description}   '''),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                OtherVideoCourses(),
-                SizedBox(
+                const OtherVideoCourses(),
+                const SizedBox(
                   height: 10,
                 ),
               ]),
