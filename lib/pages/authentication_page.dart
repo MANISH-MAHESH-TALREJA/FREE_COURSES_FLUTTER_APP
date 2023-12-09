@@ -167,9 +167,9 @@ class AuthenticationPageState extends State<AuthenticationPage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Column(
+                const Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'WELCOME TO',
                       style: TextStyle(
@@ -215,7 +215,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
                 ),
                 SizedBox(height: size.height * 0.05),
                 AvatarGlow(
-                  glowColor: Theme.of(context).accentColor,
+                  glowColor: Theme.of(context).colorScheme.secondary,
                   endRadius: 90.0,
                   duration: const Duration(milliseconds: 2000),
                   repeat: true,
@@ -240,10 +240,10 @@ class AuthenticationPageState extends State<AuthenticationPage>
                             backgroundColor: MaterialStateProperty.all(Colors.blueAccent)
                           ),
                           child: googleSignInStarted == false
-                              ? Row(
+                              ? const Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Icon(
                                 FontAwesome.google,
                                 color: Colors.white,
@@ -281,10 +281,10 @@ class AuthenticationPageState extends State<AuthenticationPage>
                               backgroundColor: MaterialStateProperty.all(Colors.blueAccent)
                           ),
                           child: facebookSignInStarted == false
-                              ? Row(
+                              ? const Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Icon(
                                 FontAwesome.facebook_official,
                                 color: Colors.white,
@@ -335,7 +335,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.w900,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                   ],
                 ),
@@ -377,10 +377,10 @@ class AuthenticationPageState extends State<AuthenticationPage>
                                   backgroundColor: MaterialStateProperty.all(Colors.blueAccent)
                               ),
                               child: googleSignInStarted == false
-                                  ? Row(
+                                  ? const Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   Icon(
                                     FontAwesome.google,
                                     color: Colors.white,
@@ -418,10 +418,10 @@ class AuthenticationPageState extends State<AuthenticationPage>
                                   backgroundColor: MaterialStateProperty.all(Colors.blueAccent)
                               ),
                               child: facebookSignInStarted == false
-                                  ? Row(
+                                  ? const Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   Icon(
                                     FontAwesome.facebook_official,
                                     color: Colors.white,

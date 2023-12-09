@@ -211,11 +211,11 @@ class CarouselState extends State<Carousel> {
                 );
               } else if (netImage is FadeInImage) {
                 return ClipRRect(
-                  borderRadius: widget.borderRadius!
+                 /* borderRadius: widget.borderRadius!
                       ? BorderRadius.all(widget.radius != null
                           ? widget.radius!
                           : const Radius.circular(8.0))
-                      : null,
+                      : null,*/
                   child: Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(

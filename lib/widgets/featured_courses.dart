@@ -54,7 +54,7 @@ class FeaturedCoursesState extends State<FeaturedCourses>
         Center(
           child: DotsIndicator(
             dotsCount: 5,
-            position: listIndex.toDouble(),
+            position: listIndex.toInt(),
             decorator: DotsDecorator(
               color: Colors.black26,
               activeColor: Colors.black,

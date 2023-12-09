@@ -127,7 +127,7 @@ class HomePageState extends State<HomePage>  with TickerProviderStateMixin {
         notchSmoothness: NotchSmoothness.defaultEdge,
         activeIndex: _currentIndex,
         inactiveColor: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.grey[800],
-        activeColor: context.watch<ThemeBloc>().darkTheme! == true ? Colors.cyanAccent : Theme.of(context).accentColor,
+        activeColor: context.watch<ThemeBloc>().darkTheme! == true ? Colors.cyanAccent : Theme.of(context).colorScheme.secondary,
         onTap: (index) => onTabTapped(index),
         gapLocation: GapLocation.none,
       ),

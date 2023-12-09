@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 class ThemeModel {
   final lightMode = ThemeData(
     primaryColor: Colors.deepPurpleAccent,
-    accentColor: Colors.black,
+    // accentColor: Colors.black,
     iconTheme: IconThemeData(color: Colors.grey[900]),
     fontFamily: 'Poppins',
     scaffoldBackgroundColor: Colors.grey[100],
@@ -47,7 +47,7 @@ class ThemeModel {
 
   final darkMode = ThemeData(
       primaryColor: Colors.deepPurpleAccent,
-      accentColor: Colors.white,
+      // accentColor: Colors.white,
       iconTheme: const IconThemeData(color: Colors.white),
       fontFamily: 'Poppins',
       scaffoldBackgroundColor: const Color(0xff303030),

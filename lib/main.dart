@@ -83,16 +83,19 @@ class MyAppState extends State<MyApp>
               appBarTheme: AppBarTheme(
                 color: Colors.transparent,
                 elevation: 0,
-                brightness: Brightness.light,
                 iconTheme: IconThemeData(
                   color: Colors.grey[800],
                 ),
-                textTheme: TextTheme(
-                    headline6: GoogleFonts.poppins(
+                titleTextStyle: GoogleFonts.poppins(
+                    fontSize: 16,
+                    color: Colors.grey[900],
+                    fontWeight: FontWeight.w500
+                ),
+                toolbarTextStyle: GoogleFonts.poppins(
                         fontSize: 16,
                         color: Colors.grey[900],
                         fontWeight: FontWeight.w500
-                    )),
+                    ), systemOverlayStyle: SystemUiOverlayStyle.dark,
               )),
           debugShowCheckedModeBanner: false,
           home: const SplashScreenPage()),
