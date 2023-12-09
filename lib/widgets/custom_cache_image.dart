@@ -14,9 +14,11 @@ class CustomCacheImage extends StatelessWidget
       fit: BoxFit.fill,
       height: MediaQuery.of(context).size.height,
       placeholder: (context, url) => Container(color: Colors.grey[300]),
-      errorWidget: (context, url, error) => Container(
-        color: Colors.grey[300],
-        child: const Icon(Icons.error),
+      errorWidget: (context, url, error) => Center(
+        child: Container(
+          color: Colors.grey[300],
+          child: const Icon(Icons.error),
+        ),
       ),
     );
   }

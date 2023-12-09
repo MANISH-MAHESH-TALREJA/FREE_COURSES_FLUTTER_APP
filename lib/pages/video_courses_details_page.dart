@@ -55,8 +55,8 @@ class BlogDetailsState extends State<VideoCoursesDetailsPage> {
   }
 
   handleSource(link) async {
-    if (await canLaunch(link)) {
-      launch(link);
+    if (await canLaunchUrl(Uri.parse(link))) {
+      launchUrl(Uri.parse(link));
     }
   }
 
@@ -264,9 +264,9 @@ class BlogDetailsState extends State<VideoCoursesDetailsPage> {
                                 onPressed: () async
                                 {
                                   var url = "https://www.youtube.com/watch?v=${d.videoID!}";
-                                  if(await canLaunch(url))
+                                  if(await canLaunchUrl(Uri.parse(url)))
                                   {
-                                    await launch(url);
+                                    await launchUrl(Uri.parse(url));
                                   }
                                   else
                                   {

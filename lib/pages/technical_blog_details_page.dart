@@ -55,8 +55,8 @@ class TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
   }
 
   handleSource(link) async {
-    if (await canLaunch(link)) {
-      launch(link);
+    if (await canLaunchUrl(Uri.parse(link))) {
+      launchUrl(Uri.parse(link));
     }
   }
 
@@ -102,7 +102,7 @@ class TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                         ),
                       ),
                       const Text(
-                        "DAILY FREE COURSES",
+                        "TECHNICAL BLOGS",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w900,
@@ -182,9 +182,9 @@ class TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                             onPressed: () async
                             {
                               var url = d.blogLink;
-                              if(await canLaunch(url!))
+                              if(await canLaunchUrl(Uri.parse(url!)))
                               {
-                                await launch(url);
+                                await launchUrl(Uri.parse(url));
                               }
                               else
                               {
@@ -202,7 +202,7 @@ class TechnicalBlogDetailsPageState extends State<TechnicalBlogDetailsPage> {
                             label: const Padding(
                               padding: EdgeInsets.only(right:8.0),
                               child: Text(
-                                "SUBSCRIBE COURSE",
+                                "READ FULL BLOG",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(

@@ -6,7 +6,7 @@ class ThemeModel {
     primaryColor: Colors.deepPurpleAccent,
     // accentColor: Colors.black,
     iconTheme: IconThemeData(color: Colors.grey[900]),
-    fontFamily: 'Poppins',
+    fontFamily: 'Muli',
     scaffoldBackgroundColor: Colors.grey[100],
     brightness: Brightness.light,
     primaryColorDark: Colors.grey[800],
@@ -23,7 +23,7 @@ class ThemeModel {
       ),
       actionsIconTheme: IconThemeData(color: Colors.grey[900]),
       titleTextStyle: TextStyle(
-          fontFamily: 'Poppins',
+          fontFamily: 'Muli',
           fontSize: 18,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.6,
@@ -32,7 +32,7 @@ class ThemeModel {
         ),
     ),
     textTheme: TextTheme(
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
           fontWeight: FontWeight.w500, fontSize: 16, color: Colors.grey[900]),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -49,7 +49,7 @@ class ThemeModel {
       primaryColor: Colors.deepPurpleAccent,
       // accentColor: Colors.white,
       iconTheme: const IconThemeData(color: Colors.white),
-      fontFamily: 'Poppins',
+      fontFamily: 'Muli',
       scaffoldBackgroundColor: const Color(0xff303030),
       brightness: Brightness.dark,
       primaryColorDark: Colors.grey[300],
@@ -66,7 +66,7 @@ class ThemeModel {
         ),
         actionsIconTheme: const IconThemeData(color: Colors.white),
         titleTextStyle: const TextStyle(
-            fontFamily: 'Poppins',
+            fontFamily: 'Muli',
             fontSize: 18,
             letterSpacing: -0.6,
             wordSpacing: 1,
@@ -75,7 +75,7 @@ class ThemeModel {
           ),
       ),
       textTheme: const TextTheme(
-        subtitle1: TextStyle(
+        titleMedium: TextStyle(
             fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(

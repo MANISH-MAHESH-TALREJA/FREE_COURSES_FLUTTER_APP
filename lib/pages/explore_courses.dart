@@ -49,9 +49,9 @@ class ExploreCoursesState extends State<ExploreCourses> with AutomaticKeepAliveC
               context.read<RecentCoursesBLOC>().onRefresh(mounted);
               context.read<RecommendedCoursesBLOC>().onRefresh(mounted);
             },
-            child: SingleChildScrollView(
+            child: const SingleChildScrollView(
               child: Column(
-                children: const <Widget>[
+                children: <Widget>[
                   Header(),
                   FeaturedCourses(),
                   PopularCourses(),

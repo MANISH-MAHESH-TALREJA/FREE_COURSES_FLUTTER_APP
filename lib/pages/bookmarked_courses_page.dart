@@ -41,7 +41,7 @@ class BookmarkedCoursesPageState extends State<BookmarkedCoursesPage>
               indicatorWeight: 0,
               indicatorSize: TabBarIndicatorSize.tab,
               labelStyle: const TextStyle(
-                  fontFamily: 'Poppins',
+                  fontFamily: 'Muli',
                   fontSize: 15,
                   fontWeight: FontWeight.w600),
               indicator: MD2Indicator(

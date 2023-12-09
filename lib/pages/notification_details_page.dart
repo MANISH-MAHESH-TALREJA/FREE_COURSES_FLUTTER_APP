@@ -66,7 +66,7 @@ class NotificationDetailsPage extends StatelessWidget {
                 /*color: Colors.grey[600],*/
               ),
               onTapUrl: (url) async {
-                await launch(url);
+                await launchUrl(Uri.parse(url));
                 return true;
               },
             ),

@@ -140,7 +140,7 @@ class CategoryBasedCoursesPageState extends State<CategoryBasedCoursesPage> {
                 ),
                 title: Text(
                   widget.stateName.toUpperCase(),
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.montserrat(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
@@ -175,8 +175,8 @@ class CategoryBasedCoursesPageState extends State<CategoryBasedCoursesPage> {
                           return Opacity(
                             opacity: _isLoading! ? 1.0 : 0.0,
                             child: _lastVisible == null
-                                ? Column(
-                                    children: const [
+                                ? const Column(
+                                    children: [
                                       LoadingCard(
                                         height: 180,
                                       ),

@@ -61,13 +61,13 @@ flutter:
 
   fonts:
 
-    - family: Poppins
+    - family: Muli
       fonts:
-        - asset: fonts/Poppins-Regular.ttf
+        - asset: fonts/Muli-Regular.ttf
           weight: 500
-        - asset: fonts/Poppins-Medium.ttf
+        - asset: fonts/Muli-Medium.ttf
           weight: 600
-        - asset: fonts/Poppins-SemiBold.ttf
+        - asset: fonts/Muli-SemiBold.ttf
           weight: 700
-        - asset: fonts/Poppins-Bold.ttf
-          weight: 600
+        - asset: fonts/Muli-Bold.ttf
+          weight: 800

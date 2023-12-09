@@ -1,5 +1,6 @@
 import 'package:blog/pages/video_courses_details_page.dart';
 import 'package:blog/pages/video_courses_search_page.dart';
+import 'package:blog/widgets/custom_cache_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
@@ -178,10 +179,7 @@ class VideoCourseItem extends StatelessWidget {
                     Positioned.fill(
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(5.0),
-                          child: Image.network(
-                            d.thumbnail!,
-                            fit: BoxFit.fill,
-                          )),
+                          child: CustomCacheImage(imageUrl: d.thumbnail!,)),
                     ),
                     Positioned.fill(
                       child: Align(
@@ -189,7 +187,7 @@ class VideoCourseItem extends StatelessWidget {
                         child: Icon(
                           Icons.play_circle_outline,
                           size: 100,
-                          color: Colors.red.withOpacity(0.8),
+                          color: Colors.deepOrange.withOpacity(0.6),
                         ),
                       ),
                     )

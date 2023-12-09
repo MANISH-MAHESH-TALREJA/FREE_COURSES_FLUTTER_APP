@@ -198,9 +198,9 @@ class UdemyCoursesDetailPageState extends State<UdemyCoursesDetailPage> {
                           borderRadius: BorderRadius.circular(12)),
                       onPressed: () async
                       {
-                        if (await canLaunch(widget.data.courseDriveLink!))
+                        if (await canLaunchUrl(Uri.parse(widget.data.courseDriveLink!)))
                         {
-                          await launch(widget.data.courseDriveLink!);
+                          await launchUrl(Uri.parse(widget.data.courseDriveLink!));
                         }
                         else
                         {

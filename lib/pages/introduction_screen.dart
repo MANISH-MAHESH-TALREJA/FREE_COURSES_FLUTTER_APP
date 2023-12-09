@@ -35,6 +35,10 @@ class IntroductionScreenPageState extends State<IntroductionScreenPage> {
     logged = prefs.getString("LOGGED");
     if (logged != "" && logged != null)
     {
+      if(!mounted)
+      {
+        return;
+      }
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
     else
@@ -65,20 +69,20 @@ class IntroductionScreenPageState extends State<IntroductionScreenPage> {
       key: introKey,
       pages: [
         PageViewModel(
-          titleWidget: const Text('FREE COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-          bodyWidget: const Text('DAILY NEW FREE ONLINE UDEMY COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
+          titleWidget: const Text('FREE COURSES', style: TextStyle(fontFamily:'Muli', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+          bodyWidget: const Text('DAILY NEW FREE ONLINE UDEMY COURSES', style: TextStyle(fontFamily:'Muli', fontSize: 17),textAlign: TextAlign.center,),
           image: _buildImage('courses_01'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          titleWidget: const Text('VIDEO COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-          bodyWidget: const Text('WIDE VARIETY OF VIDEO COURSES AVAILABLE', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
+          titleWidget: const Text('VIDEO COURSES', style: TextStyle(fontFamily:'Muli', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+          bodyWidget: const Text('WIDE VARIETY OF VIDEO COURSES AVAILABLE', style: TextStyle(fontFamily:'Muli', fontSize: 17),textAlign: TextAlign.center,),
           image: _buildImage('courses_02'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          titleWidget: const Text('IT COURSES', style: TextStyle(fontFamily:'Poppins', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-          bodyWidget: const Text('POPULAR PROGRAMMING COURSES TO LEARN AND PRACTICE', style: TextStyle(fontFamily:'Poppins', fontSize: 17),textAlign: TextAlign.center,),
+          titleWidget: const Text('IT COURSES', style: TextStyle(fontFamily:'Muli', fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+          bodyWidget: const Text('POPULAR PROGRAMMING COURSES TO LEARN AND PRACTICE', style: TextStyle(fontFamily:'Muli', fontSize: 17),textAlign: TextAlign.center,),
           image: _buildImage('courses_03'),
           decoration: pageDecoration,
         ),

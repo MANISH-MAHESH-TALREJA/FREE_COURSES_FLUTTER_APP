@@ -78,7 +78,7 @@ class MyAppState extends State<MyApp>
               primarySwatch: Colors.blue,
               primaryColor: Colors.blueAccent,
               iconTheme: IconThemeData(color: Colors.grey[900]),
-              fontFamily: 'Poppins',
+              fontFamily: 'Muli',
 
               appBarTheme: AppBarTheme(
                 color: Colors.transparent,
@@ -86,12 +86,12 @@ class MyAppState extends State<MyApp>
                 iconTheme: IconThemeData(
                   color: Colors.grey[800],
                 ),
-                titleTextStyle: GoogleFonts.poppins(
+                titleTextStyle: GoogleFonts.montserrat(
                     fontSize: 16,
                     color: Colors.grey[900],
                     fontWeight: FontWeight.w500
                 ),
-                toolbarTextStyle: GoogleFonts.poppins(
+                toolbarTextStyle: GoogleFonts.montserrat(
                         fontSize: 16,
                         color: Colors.grey[900],
                         fontWeight: FontWeight.w500

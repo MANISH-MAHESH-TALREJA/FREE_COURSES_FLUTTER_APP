@@ -63,7 +63,7 @@ class TechnicalBlogPageState extends State<TechnicalBlogPage>
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Text('DAILY FREE COURSES', style: TextStyle(color: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.black,)),
+        title: Text('TECHNICAL BLOGS', style: TextStyle(color: context.watch<ThemeBloc>().darkTheme! == true ? Colors.white : Colors.black,)),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),

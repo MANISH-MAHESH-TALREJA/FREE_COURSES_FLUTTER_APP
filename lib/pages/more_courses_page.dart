@@ -140,7 +140,7 @@ class MoreCoursesPageState extends State<MoreCoursesPage> {
                 ),
                 title: Text(
                   widget.title,
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.montserrat(
                       color: Colors.white, fontWeight: FontWeight.w500),
                 ),
                 titlePadding: const EdgeInsets.only(left: 20, bottom: 15),
@@ -160,8 +160,8 @@ class MoreCoursesPageState extends State<MoreCoursesPage> {
                     return Opacity(
                       opacity: _isLoading! ? 1.0 : 0.0,
                       child: _lastVisible == null
-                          ? Column(
-                              children: const [
+                          ? const Column(
+                              children: [
                                 LoadingCard(
                                   height: 180,
                                 ),

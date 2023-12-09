@@ -114,8 +114,8 @@ class ProfilePageState extends State<ProfilePage>
                     Feather.chevron_right,
                     size: 20,
                   ),
-                  onTap: () async => await launch(
-                      'mailto:${Constants().supportEmail}?subject=ABOUT ${Constants().appName} APP&body='),
+                  onTap: () async => await launchUrl(Uri.parse(
+                      'mailto:${Constants().supportEmail}?subject=ABOUT ${Constants().appName} APP&body=')),
                 ),
               ),
             ),
@@ -143,14 +143,7 @@ class ProfilePageState extends State<ProfilePage>
                   onTap: () async
                     {
                       var link = "https://play.google.com/store/apps/details?id=net.manish.blog";
-                      if (canLaunch(link) != null)
-                      {
-                        launch(link);
-                      }
-                      else
-                      {
-                        throw 'UNABLE TO LAUNCH !!!';
-                      }
+                      launchUrl(Uri.parse(link));
                     }
                 ),
               ),
@@ -206,9 +199,9 @@ class ProfilePageState extends State<ProfilePage>
                     size: 20,
                   ),
                   onTap: () async {
-                    if (await canLaunch(Constants().privacyPolicyUrl))
+                    if (await canLaunchUrl(Uri.parse(Constants().privacyPolicyUrl)))
                     {
-                      launch(Constants().privacyPolicyUrl);
+                      launchUrl(Uri.parse(Constants().privacyPolicyUrl));
                     }
                     else
                     {
@@ -260,7 +253,7 @@ class ProfilePageState extends State<ProfilePage>
                             {Navigator.of(context).pop();},
                           )],
                           content: const SingleChildScrollView(
-                              child: Text("Developed By : \n\n   1. Abhishek Ojha\n   2. Manish Talreja\n\n     Free Online Courses is an app that will provide Free Udemy Courses, Video Courses to students.", style:TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.normal))
+                              child: Text("Developed By : \n\n   1. Abhishek Ojha\n   2. Manish Talreja\n\n     Free Online Courses is an app that will provide Free Udemy Courses, Video Courses to students.", style:TextStyle(fontFamily: 'Muli', fontWeight: FontWeight.normal))
                           ),
                         );
                       },
@@ -284,8 +277,8 @@ class GuestUserUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Column(
-          children: const [
+        const Column(
+          children: [
             AvatarGlow(
               glowColor: Colors.orange,
               endRadius: 90.0,
@@ -529,8 +522,8 @@ class _UserUIState extends State<UserUI> {
                 Feather.chevron_right,
                 size: 20,
               ),
-              onTap: () async => await launch(
-                  'mailto:${"aayushmanojha4231@gmail.com"}?subject=REQUEST FOR AN COURSE ON ${Constants().appName} APP&body= HELLO AAYUSHMAN SIR,\n          MYSELF, '+sb.name!+", I JOINED FREE COURSES APP ON : "+sb.joiningDate!+". I WOULD LIKE TO REQUEST FOR A COURSE ON YOU APP NAMED AS ............\n\n\n\n\nTHANKING YOU SIR,\nWITH REGARDS,\n"+sb.name!+"\n"+sb.email!.toUpperCase()),
+              onTap: () async => await launchUrl(Uri.parse(
+                  'mailto:${"aayushmanojha4231@gmail.com"}?subject=REQUEST FOR AN COURSE ON ${Constants().appName} APP&body= HELLO AAYUSHMAN SIR,\n          MYSELF, '+sb.name!+", I JOINED FREE COURSES APP ON : "+sb.joiningDate!+". I WOULD LIKE TO REQUEST FOR A COURSE ON YOU APP NAMED AS ............\n\n\n\n\nTHANKING YOU SIR,\nWITH REGARDS,\n"+sb.name!+"\n"+sb.email!.toUpperCase())),
             ),
           ),
         ),
