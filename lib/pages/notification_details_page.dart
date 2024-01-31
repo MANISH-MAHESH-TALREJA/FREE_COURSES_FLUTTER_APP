@@ -10,7 +10,7 @@ import '../bloc/theme_bloc.dart';
 class NotificationDetailsPage extends StatelessWidget {
   final NotificationModel data;
 
-  const NotificationDetailsPage({Key? key, required this.data}) : super(key: key);
+  const NotificationDetailsPage({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {

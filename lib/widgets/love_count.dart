@@ -5,7 +5,7 @@ class LoveCount extends StatelessWidget
 {
   final String collectionName;
   final String timestamp;
-  const LoveCount({Key? key, required this.collectionName, required this.timestamp}) : super(key: key);
+  const LoveCount({super.key, required this.collectionName, required this.timestamp});
 
   @override
   Widget build(BuildContext context)

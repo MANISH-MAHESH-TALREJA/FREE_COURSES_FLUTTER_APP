@@ -10,7 +10,7 @@ import 'package:blog/utility/loading_cards.dart';
 import 'package:blog/utility/general_utility_functions.dart';
 
 class UdemyCoursesSearchPage extends StatefulWidget {
-  const UdemyCoursesSearchPage({Key? key}) : super(key: key);
+  const UdemyCoursesSearchPage({super.key});
 
   @override
   UdemyCoursesSearchPageState createState() => UdemyCoursesSearchPageState();
@@ -120,7 +120,7 @@ class UdemyCoursesSearchPageState extends State<UdemyCoursesSearchPage> {
 }
 
 class SuggestionsUI extends StatelessWidget {
-  const SuggestionsUI({Key? key}) : super(key: key);
+  const SuggestionsUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +162,7 @@ class SuggestionsUI extends StatelessWidget {
 }
 
 class AfterSearchUI extends StatelessWidget {
-  const AfterSearchUI({Key? key}) : super(key: key);
+  const AfterSearchUI({super.key});
 
   @override
   Widget build(BuildContext context) {

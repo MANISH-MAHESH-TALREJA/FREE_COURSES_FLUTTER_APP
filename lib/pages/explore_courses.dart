@@ -17,7 +17,7 @@ import 'package:blog/widgets/recommended_courses.dart';
 import '../constants.dart';
 
 class ExploreCourses extends StatefulWidget {
-  const ExploreCourses({Key? key}) : super(key: key);
+  const ExploreCourses({super.key});
 
   @override
   ExploreCoursesState createState() => ExploreCoursesState();
@@ -69,7 +69,7 @@ class ExploreCoursesState extends State<ExploreCourses> with AutomaticKeepAliveC
 }
 
 class Header extends StatelessWidget {
-  const Header({Key? key}) : super(key: key);
+  const Header({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +173,7 @@ class Header extends StatelessWidget {
 }
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  const CustomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

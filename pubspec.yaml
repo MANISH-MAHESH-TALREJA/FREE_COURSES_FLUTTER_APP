@@ -6,52 +6,52 @@ publish_to: 'none'
 version: 1.0.0+0
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: '>=3.2.6 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  avatar_glow: ^2.0.2
+  avatar_glow: ^3.0.1
   in_app_update: ^4.2.2
   animated_bottom_navigation_bar:
     path: ./animated_bottom_navigation_bar
-  cached_network_image: ^3.3.0
+  cached_network_image: ^3.3.1
 
   flutter_icons:
     path: ./flutter_icons
   connectivity: ^3.0.6
   share: ^2.0.4
   flutter_login_facebook: ^1.9.0
-  cloud_firestore: ^4.13.5
-  permission_handler: ^11.1.0
+  cloud_firestore: ^4.14.0
+  permission_handler: ^11.2.0
   dots_indicator: ^3.0.0
-  firebase_auth: ^4.15.2
+  firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
-  firebase_messaging: ^14.7.8
+  firebase_messaging: ^14.7.10
   flutter_html: ^3.0.0-beta.2
   intl: ^0.19.0
   google_fonts: ^6.1.0
-  google_sign_in: ^6.2.0
+  google_sign_in: ^6.2.1
   line_icons: ^2.0.3
   provider: ^6.1.1
-  device_info_plus: ^9.1.1
+  device_info_plus: ^9.1.2
 
   html_unescape: ^2.0.0
-  flutter_widget_from_html: ^0.14.9
+  flutter_widget_from_html: ^0.14.11
   shared_preferences: ^2.2.2
   skeleton_text: ^3.0.1
 
   toast: ^0.3.0
-  url_launcher: ^6.2.2
-  introduction_screen: ^3.1.9
+  url_launcher: ^6.2.4
+  introduction_screen: ^3.1.12
   youtube_player_flutter: ^9.0.0-beta.0
   focused_menu: ^1.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
 
 flutter:
   uses-material-design: true

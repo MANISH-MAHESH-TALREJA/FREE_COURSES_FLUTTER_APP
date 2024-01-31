@@ -12,8 +12,7 @@ class BlogCard extends StatelessWidget {
   final Color color;
 
   const BlogCard(
-      {Key? key, required this.d, required this.tag, required this.color})
-      : super(key: key);
+      {super.key, required this.d, required this.tag, required this.color});
 
   @override
   Widget build(BuildContext context) {

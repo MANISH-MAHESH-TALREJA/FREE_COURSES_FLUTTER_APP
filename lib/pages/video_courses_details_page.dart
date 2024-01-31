@@ -22,8 +22,7 @@ class VideoCoursesDetailsPage extends StatefulWidget {
   final VideoCoursesModel blogData;
   final String? tag;
 
-  const VideoCoursesDetailsPage({Key? key, required this.blogData, required this.tag})
-      : super(key: key);
+  const VideoCoursesDetailsPage({super.key, required this.blogData, required this.tag});
 
   @override
   BlogDetailsState createState() => BlogDetailsState();

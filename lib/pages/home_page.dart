@@ -17,7 +17,7 @@ import 'package:toast/toast.dart';
 import '../bloc/theme_bloc.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   HomePageState createState() => HomePageState();

@@ -14,8 +14,7 @@ class MoreCoursesPage extends StatefulWidget {
   final String title;
   final Color color;
 
-  const MoreCoursesPage({Key? key, required this.title, required this.color})
-      : super(key: key);
+  const MoreCoursesPage({super.key, required this.title, required this.color});
 
   @override
   MoreCoursesPageState createState() => MoreCoursesPageState();
@@ -194,8 +193,7 @@ class _ListItem extends StatelessWidget {
   final UdemyCoursesModel d;
   final tag;
 
-  const _ListItem({Key? key, required this.d, required this.tag})
-      : super(key: key);
+  const _ListItem({required this.d, required this.tag});
 
   @override
   Widget build(BuildContext context) {

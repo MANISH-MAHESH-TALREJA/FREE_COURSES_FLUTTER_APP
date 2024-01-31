@@ -17,7 +17,7 @@ import 'package:blog/utility/general_utility_functions.dart';
 import 'package:blog/utility/loading_cards.dart';
 
 class VideoCoursesPage extends StatefulWidget {
-  const VideoCoursesPage({Key? key}) : super(key: key);
+  const VideoCoursesPage({super.key});
 
   @override
   VideoCoursesPageState createState() => VideoCoursesPageState();
@@ -163,7 +163,7 @@ class VideoCoursesPageState extends State<VideoCoursesPage>
 class VideoCourseItem extends StatelessWidget {
   final VideoCoursesModel d;
 
-  const VideoCourseItem({Key? key, required this.d}) : super(key: key);
+  const VideoCourseItem({super.key, required this.d});
 
   @override
   Widget build(BuildContext context) {

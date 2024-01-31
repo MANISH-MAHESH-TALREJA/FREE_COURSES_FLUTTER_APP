@@ -10,7 +10,7 @@ class EditProfile extends StatefulWidget
   final String name;
   final String imageUrl;
 
-  const EditProfile({Key? key, required this.name, required this.imageUrl}) : super(key: key);
+  const EditProfile({super.key, required this.name, required this.imageUrl});
 
   @override
   EditProfileState createState() => EditProfileState(name, imageUrl);

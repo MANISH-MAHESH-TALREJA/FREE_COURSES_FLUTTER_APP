@@ -11,7 +11,7 @@ class AuthenticationPage extends StatefulWidget
 {
   final String? tag;
 
-  const AuthenticationPage({Key? key, this.tag}) : super(key: key);
+  const AuthenticationPage({super.key, this.tag});
 
   @override
   AuthenticationPageState createState() => AuthenticationPageState();
@@ -213,19 +213,21 @@ class AuthenticationPageState extends State<AuthenticationPage>
                     ),
                   ],
                 ),
-                SizedBox(height: size.height * 0.05),
+                SizedBox(height: size.height * 0.1),
                 AvatarGlow(
-                  glowColor: Theme.of(context).colorScheme.secondary,
-                  endRadius: 90.0,
+                  glowColor: Color(0xfff6d5f1),
+                  // glowBorderRadius: BorderRadius.circular(90.0),
                   duration: const Duration(milliseconds: 2000),
                   repeat: true,
-                  repeatPauseDuration: const Duration(milliseconds: 100),
+                  glowCount: 2,
+                  glowRadiusFactor: 0.4,
+                  //repeatPauseDuration: const Duration(milliseconds: 100),
                   child: const CircleAvatar(
                       radius: 60,
                       backgroundColor: Colors.transparent,
                       backgroundImage: AssetImage("assets/images/app_icon.png")),
                 ),
-                SizedBox(height: size.height * 0.05),
+                SizedBox(height: size.height * 0.1),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -325,7 +327,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
-                          color: Theme.of(context).secondaryHeaderColor),
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 10,
@@ -351,13 +353,15 @@ class AuthenticationPageState extends State<AuthenticationPage>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    const AvatarGlow(
-                      glowColor: Colors.purpleAccent,
-                      endRadius: 90.0,
-                      duration: Duration(milliseconds: 2000),
-                      repeat: true,
-                      repeatPauseDuration: Duration(milliseconds: 100),
-                      child: CircleAvatar(
+                    AvatarGlow(
+                glowColor: Color(0xfff6d5f1),
+              // glowBorderRadius: BorderRadius.circular(90.0),
+              duration: const Duration(milliseconds: 2000),
+              repeat: true,
+              glowCount: 2,
+              glowRadiusFactor: 0.4,
+              //repeatPauseDuration: const Duration(milliseconds: 100),
+              child: const CircleAvatar(
                           radius: 60,
                           backgroundColor: Colors.transparent,
                           backgroundImage: AssetImage("assets/images/app_icon.png")),

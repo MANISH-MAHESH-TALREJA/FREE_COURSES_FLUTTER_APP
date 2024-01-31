@@ -11,7 +11,7 @@ import 'package:blog/widgets/custom_cache_image.dart';
 
 class RecommendedCourses extends StatelessWidget
 {
-  const RecommendedCourses({Key? key}) : super(key: key);
+  const RecommendedCourses({super.key});
   @override
   Widget build(BuildContext context)
   {
@@ -71,7 +71,7 @@ class RecommendedCourses extends StatelessWidget
 class _ListItem extends StatelessWidget
 {
   final UdemyCoursesModel d;
-  const _ListItem({Key? key, required this.d}) : super(key: key);
+  const _ListItem({required this.d});
 
   @override
   Widget build(BuildContext context)

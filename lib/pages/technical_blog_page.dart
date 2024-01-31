@@ -16,7 +16,7 @@ import 'package:blog/widgets/custom_cache_image.dart';
 import 'package:blog/utility/loading_cards.dart';
 
 class TechnicalBlogPage extends StatefulWidget {
-  const TechnicalBlogPage({Key? key}) : super(key: key);
+  const TechnicalBlogPage({super.key});
 
   @override
   TechnicalBlogPageState createState() => TechnicalBlogPageState();
@@ -162,7 +162,7 @@ class TechnicalBlogPageState extends State<TechnicalBlogPage>
 class _ItemList extends StatelessWidget {
   final TechnicalBlogModel d;
 
-  const _ItemList({Key? key, required this.d}) : super(key: key);
+  const _ItemList({required this.d});
 
   @override
   Widget build(BuildContext context) {

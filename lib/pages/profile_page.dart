@@ -16,7 +16,7 @@ import '../bloc/theme_bloc.dart';
 import '../constants.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   ProfilePageState createState() => ProfilePageState();
@@ -271,30 +271,36 @@ class ProfilePageState extends State<ProfilePage>
 }
 
 class GuestUserUI extends StatelessWidget {
-  const GuestUserUI({Key? key}) : super(key: key);
+  const GuestUserUI({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Column(
+        Column(
           children: [
             AvatarGlow(
               glowColor: Colors.orange,
-              endRadius: 90.0,
-              duration: Duration(milliseconds: 2000),
+              glowCount: 2,
+              glowRadiusFactor: 0.4,
+              // endRadius: 90.0,
+              //glowBorderRadius: BorderRadius.circular(90.0),
+              duration: const Duration(milliseconds: 2000),
               repeat: true,
-              repeatPauseDuration: Duration(milliseconds: 100),
-              child: CircleAvatar(
+              // repeatPauseDuration: Duration(milliseconds: 100),
+              child: const CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage("assets/images/emoji.png")),
             ),
-            Text(
+            const SizedBox(
+              height: 40,
+            ),
+            const Text(
               "FREE ONLINE COURSES",
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
           ],
@@ -337,7 +343,7 @@ class GuestUserUI extends StatelessWidget {
 }
 
 class UserUI extends StatefulWidget {
-  const UserUI({Key? key}) : super(key: key);
+  const UserUI({super.key});
 
   @override
   State<UserUI> createState() => _UserUIState();
@@ -392,14 +398,20 @@ class _UserUIState extends State<UserUI> {
           children: [
             AvatarGlow(
               glowColor: Colors.orange,
-              endRadius: 90.0,
+              glowCount: 2,
+              glowRadiusFactor: 0.4,
+              // endRadius: 90.0,
+              //glowBorderRadius: BorderRadius.circular(90.0),
               duration: const Duration(milliseconds: 2000),
               repeat: true,
-              repeatPauseDuration: const Duration(milliseconds: 100),
+              // repeatPauseDuration: const Duration(milliseconds: 100),
               child: CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.transparent,
                   backgroundImage: CachedNetworkImageProvider(sb.imageUrl!)),
+            ),
+            const SizedBox(
+              height: 40,
             ),
             Text(
               sb.name!,
@@ -575,6 +587,10 @@ class _UserUIState extends State<UserUI> {
                 onPressed: () async {
                   Navigator.pop(context);
                   await context.read<AuthenticationBLOC>().removeSignIn();
+                  if (!context.mounted)
+                  {
+                    return;
+                  }
                   await context.read<AuthenticationBLOC>().userSignOut().then(
                       (value) => nextScreenCloseOthers(context, const AuthenticationPage()));
                 },

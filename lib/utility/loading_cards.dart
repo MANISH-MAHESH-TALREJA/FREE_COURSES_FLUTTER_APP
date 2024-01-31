@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class LoadingPopularCoursesCard extends StatelessWidget {
-  const LoadingPopularCoursesCard({Key? key}) : super(key: key);
+  const LoadingPopularCoursesCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class LoadingPopularCoursesCard extends StatelessWidget {
 }
 
 class LoadingFeaturedCoursesCard extends StatelessWidget {
-  const LoadingFeaturedCoursesCard({Key? key}) : super(key: key);
+  const LoadingFeaturedCoursesCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class LoadingFeaturedCoursesCard extends StatelessWidget {
 class LoadingCard extends StatelessWidget {
   final double height;
 
-  const LoadingCard({Key? key, required this.height}) : super(key: key);
+  const LoadingCard({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {

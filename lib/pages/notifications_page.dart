@@ -9,7 +9,7 @@ import '../bloc/theme_bloc.dart';
 import 'notification_details_page.dart';
 
 class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({Key? key}) : super(key: key);
+  const NotificationsPage({super.key});
 
   @override
   NotificationsPageState createState() => NotificationsPageState();
@@ -100,7 +100,7 @@ class NotificationsPageState extends State<NotificationsPage> {
 class _ListItem extends StatelessWidget {
   final NotificationModel d;
 
-  const _ListItem({Key? key, required this.d}) : super(key: key);
+  const _ListItem({required this.d});
 
   @override
   Widget build(BuildContext context) {

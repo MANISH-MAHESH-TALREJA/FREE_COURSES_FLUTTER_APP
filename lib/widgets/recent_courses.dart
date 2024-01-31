@@ -11,7 +11,7 @@ import 'package:blog/utility/loading_cards.dart';
 
 class RecentCourses extends StatelessWidget
 {
-  const RecentCourses({Key? key}) : super(key: key);
+  const RecentCourses({super.key});
 
   @override
   Widget build(BuildContext context)
@@ -70,7 +70,7 @@ class RecentCourses extends StatelessWidget
 class ItemList extends StatelessWidget
 {
   final UdemyCoursesModel d;
-  const ItemList({Key? key, required this.d}) : super(key: key);
+  const ItemList({super.key, required this.d});
 
   @override
   Widget build(BuildContext context)

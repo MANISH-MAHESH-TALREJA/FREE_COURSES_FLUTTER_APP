@@ -10,7 +10,7 @@ class LoveCard extends StatelessWidget
   final String? uid;
   final String timestamp;
 
-  const LoveCard({Key? key, required this.collectionName, required this.uid, required this.timestamp}): super(key: key);
+  const LoveCard({super.key, required this.collectionName, required this.uid, required this.timestamp});
 
   @override
   Widget build(BuildContext context)

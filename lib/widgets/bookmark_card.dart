@@ -10,7 +10,7 @@ class BookmarkCard extends StatelessWidget
   final String? uid;
   final String timestamp;
 
-  const BookmarkCard({Key? key, required this.collectionName, required this.uid, required this.timestamp}): super(key: key);
+  const BookmarkCard({super.key, required this.collectionName, required this.uid, required this.timestamp});
 
   @override
   Widget build(BuildContext context)

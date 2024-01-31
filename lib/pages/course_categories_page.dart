@@ -16,7 +16,7 @@ import '../bloc/theme_bloc.dart';
 import 'empty_page.dart';
 
 class CourseCategoriesPage extends StatefulWidget {
-  const CourseCategoriesPage({Key? key}) : super(key: key);
+  const CourseCategoriesPage({super.key});
 
   @override
   CourseCategoriesPageState createState() => CourseCategoriesPageState();
@@ -116,7 +116,7 @@ class CourseCategoriesPageState extends State<CourseCategoriesPage>
 class _ItemList extends StatelessWidget {
   final CourseCategoriesModel d;
 
-  const _ItemList({Key? key, required this.d}) : super(key: key);
+  const _ItemList({required this.d});
 
   @override
   Widget build(BuildContext context) {

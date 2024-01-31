@@ -19,8 +19,7 @@ class UdemyCoursesDetailPage extends StatefulWidget {
   final UdemyCoursesModel data;
   final String? tag;
 
-  const UdemyCoursesDetailPage({Key? key, required this.data, required this.tag})
-      : super(key: key);
+  const UdemyCoursesDetailPage({super.key, required this.data, required this.tag});
 
   @override
   UdemyCoursesDetailPageState createState() => UdemyCoursesDetailPageState();

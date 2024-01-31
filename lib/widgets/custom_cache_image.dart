@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomCacheImage extends StatelessWidget
 {
   final String imageUrl;
-  const CustomCacheImage({Key? key, required this.imageUrl}) : super(key: key);
+  const CustomCacheImage({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context)

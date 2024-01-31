@@ -11,7 +11,7 @@ import 'package:blog/utility/loading_cards.dart';
 
 class FeaturedCourses extends StatefulWidget
 {
-  const FeaturedCourses({Key? key}) : super(key: key);
+  const FeaturedCourses({super.key});
 
   @override
   FeaturedCoursesState createState() => FeaturedCoursesState();
@@ -74,7 +74,7 @@ class FeaturedCoursesState extends State<FeaturedCourses>
 class _FeaturedItemList extends StatelessWidget
 {
   final UdemyCoursesModel d;
-  const _FeaturedItemList({Key? key, required this.d}) : super(key: key);
+  const _FeaturedItemList({required this.d});
 
   @override
   Widget build(BuildContext context)

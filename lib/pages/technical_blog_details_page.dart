@@ -20,8 +20,7 @@ class TechnicalBlogDetailsPage extends StatefulWidget {
   final TechnicalBlogModel blogData;
   final String? tag;
 
-  const TechnicalBlogDetailsPage({Key? key, required this.blogData, required this.tag})
-      : super(key: key);
+  const TechnicalBlogDetailsPage({super.key, required this.blogData, required this.tag});
 
   @override
   TechnicalBlogDetailsPageState createState() => TechnicalBlogDetailsPageState();
