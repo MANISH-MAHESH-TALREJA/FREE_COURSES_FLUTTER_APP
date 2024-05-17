@@ -13,7 +13,7 @@ class ThemeModel {
     primaryColorLight: Colors.white,
     secondaryHeaderColor: Colors.grey[600],
     shadowColor: Colors.grey[200],
-    backgroundColor: Colors.white,
+    // backgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       color: Colors.white,
@@ -56,7 +56,7 @@ class ThemeModel {
       primaryColorLight: Colors.grey[800],
       secondaryHeaderColor: Colors.grey[400],
       shadowColor: const Color(0xff282828),
-      backgroundColor: Colors.grey[900],
+      // backgroundColor: Colors.grey[900],
       appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.light,
         color: Colors.grey[900],

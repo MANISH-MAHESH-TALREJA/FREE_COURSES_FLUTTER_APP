@@ -78,9 +78,9 @@ class SplashScreenPageState extends State<SplashScreenPage> with SingleTickerPro
           children: <Widget>
           [
             Image.asset(
-              'assets/images/app_icon_new_splash.png',
-              width: animation!.value * 250,
-              height: animation!.value * 350,
+              'assets/images/app_background.png',
+              width: animation!.value * 300,
+              height: animation!.value * 400,
             ),
           ],
         ),
