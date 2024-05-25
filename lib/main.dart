@@ -23,7 +23,7 @@ import 'pages/splash_screen_page.dart';
 void main()async
 {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: FirebaseOptions(apiKey: "AIzaSyCtBS7i-tQk5cNYjTOukjhitzzC3XAJpsI", appId: "1:358735777314:android:e6668535d53eeaea2d847b", messagingSenderId: "358735777314", projectId: "manish-travel"));
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark
