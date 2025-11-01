@@ -67,9 +67,9 @@ openSignInDialog(context)
 }
 
 
-void openSnackBar(scaffoldKey, snackMessage)
-{
-  scaffoldKey.currentState.showSnackBar(SnackBar(
+void openSnackBar(BuildContext context, String snackMessage) {
+  // 1. Define the SnackBar with the user's requested content and action.
+  final snackBar = SnackBar(
     content: Container(
       alignment: Alignment.centerLeft,
       height: 30,
@@ -83,10 +83,21 @@ void openSnackBar(scaffoldKey, snackMessage)
     action: SnackBarAction(
       label: 'OK',
       textColor: Colors.blueAccent,
-      onPressed: () {},
+      onPressed: () {
+        // Explicitly hide the SnackBar when 'OK' is pressed
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      },
     ),
-  ));
+    // Set a duration for automatic dismissal if the user doesn't press 'OK'
+    duration: const Duration(seconds: 5),
+  );
+
+  // 2. Use ScaffoldMessenger.of(context) to manage and display the SnackBar.
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar() // Hides any current SnackBar to ensure the new one displays
+    ..showSnackBar(snackBar);
 }
+
 
 
 void nextScreen(context, page)

@@ -1,6 +1,6 @@
 # blog
 
-FREE COURSES FLUTTER APP
+FREE ONLINE COURSES
 
 ## Getting Started
 

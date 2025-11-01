@@ -82,7 +82,7 @@ class UdemyCoursesSearchPageState extends State<UdemyCoursesSearchPage> {
                 textInputAction: TextInputAction.search,
                 onFieldSubmitted: (value) {
                   if (value == '') {
-                    openSnackBar(scaffoldKey, 'TYPE SOMETHING !!!');
+                    openSnackBar(context, 'TYPE SOMETHING !!!');
                   } else {
                     context.read<UdemyCoursesSearchBLOC>().setSearchText(value);
                     context.read<UdemyCoursesSearchBLOC>().addToSearchList(value);

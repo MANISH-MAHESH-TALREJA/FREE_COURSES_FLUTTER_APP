@@ -37,7 +37,7 @@ class EditProfileState extends State<EditProfile>
     await ib.checkInternet();
     if (ib.hasInternet == false)
     {
-      openSnackBar(scaffoldKey, 'NO INTERNET');
+      openSnackBar(context, 'NO INTERNET');
     }
     else
     {
@@ -47,7 +47,7 @@ class EditProfileState extends State<EditProfile>
         setState(() => loading = true);
         await sb.updateUserProfile(nameCtrl.text, imageUrl).then((value)
         {
-          openSnackBar(scaffoldKey, 'UPDATED SUCCESSFULLY');
+          openSnackBar(context, 'UPDATED SUCCESSFULLY');
           setState(() => loading = false);
         });
       }

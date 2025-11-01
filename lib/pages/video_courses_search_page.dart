@@ -80,7 +80,7 @@ class VideoCoursesSearchPageState extends State<VideoCoursesSearchPage> {
                 textInputAction: TextInputAction.search,
                 onFieldSubmitted: (value) {
                   if (value == '') {
-                    openSnackBar(scaffoldKey, 'TYPE SOMETHING !!!');
+                    openSnackBar(context, 'TYPE SOMETHING !!!');
                   } else {
                     context.read<VideoCoursesSearchBLOC>().setSearchText(value);
                     context.read<VideoCoursesSearchBLOC>().addToSearchList(value);

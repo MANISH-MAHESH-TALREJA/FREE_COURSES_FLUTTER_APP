@@ -31,7 +31,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
     sb.removeSignIn();
     nextScreenReplace(context, const IntroductionScreenPage());
   }
-  handleFacebookSignIn() async
+  /*handleFacebookSignIn() async
   {
     final sb = context.read<AuthenticationBLOC>();
     final ib = context.read<InternetBLOC>();
@@ -39,13 +39,13 @@ class AuthenticationPageState extends State<AuthenticationPage>
     await ib.checkInternet();
     if (ib.hasInternet == false)
     {
-      openSnackBar(scaffoldKey, 'CHECK YOUR INTERNET CONNECTION');
+      openSnackBar(context, 'CHECK YOUR INTERNET CONNECTION');
     } else {
       await sb.signInWithFacebook().then((_)
       {
         if (sb.hasError == true)
         {
-          openSnackBar(scaffoldKey, 'SOMETHING WRONG, PLEASE TRY AGAIN.');
+          openSnackBar(context, 'SOMETHING WRONG, PLEASE TRY AGAIN.');
           setState(() => facebookSignInStarted = false);
         }
         else
@@ -80,7 +80,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
         }
       });
     }
-  }
+  }*/
   handleGoogleSignIn() async
   {
     final sb = context.read<AuthenticationBLOC>();
@@ -89,7 +89,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
     await ib.checkInternet();
     if (ib.hasInternet == false)
     {
-      openSnackBar(scaffoldKey, 'CHECK YOUR INTERNET CONNECTION');
+      openSnackBar(context, 'CHECK YOUR INTERNET CONNECTION');
     }
     else
     {
@@ -97,7 +97,8 @@ class AuthenticationPageState extends State<AuthenticationPage>
       {
         if (sb.hasError == true)
         {
-          openSnackBar(scaffoldKey, 'SOMETHING WRONG, PLEASE TRY AGAIN.');
+          debugPrint(sb.errorCode);
+          openSnackBar(context, 'SOMETHING WRONG, PLEASE TRY AGAIN.${sb.errorCode}');
           setState(() => googleSignInStarted = false);
         }
         else
@@ -270,7 +271,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
                     const SizedBox(
                       height: 10,
                     ),
-                    SizedBox(
+                    /*SizedBox(
                       height: 45,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: TextButton(
@@ -307,7 +308,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
                             child: CircularProgressIndicator(
                                 backgroundColor: Colors.white),
                           )),
-                    ),
+                    ),*/
                     Container(),
                   ],
                 ),
@@ -409,7 +410,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
                         const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
+                        /*SizedBox(
                           height: 45,
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: TextButton(
@@ -446,7 +447,7 @@ class AuthenticationPageState extends State<AuthenticationPage>
                                 child: CircularProgressIndicator(
                                     backgroundColor: Colors.white),
                               )),
-                        ),
+                        ),*/
                         Container(),
                       ],
                     ),

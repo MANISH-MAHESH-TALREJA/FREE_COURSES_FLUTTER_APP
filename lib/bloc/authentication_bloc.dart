@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+//import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +15,7 @@ class AuthenticationBLOC extends ChangeNotifier
     checkGuestUser();
   }
 
-  final FacebookLogin _fbLogin = FacebookLogin();
+  //final FacebookLogin _fbLogin = FacebookLogin();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final String defaultUserImageUrl = 'https://manish-mahesh-talreja.000webhostapp.com/IMAGES/EMOJI.png';
@@ -75,7 +75,7 @@ class AuthenticationBLOC extends ChangeNotifier
     }
   }
 
-  Future signInWithFacebook() async
+  /*Future signInWithFacebook() async
   {
     User? currentUser;
     // ignore: invalid_return_type_for_catch_error
@@ -126,7 +126,7 @@ class AuthenticationBLOC extends ChangeNotifier
         notifyListeners();
       }
     }
-  }
+  }*/
   Future<bool> checkUserExists() async
   {
     DocumentSnapshot snap = await fireStore.collection('USERS').doc(_uid).get();
@@ -232,7 +232,7 @@ class AuthenticationBLOC extends ChangeNotifier
     if (_signInProvider == 'FACEBOOK')
     {
       await _firebaseAuth.signOut();
-      await _fbLogin.logOut();
+      //await _fbLogin.logOut();
     }
     else
     {

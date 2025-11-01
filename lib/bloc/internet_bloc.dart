@@ -1,4 +1,5 @@
-import 'package:connectivity/connectivity.dart';
+//import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 class InternetBLOC extends ChangeNotifier
@@ -17,7 +18,24 @@ class InternetBLOC extends ChangeNotifier
 
   bool get hasInternet => _hasInternet;
 
-  checkInternet() async
+  Future<void> checkInternet() async
+  {
+    // The return type is now List<ConnectivityResult>
+    final List<ConnectivityResult> result = await Connectivity().checkConnectivity();
+
+    // Check if the list of connectivity results contains 'none'
+    if (result.contains(ConnectivityResult.none))
+    {
+      _hasInternet = false;
+    }
+    else
+    {
+      // If it doesn't contain 'none', it means there is some form of connectivity
+      _hasInternet = true;
+    }
+    notifyListeners();
+  }
+  /*checkInternet() async
   {
     var result = await (Connectivity().checkConnectivity());
     if (result == ConnectivityResult.none)
@@ -29,5 +47,5 @@ class InternetBLOC extends ChangeNotifier
       _hasInternet = true;
     }
     notifyListeners();
-  }
+  }*/
 }
